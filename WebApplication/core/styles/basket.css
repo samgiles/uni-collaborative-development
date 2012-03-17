@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+#basket {
+	width: 300px;
+	border: 1px solid #eee;
+	font-size: 0.9em;
+}
+	
+.shopping-basket {
+	list-style-type: none;
+	padding: 5px;
+}
+	
+.shopping-basket li{
+	margin-top: 3px;
+}
+	
+span.basket-button {
+	margin: 0 5px;
+}
+	
+li.basket-totals {
+	border-top: 1px solid #eee;
+	padding-top: 5px;
+}
+
+#basket-ajax {
+	position: relative;
+	margin-top: -22px;	
+}
+
+.ajax-load {
+	width: 225px;
+	background: url(ajax-loader.gif);
+	background-position: center;
+	height: 20px;	
+}
+
+#basket-container {
+ display: none;
+}
+
+.hidden {
+	display: none;	
+}
+
+/*- LOGIN -*/
+
+/* Z-index of #mask must lower than #boxes .window */
+#mask {
+  position:absolute;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+   
+#login-box .window {
+  position:fixed;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+ 
+ 
+#boxes #dialog {
+  width:375px; 
+  height:203px;
+}

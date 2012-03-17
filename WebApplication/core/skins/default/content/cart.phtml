@@ -1,0 +1,58 @@
+<div id="basket">
+	<ul class="shopping-basket">
+        <?php if ($this->notLoggedIn()): ?>
+          <li>You need to log in or register to add items to your basket</li>
+        <?php else: ?>
+		<?php $total = 0;?>
+		<?php foreach($this->cart() as $product):?>
+			<li>
+				<span class="basket-title">
+					<?php echo $product['TITLE'];?>
+				</span>
+				<span class="basket-button basket-less">
+					<a class="basket-control-link" href="./?c=ShoppingCart&remove&productid=<?php echo $product['CODE'];?>&quantity=1"><img src="images/action_remove.png" title="Remove Item" /></a>
+				</span>
+				<span class="basket-quantity">
+					<?php echo $product['QUANTITY'];?>
+				</span>
+				<span class="basket-button basket-more">
+					<a class="basket-control-link" href="./?c=ShoppingCart&add&productid=<?php echo $product['CODE'];?>&quantity=1"><img src="images/action_add.png" title="Add Item" /></a>
+				</span>
+				<span class="basket-price">
+					£<?php $price = $product['UNIT_PRICE'] * $product['QUANTITY']; 
+						   $total += $price; 
+						   echo $price; ?>
+				</span>
+			</li>
+		<?php endforeach;?>
+		<li class="basket-totals">
+			<?php if ($total <= 0):?>
+				<span>There are no items in the basket.</span>
+			<?php elseif ($total < 50):?>
+				<span>Total: £<?php echo $total?></span>
+				<span>Delivery: £3.99</span>
+			<?php else:?>
+				<span>Total: £<?php echo $total?></span>
+				<span>Delivery: FREE</span>
+			<?php endif;?>
+		</li>
+		<?php if($this->warnOutOfStock()):?>
+			<li>
+				<script type="text/javascript">
+						basket.showWarning("Unfortunately we don't have enough stock to complete your order.");
+				</script>
+				<noscript>Unfortunately we don't have enough stock to complete your order.</noscript>
+			</li>
+		<?php endif;?>
+		<?php if($this->warnNotEnoughStock()):?>
+			<li>
+				<script type="text/javascript">
+						basket.showWarning("Unfortunately there won't be enough stock to make the entire order, please review your basket.");
+				</script>
+				<noscript>Unfortunately there won't be enough stock to make the entire order, please review your basket.</noscript>
+			</li>
+		<?php endif; ?>
+        <?php endif; ?>
+	</ul>
+</div>
+<?php // FUTURE:  When we have a Product model use the model rather than the array.?>

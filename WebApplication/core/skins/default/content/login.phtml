@@ -1,0 +1,28 @@
+<?php 
+ if ($this->redirect()) {
+   header('Location: http://uni.sam-giles.co.uk/?c=' . $this->redirect());
+   exit(0);
+ }
+ 
+?>
+<?php if (!$this->hasAuthenticated()): ?>
+<div class="login-container">
+  <form action="./?c=Login<?php 
+        echo ($this->setRedirect() !== NULL)? '&go-to=' . $this->setRedirect() : '' ;
+        ?>" method="POST">
+        <fieldset>
+     <label>Username:</label>
+       <input type="test" name="uname" class="text ui-widget-content ui-corner-all"/>
+     <label>Password:</label>
+       <input type="password" name="pword" class="text ui-widget-content ui-corner-all"/>
+       <input type="submit" value="Log in!" class="submit" />
+       </fieldset>
+  </form>
+  <?php if ($this->invalidDetails()): ?>
+   <p class="red">Invalid username or password</p>
+  <?php endif;?>
+  <a href="#">Forgotten your password?</a>
+</div>
+<?php endif; 
+echo $GLOBALS['hash'];
+?>

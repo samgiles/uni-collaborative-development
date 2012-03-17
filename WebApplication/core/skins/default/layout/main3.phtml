@@ -1,0 +1,182 @@
+<?
+
+mysql_connect("mysql1226int.cp.blacknight.com", "u1168152_tests", "onetwothree") or die(mysql_error());
+mysql_select_db("db1168152_tests") or die(mysql_error());
+
+
+
+$name1 = $_POST['uname'];
+$pass = $_POST['pword'];
+$userid = $_COOKIE['user'];
+
+if($userid)
+{
+
+$sql3 = mysql_query("SELECT * FROM `backoffice_log` WHERE `log_username`='{$userid}'");
+$show4 = mysql_fetch_array($sql3);
+
+if($show4['log_staff'] == "Admin"){ $sql4 = mysql_query("SELECT * FROM `backoffice_log`"); }
+if($show4['log_staff'] == "Supervisor"){ $sql4 = mysql_query("SELECT * FROM `backoffice_log`"); }
+if($show4['log_staff'] == "Warehouse"){ $sql4 = mysql_query("SELECT * FROM `backoffice_log` WHERE `log_staff`='Warehouse'"); }
+
+
+$cont .= "SHOW DETAILS<br><a href=\"?=Check&add=\">Click here to add staff</a><br>";
+
+while($show2 = mysql_fetch_array($sql4))
+{
+    
+$cont .= "{$show2['log_username']} and they are {$show2['log_staff']}<br>";    
+    
+ 
+    
+}
+
+
+
+$getid = $_GET['id'];
+
+if($getid)
+{
+if($getid == 1){ $name = "Supervisor"; }    
+if($getid == 2){ $name = "Warehouse"; }  
+if($getid == 3){ $name = "General"; }  
+
+$content = "{$name} Staff Details<br>{$cont}";
+
+
+} else{
+$sql3 = mysql_query("SELECT * FROM `backoffice_log` WHERE `log_username`='{$userid}' LIMIT 1");
+$show4 = mysql_fetch_array($sql3);
+
+$content = "
+Welcome {$userid}<br>
+<h1> BACK OFFICE</H1>
+<h2> Select Staff Details</H2>
+<style>
+#txtChar{width:25}
+</style>
+<br>
+<a href=\"?c=Check&id=1\">Your only allowed to see {$show4['log_staff']}</a>";
+
+
+}
+
+}
+if(isset($name1))
+{
+$sql2 = mysql_query("SELECT * FROM `backoffice_log` WHERE `log_username`='{$name1}' AND `log_password`='{$pass}' LIMIT 1");
+
+$num = mysql_num_rows($sql2);
+
+if($num == 0){ echo "No such username or password"; die; }
+else {
+
+$show = mysql_fetch_array($sql2);
+
+$getuser = $show['log_username'];
+
+setcookie("user","{$getuser}",time()+3600);
+
+echo "<meta http-equiv=\"refresh\" content=\"0; ,URL=?c=Check\">";
+
+}
+
+
+
+
+} 
+
+
+//////////////////////////if no username////////////////////////////////
+if(!$userid)
+{
+
+      
+  $content = "
+   <form action=\"./?c=Check\" method=\"POST\">
+     <label>Username:</label>
+       <input type=\"test\" name=\"uname\" />
+     <label>Password:</label>
+       <input type=\"password\" name=\"pword\" />
+       <input type=\"submit\" value=\"Log in!\" class=\"submit\" />
+  </form>
+  ";
+    
+   
+}
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tools Shop</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
+        <link type="text/css" href="css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="main_container">    
+            <div id="header">
+                <div class="top_right">
+                    <div class="big_banner">
+                        <a href="#">
+                            <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=5,0,0,0">
+
+<PARAM NAME="MOVIE" VALUE="./images/BANNER2.swf">
+
+<PARAM NAME="PLAY" VALUE="true">
+
+<PARAM NAME="LOOP" VALUE="true">
+
+<PARAM NAME="QUALITY" VALUE="high">
+
+<PARAM NAME="SCALE" value="noborder">
+
+<EMBED SRC="./images/BANNER2.swf"
+
+WIDTH="728px"
+HEIGHT="128px"
+
+PLAY="true" 
+
+LOOP="true"
+
+QUALITY="high" 
+
+scale="noborder"
+
+PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> 
+
+</EMBED>
+
+</OBJECT>
+                        </a>
+                    </div>
+                </div>
+        
+                <div id="logo">
+                    <a href="index.html"><img src="images/logo.png" alt="" title="" border="0" width="182" height="85" /></a>
+                </div>
+             
+     
+        
+            <div class="center_content">
+<? echo "{$content}"; ?>
+</div>
+            
+            <div class="footer">
+                <div class="left_footer">
+                    <img src="images/footer_logo.png" alt="" title="" width="89" height="42"/>
+                </div>
+                <div class="center_footer">
+                    <p>. All Rights Reserved 2012</p>
+                    <img src="images/payment.gif" alt="" title="" />
+                </div>
+            
+              
+            </div>                 
+        </div>
+<!-- end of main_container -->
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
+</html>

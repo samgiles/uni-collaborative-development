@@ -1,0 +1,67 @@
+<?php $cart = $this->cartItems(); ?>
+       <div class="center_title_bar"><center>Checkout</center></div>
+    
+        <div class="prod_box">
+
+            <div class="center_prod_box">            
+                 <div class="product_title"><a href="products.html">Address to deliver to</a></div>
+                 <div class="prod_price"> <span class="price">Example name <p>01 Example way <p> Example<p> Example City<p> Example postcode
+    			 </span></div>                        
+            </div>
+           
+            <div class="prod_details_tab">          
+            <a href="profileedit.html" class="prod_details">Change</a>            
+            </div>                     
+        </div>
+    
+    	<div class="prod_box">
+
+            <div class="center_prod_box">            
+                 <div class="product_title"><a href="products.html">Payment details</a></div>
+                 <div class="prod_price"> <span class="price">Visa ending in 0000</span></div>                        
+            </div>
+           
+            <div class="prod_details_tab">        
+            <a href="profileedit.html" class="prod_details">Change</a>            
+            </div>                     
+        </div>
+		<div class="prod_box">
+
+            <div class="center_prod_box">            
+                 <div class="product_title"><a href="products.html">Invoice Address</a></div>
+                 <div class="prod_price"> <span class="price">Same as delivery address</span></div>                        
+            </div>
+           
+            <div class="prod_details_tab">        
+            <a href="profileedit.html" class="prod_details">Change</a>            
+            </div>                     
+        </div> 
+		
+	
+	<div class="center_title_bar"><center>Products</center></div>
+      
+      <?php foreach($cart as $item):?>
+        <div class="prod_box">
+
+            <div class="center_prod_box">            
+                 <div class="product_title"><a href="./?c=Product&pid=<?php echo $item['CODE']; ?>"><?php echo $item['TITLE'];?></a></div>
+                 <div class="product_img"><a href="./?c=Product&pid=<?php echo $item['CODE']; ?>"><img src="<?php echo $item['PHOTOGRAPH'];?>" alt="" title="" border="0"  style="width: 71px; height: 71px"  /></a></div>
+                 <div class="prod_price"><span>Quantity: <?php echo $item['QUANTITY']; ?></span></div>   
+                 <div class=""><span class="price"> Unit Price: <?php echo  str_replace('GBP', '£', money_format('%=.2i', $item['UNIT_PRICE']));?></span></div>
+                 <div class=""><span class="price"> Total: <?php echo str_replace('GBP', '£', money_format('%=.2i', ($value = $item['UNIT_PRICE'] * $item['QUANTITY']))); $total += $value; ?></span></div>
+            </div>                  
+        </div>
+      <?php endforeach; ?>
+
+	<div class="center_title_bar"><center>Order placement</center></div>
+		<div class="prod_box">
+
+            <div class="center_prod_box">            
+                 <div class="prod_price"> <span class="price">Total: <?php echo str_replace('GBP', '£', money_format('%=.2i', $total));?></span></div> 
+				 <div class="prod_price"> <span class="price">P&P <?php if ($total > 50) { echo '£0.00'; } else { echo '£4.99'; }?></span></div>
+            </div>
+           
+            <div class="prod_details_tab">          
+            <a href="buy.html" class="prod_buy">Place Order</a>            
+            </div>                     
+        </div>

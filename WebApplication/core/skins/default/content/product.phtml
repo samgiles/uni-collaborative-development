@@ -1,0 +1,42 @@
+<?php $product = $this->product(); ?>
+<div class="center_title_bar"><?php echo $product->getTitle();?></div>
+    <div class="prod_box_big">
+        <div class="center_prod_box_big">            
+             <div class="product_img_big">
+                <a href="#" title="">
+                    <img src="images/p3.jpg" alt="" title="" border="0" />
+                </a>
+             </div>
+             <div class="details_big_box">
+                <div class="product_title_big"><?php echo $product->getTitle();?>                     </div>
+                    <div class="specifications">
+                        <p>Available: 
+                            <?php if($product->getStockLevel() > 0): ?>
+                                <span class="blue">In stock</span><br />
+                            <?php else:?>
+                                <span class="blue red">Out Of stock</span>
+                            <?php endif;?>
+                        </p>
+                        <p>
+                            Transport: 
+                            <span class="blue">
+                                delivery services company
+                            </span>
+                        </p>
+                        <p>Description :</p>  
+                        <p>
+                            <?php echo $product->getDescription(); ?>
+                        </p>
+                    </div>
+                    <div class="prod_price_big">
+                        <span class="reduce">&pound;<?php echo $product->getUnitPrice(); ?> </span>
+                        <span class="price"></span>
+                         <div class="prod_details_tab">
+                            <a href="./?c=ShoppingCart&add&productid=<?php  echo $product->getCode(); ?>&quantity=1" class="prod_buy add-to-basket">Add to Cart</a>  
+                        </div>
+                    </div>
+                </div>                        
+            </div>      
+        </div>
+    </div>
+</div>

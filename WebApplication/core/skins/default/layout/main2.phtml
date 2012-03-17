@@ -1,0 +1,81 @@
+empty file<?php // We need to know if the user is authenticated as we server a slightly different page if they are logged in.
+    $authObject = new LoginController(); 
+    ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tools Shop</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
+        <link type="text/css" href="css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="main_container">    
+            <div id="header">
+                <div class="top_right">
+                    <div class="big_banner">
+                        <a href="#">
+                            <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=5,0,0,0">
+
+<PARAM NAME="MOVIE" VALUE="./images/BANNER2.swf">
+
+<PARAM NAME="PLAY" VALUE="true">
+
+<PARAM NAME="LOOP" VALUE="true">
+
+<PARAM NAME="QUALITY" VALUE="high">
+
+<PARAM NAME="SCALE" value="noborder">
+
+<EMBED SRC="./images/BANNER2.swf"
+
+WIDTH="728px"
+HEIGHT="128px"
+
+PLAY="true" 
+
+LOOP="true"
+
+QUALITY="high" 
+
+scale="noborder"
+
+PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> 
+
+</EMBED>
+
+</OBJECT>
+                        </a>
+                    </div>
+                </div>
+        
+                <div id="logo">
+                    <a href="index.html"><img src="images/logo.png" alt="" title="" border="0" width="182" height="85" /></a>
+                </div>
+             
+     
+        
+            <div class="center_content">
+            
+            
+                <?php $this->content(); ?>
+                
+                
+            </div>
+            
+            <div class="footer">
+                <div class="left_footer">
+                    <img src="images/footer_logo.png" alt="" title="" width="89" height="42"/>
+                </div>
+                <div class="center_footer">
+                    <p>. All Rights Reserved 2012</p>
+                    <img src="images/payment.gif" alt="" title="" />
+                </div>
+            
+              
+            </div>                 
+        </div>
+<!-- end of main_container -->
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
+</html>

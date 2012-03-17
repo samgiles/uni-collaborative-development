@@ -1,0 +1,77 @@
+<?
+
+mysql_connect("mysql1226int.cp.blacknight.com", "u1168152_tests", "onetwothree") or die(mysql_error());
+mysql_select_db("db1168152_tests") or die(mysql_error());
+
+
+
+$name1 = $_POST['uname'];
+$pass = $_POST['pword'];
+$userid = $_COOKIE['getuser'];
+
+if(isset($name1))
+{
+$sql2 = mysql_query("SELECT * FROM `backoffice_log` WHERE `log_username`='{$name1}' AND `log_password`='{$pass}' LIMIT 1");
+
+$num = mysql_num_rows($sql2);
+
+if($num == 0){ echo "No such username or password"; die; }
+else {
+
+$show = mysql_fetch_array($sql2);
+
+$getuser = $show['log_username'];
+
+include'session.php';
+
+}
+
+
+
+
+} 
+
+if(isset($userid))
+{
+
+$getid = $_GET['id'];
+
+if($getid)
+{
+if($getid == 1){ $name = "Supervisor"; }    
+if($getid == 2){ $name = "Warehouse"; }  
+if($getid == 3){ $name = "General"; }  
+
+echo "{$name} Staff Details";
+
+die;
+}
+ 
+} else {
+      
+  echo "
+   <form action=\"./?c=Check\" method=\"POST\">
+     <label>Username:</label>
+       <input type=\"test\" name=\"uname\" />
+     <label>Password:</label>
+       <input type=\"password\" name=\"pword\" />
+       <input type=\"submit\" value=\"Log in!\" class=\"submit\" />
+  </form>
+  ";
+    
+    die;
+}
+ 
+?>
+<h1> BACK OFFICE</H1>
+<h2> Select Staff Details</H2>
+<style>
+#txtChar{width:25}
+</style>
+<br>
+<a href="?c=Check&id=1">Click here for Supervisor</a>
+<br>
+<a href="?c=Check&id=2">Click here for Warehouse Staff</a>
+<br>
+<a href="?c=Check&id=3">Click here for General Staff</a>
+<br>

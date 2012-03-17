@@ -1,0 +1,45 @@
+<?php 
+  if ($this->isEmptyQuery()): ?>
+    <p>Please enter a search term</p>
+  <?php
+  else:
+      if ($this->c() == 'Search'){
+          if (isset($_GET['asc'])):?>
+                 <center> <a href="./?c=Search&q=<?php echo $_GET['q']; ?>&desc">See Lowest Price First</a></center>
+          <?php elseif (isset($_GET['desc'])): ?>
+                  <center><a href="./?c=Search&q=<?php echo $_GET['q']; ?>&asc">See Highest Price First</a></center>
+          <?php
+          else: ?>
+          <center> <a href="./?c=Search&q=<?php echo $_GET['q']; ?>&desc">See Lowest Price First</a> <a href="./?c=Search&q=<?php echo $_GET['q']; ?>&asc">See Highest Price First</a></center>
+          <?php
+          endif;
+          }
+  $products = $this->products();
+  foreach($products as $product):
+?>
+<div class="prod_box">
+    <div class="center_prod_box">            
+        <div class="product_title">
+            <a href="./?c=Product&pid=<?php echo $product->getCode(); ?>"><?php echo $product->getTitle(); ?></a>
+        </div>
+        <div class="product_img">
+            <a href="./?c=Product&pid=<?php echo $product->getCode(); ?>">
+                <img src="<?php 
+                    echo $product->getPhotoPath();
+                ?>" alt="" title="" border="0" style="width: 71px; height: 71px" />  
+            </a>
+        </div>
+        <div class="prod_price">
+            <span class="price">£<?php echo $product->getUnitPrice(); ?></span>
+        </div>                        
+    </div>
+           
+    <div class="prod_details_tab">
+        <a href="./?c=ShoppingCart&add&productid=<?php 
+            echo $product->getCode();
+        ?>&quantity=1" class="prod_buy add-to-basket">Add to Cart</a>          
+        <a href="./?c=Product&pid=<?php echo $product->getCode(); ?>" class="prod_details">Details</a>            
+    </div>                     
+</div>
+<?php endforeach;
+endif;
