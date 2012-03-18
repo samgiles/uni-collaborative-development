@@ -1,6 +1,7 @@
 <?php
 /**
  * Autoload.php sets up the autoloading for the application.
+ * @package core
  */
 
 /**

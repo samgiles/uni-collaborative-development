@@ -5,7 +5,7 @@
 * @author Samuel E Giles
 * @version 0.5 August 2011
 * @license GPLv3 http://www.gnu.org/licenses/gpl.txt
-* @package default
+* @package core
 */
 class Logger {
 

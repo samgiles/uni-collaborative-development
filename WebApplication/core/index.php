@@ -1,6 +1,7 @@
 <?php 
 /**
  * This is the index file for the framework.  It provides an entry point to the application.
+ * @package core
  */
 
 $dn = dirname(__FILE__);
