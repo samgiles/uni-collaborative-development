@@ -1,5 +1,5 @@
 <?php
-class Product implements Model {
+class Product {
     
     private $_code;
     private $_photoPath;

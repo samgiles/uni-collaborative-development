@@ -4,7 +4,7 @@
  * @author Samuel Giles
  * TODO:  Update this when Product Models are created.
  */
-class ShoppingCart implements Model {
+class ShoppingCart {
 	
 	/**
 	 * An associative array of items that are currently in the shopping basket.

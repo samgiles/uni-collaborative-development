@@ -1,5 +1,5 @@
 <?php 
-/*
+/**
  * This is the index file for the framework.  It provides an entry point to the application.
  */
 
@@ -11,6 +11,7 @@ $psdn = PATH_SEPARATOR . $dn; // Path separator and dn
 $path = $dn . '/../auth' . $psdn . '/../db' . $psdn . '/../session' . $psdn . '/../session/simple-sessions' . $psdn . '/../session/simple-sessions/session_writers' . $psdn . '/controllers'  . $psdn . '/models' . $psdn . '/../auth/adapters';
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
+// Set locale specifics
 date_default_timezone_set('UTC');
 setlocale(LC_MONETARY, 'en_GB');
 
