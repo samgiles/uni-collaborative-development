@@ -141,7 +141,7 @@
  	                <replacetoken>@SESSIONPWORD</replacetoken>
  	        <replacevalue>123456</replacevalue>
             </replace>
-  <exec executable="phpunit" failonerror="false">
+  <exec executable="phpunit" failonerror="true">
      <arg value="--coverage-clover" />
   	 <arg path="${basedir}/build/logs/clover.xml" />
   	 <arg value="--bootstrap" />
