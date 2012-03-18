@@ -1,8 +1,8 @@
 <?php
-include('PageModel.php');
 /**
  * The base class for a controller.  Controllers, control the processing that will occur in a web request.
  * @author Samuel Giles
+ * @package default
  */
 abstract class Controller {
 	

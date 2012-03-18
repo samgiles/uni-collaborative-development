@@ -1,5 +1,9 @@
 <?php
 /**
+ * Autoload.php sets up the autoloading for the application.
+ */
+
+/**
  * Used to autoload classes, this means we do not need to use include statements to find class definitions.
  * @param string $className
  */

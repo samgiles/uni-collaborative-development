@@ -2,6 +2,7 @@
 /**
  * Takes a web request and dispatches it appropriately using the parameters.
  * @author Samuel Giles
+ * @package default
  */
 class Dispatch {
 	

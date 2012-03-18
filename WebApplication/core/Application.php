@@ -2,6 +2,7 @@
 /**
  * The main object for the Application
  * @author Samuel Giles
+ * @package default
  */
 class Application {
 	

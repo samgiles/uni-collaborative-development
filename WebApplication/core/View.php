@@ -2,6 +2,7 @@
 /**
  * The view engine.  Handles creating the interface and outputting the interface.
  * @author Samuel Giles
+ * @package default
  */
 class View {
 	
