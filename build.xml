@@ -135,11 +135,11 @@
  	        </replace>
  	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
  	                <replacetoken>@SESSIONUNAME</replacetoken>
- 	                <replacevalue>PHPUNIT</replacevalue>
+ 	                <replacevalue>root</replacevalue>
  	        </replace>
  	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
  	                <replacetoken>@SESSIONPWORD</replacetoken>
- 	        <replacevalue>*90E462C37378CED12064BB3388827D2BA3A9B689</replacevalue>
+ 	        <replacevalue>123456</replacevalue>
             </replace>
   <exec executable="phpunit" failonerror="false">
      <arg value="--coverage-clover" />
@@ -155,11 +155,11 @@
  	              <replacevalue>@SESSIONDSN</replacevalue>
  	        </replace>
  	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
- 	                <replacetoken>PHPUNIT</replacetoken>
+ 	                <replacetoken>root</replacetoken>
  	                <replacevalue>@SESSIONUNAME</replacevalue>
  	        </replace>
  	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
- 	                <replacetoken>*90E462C37378CED12064BB3388827D2BA3A9B689</replacetoken>
+ 	                <replacetoken>123456</replacetoken>
  	        <replacevalue>@SESSIONPWORD</replacevalue>
             </replace>
  </target>
