@@ -55,7 +55,7 @@ class LoginController extends Controller {
     
   private function tryAuthenticate($uname, $pword) {
    // Create an Authenticate object.  The Authenticate interface implements a single method: function authenticate($identity (i.e. Username), $credentials (i.e. Password));
-   return $this->_auth->authenticate($uname, $pword);
+   return $this->_auth->tryAuthenticate($uname, $pword);
   }
   
   public function getAuthenticated() {

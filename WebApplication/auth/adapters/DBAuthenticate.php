@@ -83,7 +83,7 @@ class DBAuthenticate implements Authenticate {
      * @see Authenticate::authenticate()
      * TODO: Clean up this function, currently sets a session variable called 'login' that contains successful login information.
      */
-	public function authenticate($identity, $credential) {
+	public function tryAuthenticate($identity, $credential) {
 		
         if ($identity != NULL) {
           // Try and authenticate the identity and credential 

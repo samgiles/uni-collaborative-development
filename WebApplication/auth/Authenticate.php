@@ -11,5 +11,5 @@ interface Authenticate {
 	 * @param $credentials The credentials of the entity.
 	 * @returns mixed Returns always FALSE on failure and may return Adapter specific information on success.
 	 */
-	function authenticate($identity, $credentials);
+	function tryAuthenticate($identity, $credentials);
 }
