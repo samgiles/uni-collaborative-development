@@ -45,7 +45,7 @@
   <exec executable="phploc">
    <arg value="--log-csv" />
    <arg value="${basedir}/build/logs/phploc.csv" />
-   <arg path="${basedir}/WebAppplication" />
+   <arg path="${basedir}/WebApplication" />
   </exec>
  </target>
 
@@ -90,6 +90,7 @@
  <target name="phpcs-ci"
          description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
   <exec executable="phpcs" output="/dev/null">
+  	<arg value="-v" />
    <arg value="--report=checkstyle" />
    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
    <arg value="--standard=${basedir}/build/phpcs.xml" />
