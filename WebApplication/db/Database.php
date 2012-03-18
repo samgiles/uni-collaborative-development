@@ -43,7 +43,7 @@ class Database {
 	 
 	 /**
 	  * Allows an SQL statement to be executed on the database.
-	  * @example DatabaseExample.php Example usage for SELECT statement.
+	  * @example See WebApplication/docexamples/DatabaseExample.php Example usage for SELECT statement. Note: phpDocumentor2 does not fully support the example tag: https://github.com/phpDocumentor/phpDocumentor2/issues/48
 	  * @param string $sqlStatement The SQL statement to execute.
 	  * @returns PDOStatement
 	  */
