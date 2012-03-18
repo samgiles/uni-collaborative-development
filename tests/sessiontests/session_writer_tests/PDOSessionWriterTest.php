@@ -1,6 +1,5 @@
 <?php
 include_once ('SessionWriterTest.php');
-include_once (dirname(__FILE__) . '/../../WebApplication/session/simple-sessions/session_writers/PDOSessionWriter.php');
 include_once('DummyObject.php');
 
 
