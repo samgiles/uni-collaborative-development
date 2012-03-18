@@ -38,7 +38,19 @@
  </target>
 
  <target name="lint">
+ 	<apply executable="php" failonerror="true">
+ 	   <arg value="-l" />
 
+ 	   <fileset dir="${basedir}/WebApplication">
+ 	    <include name="**/*.php" />
+ 	    <modified />
+ 	   </fileset>
+
+ 	   <fileset dir="${basedir}/tests">
+ 	    <include name="**/*.php" />
+ 	    <modified />
+ 	   </fileset>
+ 	  </apply>
  </target>
 
  <target name="phploc" description="Measure project size using PHPLOC">
