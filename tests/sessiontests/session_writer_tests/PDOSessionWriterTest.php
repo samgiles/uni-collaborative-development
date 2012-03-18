@@ -1,12 +1,13 @@
 <?php
 include_once ('SessionWriterTest.php');
+include_once (dirname(__FILE__) . '/../../WebApplication/session/simple-sessions/session_writers/PDOSessionWriter.php');
 include_once('DummyObject.php');
 
 
 class PDOSessionWriterTest extends SessionWriterTest {
   
   public function __construct() {
-  	$pdo = new PDO('mysql:host=localhost;dbname=sessions', 'root', '123456');
+  	$pdo = new PDO('@SESSIONDSN', '@SESSIONUNAME', '@SESSIONPWORD');
   	parent::__construct(new PDOSessionWriter($pdo));
   }
   
