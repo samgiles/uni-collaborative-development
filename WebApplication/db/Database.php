@@ -43,7 +43,7 @@ class Database {
 	 
 	 /**
 	  * Allows an SQL statement to be executed on the database.
-	  * @example <code> $result = Database::execute("SELECT * FROM EMP");</code> returns a PDOStatement with the resultset.
+	  * @example DatabaseExample.php Example usage for SELECT statement.
 	  * @param string $sqlStatement The SQL statement to execute.
 	  * @returns PDOStatement
 	  */
