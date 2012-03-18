@@ -2,6 +2,7 @@
 /**
  * No Description TODO: Write description
  * @author Nadeem Alam
+ * @package application.controllers
  */
 class StockCheckController extends Controller {
     
