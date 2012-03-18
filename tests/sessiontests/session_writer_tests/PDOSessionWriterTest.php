@@ -6,7 +6,7 @@ include_once('DummyObject.php');
 class PDOSessionWriterTest extends SessionWriterTest {
   
   public function __construct() {
-  	$pdo = new PDO('@SESSIONDSN', '@SESSIONUNAME', '@SESSIONPWORD');
+  	$pdo = new PDO('mysql:host=localhost;dbname=sessions', 'root', '123456');
   	parent::__construct(new PDOSessionWriter($pdo));
   }
   
