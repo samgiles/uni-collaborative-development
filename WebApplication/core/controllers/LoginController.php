@@ -21,7 +21,7 @@ class LoginController extends Controller {
     if (isset($_GET['logout'])) {
       // clear session.
       setcookie('logins', null); // removing this seems to break login/logout TODO: find out why
-      $this->_auth->clear();
+      Session::clear();
     }
      
     if ($containerController !== NULL) {
@@ -36,19 +36,26 @@ class LoginController extends Controller {
   if (isset($_POST['uname']) and isset($_POST['pword'])) {
     // Do authentication with username and password.
     $authInfo = $this->tryAuthenticate($_POST['uname'], $_POST['pword']);
+    
+    if ($authInfo !== FALSE) {
+      Session::set('login', $authInfo);
+    }
+    
   } else {
     // If no uname and password variable set simply check for current authentication.
-    $authInfo = $this->tryAuthenticate(null, null);
+    $loginDetails = Session::get('login');
+
+    // Session Hash doesn't exist if NULL
+    if ($loginDetails != NULL) {
+      if (array_key_exists('ip', $loginDetails) && $loginDetails['ip'] == $_SERVER['REMOTE_ADDR']) {
+         $authInfo = $loginDetails;
+      }
+    } else {
+      $this->_invalidDetails = true;
+    }
   }
 
-  $this->_hasAuthenticated = $authInfo !== FALSE;
-  
-  if (!$this->_hasAuthenticated) {
-    $this->_invalidDetails = true;  
-  } else {
-  	// Set the session
-  	Session::set('login', $authInfo);
-  }
+  $this->_hasAuthenticated = ($authInfo !== FALSE);
   
   $this->addViewVariable('invalidDetails', $this->_invalidDetails); 
   $this->addViewVariable('hasAuthenticated', $this->_hasAuthenticated);

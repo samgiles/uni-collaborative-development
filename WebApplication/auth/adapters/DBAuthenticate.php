@@ -51,21 +51,13 @@ class DBAuthenticate implements Authenticate {
         $this->_primaryKey = $primaryKey;
         
 	}
-	
-	/**
-	 * Clears an authenticated session.
-	 * TODO: Remove this, this shouldn't really belong in here, as it has nothing to do with Authenticating a user, and violates the SRP.
-	 */
-    public function clear() {
-      Session::clear();
-    }
     
     /**
      * Gets the User access level of a user given a USER ID/CODE
      * @param int $uid
-     * TODO: Remove this, this shouldn't be here as it has nothing to do with authenticating a user and violates the SRP. Probably best to move into LoginController or something.
      */
     private function getUserAccessLevel($uid) {
+      //TODO: Remove this, this shouldn't be here as it has nothing to do with authenticating a user and violates the SRP. Probably best to move into LoginController or something.
       $sql = 'SELECT ACCESS_LEVEL_CODE FROM STAFF WHERE USER_CODE = ' . $uid;
       $result = Database::execute($sql);
       $result = $result->fetchAll();
@@ -81,7 +73,6 @@ class DBAuthenticate implements Authenticate {
     /**
      * Authenticates an entity with a given identity and credential.
      * @see Authenticate::authenticate()
-     * TODO: Clean up this function, currently sets a session variable called 'login' that contains successful login information.
      */
 	public function tryAuthenticate($identity, $credential) {
 		
@@ -99,22 +90,7 @@ class DBAuthenticate implements Authenticate {
               
               return array('username' => $identity, 'time' => time(), 'dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']);
           }
-        } else {
-          // Try and authenticate the cookie hash 
-          
-          $loginDetails = Session::get('login');
-
-          // Session Hash doesn't exist if NULL
-          if ($loginDetails != NULL) {
-              if (array_key_exists('ip', $loginDetails) && $loginDetails['ip'] == $_SERVER['REMOTE_ADDR']) {
-                return true;
-              } else {
-                return false;
-              }
-          } else {
-            return false;   
-          }
-        }
+        } 
         
         return false;
 
