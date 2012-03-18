@@ -127,9 +127,41 @@
    <arg path="${basedir}/build/api" />
   </exec>
  </target>
-
+	
  <target name="phpunit" description="Run unit tests with PHPUnit">
-  <exec executable="phpunit" failonerror="false"/>
+ 	<replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
+ 	                  <replacetoken>@SESSIONDSN</replacetoken>
+ 	              <replacevalue>mysql:host=localhost;dbname=sessions</replacevalue>
+ 	        </replace>
+ 	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
+ 	                <replacetoken>@SESSIONUNAME</replacetoken>
+ 	                <replacevalue>PHPUNIT</replacevalue>
+ 	        </replace>
+ 	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
+ 	                <replacetoken>@SESSIONPWORD</replacetoken>
+ 	        <replacevalue>*90E462C37378CED12064BB3388827D2BA3A9B689</replacevalue>
+            </replace>
+  <exec executable="phpunit" failonerror="false">
+     <arg value="--coverage-clover" />
+  	 <arg path="${basedir}/build/logs/clover.xml" />
+  	 <arg value="--bootstrap" />
+  	 <arg path="${basedir}/tests/testbootstrap.php" />
+  	 <arg value="--log-junit" />
+  	 <arg path="${basedir}/build/logs/junit.xml" />
+  	 <arg path="${basedir}/tests" />
+  </exec>
+	<replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
+ 	                  <replacetoken>mysql:host=localhost;dbname=sessions</replacetoken>
+ 	              <replacevalue>@SESSIONDSN</replacevalue>
+ 	        </replace>
+ 	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
+ 	                <replacetoken>PHPUNIT</replacetoken>
+ 	                <replacevalue>@SESSIONUNAME</replacevalue>
+ 	        </replace>
+ 	        <replace file="${basedir}/tests/sessiontests/session_writer_tests/PDOSessionWriterTest.php">
+ 	                <replacetoken>*90E462C37378CED12064BB3388827D2BA3A9B689</replacetoken>
+ 	        <replacevalue>@SESSIONPWORD</replacevalue>
+            </replace>
  </target>
 
  <target name="phpcb"
