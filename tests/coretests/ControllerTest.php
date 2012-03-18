@@ -7,10 +7,10 @@ class MockController extends Controller {
     $this->_layout 	= 'index';
     $this->_content = 'test';
     
-    $this->_mockController->addViewVariable('array', array());
-    $this->_mockController->addViewVariable('object', new stdClass());
-    $this->_mockController->addViewVariable('scalarint', 10);
-    $this->_mockController->addViewVariable('scalarstring', 'String');
+    $this->addViewVariable('array', array());
+    $this->addViewVariable('object', new stdClass());
+    $this->addViewVariable('scalarint', 10);
+    $this->addViewVariable('scalarstring', 'String');
   }
 }
 
