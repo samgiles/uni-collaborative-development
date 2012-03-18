@@ -2,7 +2,7 @@
 /**
  * No Description TODO: Write Description
  * @author Nadeem Alam
- * @package application.controllers
+ * @package application-controllers
  */
 class OrderController extends Controller {
     
