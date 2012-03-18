@@ -8,7 +8,7 @@ class SupervisorController extends Controller {
 		$this->_content = 'Supervisor';
 		
         // testing
-        if (!$this->requiredAccess(AccessLevels::Supervisor)) {
+        if (!$this->requiredAccess(AccessLevels::SUPERVISOR)) {
           return;
         }
 	}

@@ -35,7 +35,7 @@ abstract class Controller {
 	 * @var int
 	 * TODO Remove tight coupling and dependency on AccessLevels
 	 */
-    protected $_requiredAccessLevel = AccessLevels::Anyone;
+    protected $_requiredAccess = AccessLevels::ANYONE;
 	
 	/**
 	 * Adds a new variable to the page model. This can then be used in the templates specified.

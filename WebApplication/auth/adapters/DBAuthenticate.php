@@ -71,7 +71,7 @@ class DBAuthenticate implements Authenticate {
       $result = $result->fetchAll();
       if (count($result) <= 0) {
         // Non staff member. 
-        return AccessLevels::Anyone; // Anyone can access.
+        return AccessLevels::ANYONE; // Anyone can access.
       } else {
 
         return $result[0]['ACCESS_LEVEL_CODE'];  

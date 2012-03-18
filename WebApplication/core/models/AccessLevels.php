@@ -1,8 +1,8 @@
 <?php
 abstract class AccessLevels {
-  const Anyone = 0;
-  const Admin = 7;
-  const Supervisor = 1;
-  const Warehouse = 2;
-  const GeneralStaff = 4;
+  const ANYONE = 0;
+  const ADMIN = 7;
+  const SUPERVISOR = 1;
+  const WAREHOUSE = 2;
+  const GENERALSTAFF = 4;
 }
