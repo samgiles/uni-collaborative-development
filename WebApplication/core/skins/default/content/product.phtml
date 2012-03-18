@@ -1,4 +1,15 @@
-<?php $product = $this->product(); ?>
+<?php 
+/**
+ *  Displays a product's information using a 'Product' object.
+ *  @author James Legros, Samuel Giles
+ *  @package views/content
+ */
+
+/**
+ * The product this template is displaying.
+ * @var Product
+ */
+$product = $this->product(); ?>
 <div class="center_title_bar"><?php echo $product->getTitle();?></div>
     <div class="prod_box_big">
         <div class="center_prod_box_big">            
