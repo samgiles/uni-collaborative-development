@@ -24,7 +24,7 @@ class PageModel {
 	 * @param string $key The key that will be used to refer to the variable.
 	 * @param mixed $value The value of the variable.
 	 */
-	public function addPageVariable(string $key, $value){
+	public function addPageVariable($key, $value){
 		$this->_pageVariables[$key] = $value;
 	}
 }
