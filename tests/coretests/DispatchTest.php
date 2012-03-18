@@ -12,12 +12,12 @@ class DispatchTests extends PHPUnit_Framework_TestCase {
    * Test's the application dispatch method.
    * */
   public function testDispatch() {
-    $controller = Dispatch(array('c' => 'AnObscure'), array());
+    $controller = Dispatch::get(array('c' => 'AnObscure'), array());
     $this->assertTrue($controller !== NULL);
     $this->assertInstanceOf('AnObscureController', $controller);
     
     // No controller specified.
-    $controller = Dispatch(array(), array());
+    $controller = Dispatch::get(array(), array());
     $this->assertTrue($controller === NULL);
   }
 	
