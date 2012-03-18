@@ -94,10 +94,10 @@ class DBAuthenticate implements Authenticate {
             
           if ($row[$this->_credential] === md5($credential)){
               // Successful
-              // TODO: Shouldn't set the Session here really as it defeats the SRP, creating side effects that may be unwanted.
+              // TODO: Probably shouldn'y get the access level, here. Low Priority, this isn't as bad as setting a session variable here. 
               $accessLevel = $this->getUserAccessLevel($row['CODE']);
-              Session::set('login', array('username' => $identity, 'time' => time(), 'dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']));
-              return true;
+              
+              return array('username' => $identity, 'time' => time(), 'dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']);
           }
         } else {
           // Try and authenticate the cookie hash 

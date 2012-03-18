@@ -31,36 +31,38 @@ class LoginController extends Controller {
     if (isset($_GET['go-to'])) {
          $this->_redirect = $_GET['go-to'];
     }
-     
-     
+ 
   // Check $_POST variables for uname AND pword.
-  
   if (isset($_POST['uname']) and isset($_POST['pword'])) {
     // Do authentication with username and password.
-    $this->_hasAuthenticated = $this->tryAuthenticate($_POST['uname'], $_POST['pword']);
-    
-    if (!$this->_hasAuthenticated) {
-      $this->_invalidDetails = true;  
-    }
-    
+    $authInfo = $this->tryAuthenticate($_POST['uname'], $_POST['pword']);
   } else {
     // If no uname and password variable set simply check for current authentication.
-    $this->_hasAuthenticated = $this->tryAuthenticate(null, null);
+    $authInfo = $this->tryAuthenticate(null, null);
+  }
+
+  $this->_hasAuthenticated = $authInfo !== FALSE;
+  
+  if (!$this->_hasAuthenticated) {
+    $this->_invalidDetails = true;  
+  } else {
+  	// Set the session
+  	Session::set('login', $authInfo);
   }
   
   $this->addViewVariable('invalidDetails', $this->_invalidDetails); 
   $this->addViewVariable('hasAuthenticated', $this->_hasAuthenticated);
   $this->addViewVariable('redirect', $this->_redirect);
  }
-    
+
   private function tryAuthenticate($uname, $pword) {
    // Create an Authenticate object.  The Authenticate interface implements a single method: function authenticate($identity (i.e. Username), $credentials (i.e. Password));
-   return $this->_auth->tryAuthenticate($uname, $pword);
+  	return $this->_auth->tryAuthenticate($uname, $pword);
   }
-  
+
   public function getAuthenticated() {
     return $this->_hasAuthenticated;
   }
-  
+
 
 }
