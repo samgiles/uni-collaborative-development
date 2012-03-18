@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * No Description TODO: Write description
+ * @author Nadeem Alam
+ */
 class StockCheckController extends Controller {
     
     public function __construct() {
