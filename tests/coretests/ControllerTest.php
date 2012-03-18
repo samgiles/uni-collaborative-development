@@ -6,6 +6,11 @@ class MockController extends Controller {
     $this->_skin 	= 'skin-2';
     $this->_layout 	= 'index';
     $this->_content = 'test';
+    
+    $this->_mockController->addViewVariable('array', array());
+    $this->_mockController->addViewVariable('object', new stdClass());
+    $this->_mockController->addViewVariable('scalarint', 10);
+    $this->_mockController->addViewVariable('scalarstring', 'String');
   }
 }
 
@@ -31,10 +36,6 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
   }
   
   public function testAddViewVariable() {
-    $this->_mockController->addViewVariable('array', array());
-    $this->_mockController->addViewVariable('object', new stdClass());
-    $this->_mockController->addViewVariable('scalarint', 10);
-    $this->_mockController->addViewVariable('scalarstring', 'String');
     
     // Verify they were added to the underlying PageModel.
     $pageModel = $this->_mockController->getPageModel();
