@@ -25,10 +25,10 @@ class DBAuthenticate implements Authenticate {
 	protected $_credential;
 	
 	/**
-	 * Additional conditions holds an array of any more conditions as SQL conditions e.g. { "AND {field} != '{CONDITION}'", "OR {field} > {condition}" }
+	 * These additional conditions holds an array of any more conditions as SQL conditions e.g. { "AND {field} != '{CONDITION}'", "OR {field} > {condition}" }
 	 * @var array
 	 */
-	protected $_additionalConditions;
+	protected $_conditions;
 	
 	/**
 	 * The column name of the primary key in the database table.
@@ -41,13 +41,13 @@ class DBAuthenticate implements Authenticate {
 	 * @param string $table The table that holds credentials.
 	 * @param string $identity The field name that contains the identity information eg. 'username'
 	 * @param string $credential The field name that contains the credential information e.g 'paassword'
-	 * @param array $additionalConditions An array of any more conditions as SQL conditions e.g. { "AND {field} != '{CONDITION}'", "OR {field} > {condition}" }
+	 * @param array $conditions An array of any more conditions as SQL conditions e.g. { "AND {field} != '{CONDITION}'", "OR {field} > {condition}" }
 	 */
-	public function __construct($table, $primaryKey, $identity, $credential, $additionalConditions) {
+	public function __construct($table, $primaryKey, $identity, $credential, $conditions) {
 		$this->_table = $table;
 		$this->_identity = $identity;
 		$this->_credential = $credential;
-		$this->_additionalConditions = $additionalConditions;
+		$this->_conditions = $conditions;
         $this->_primaryKey = $primaryKey;
         
 	}
@@ -127,8 +127,8 @@ class DBAuthenticate implements Authenticate {
 	protected function buildSqlStatement($identity) {
 		// Build an SQL statement
 		$sqlStatement = 'SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_identity .  ' = "' . $identity . '"';
-		if ($this->_additionalConditions) {
-            $sqlStatement .= implode(" ", $this->_additionalConditions);
+		if ($this->_conditions) {
+            $sqlStatement .= implode(" ", $this->_conditions);
 		}
 		
 		return $sqlStatement;
