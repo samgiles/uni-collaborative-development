@@ -2,6 +2,7 @@
 /**
  * A simple payment processing service
  * @author Samuel Giles
+ * @package application-models
  */
 class PaymentProcessor {
   
