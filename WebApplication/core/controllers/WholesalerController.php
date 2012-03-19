@@ -6,7 +6,7 @@ class WholesalerController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'wholesalers';
 		
-		
+		$this->requiredAccess(AccessLevels::WAREHOUSE | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
         $this->getAllWholesalers();
         // Tell the view that we're an Index controller.
 		$this->addViewVariable("c", "Wholesaler");
