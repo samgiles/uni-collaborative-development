@@ -3,7 +3,7 @@ class ConfirmationController extends Controller {
     
     public function __construct() {
 		$this->_skin = 'default';
-		$this->_layout = 'main';
+		$this->_layout = 'empty';
 		$this->_content = 'confirmation';
 		
         
