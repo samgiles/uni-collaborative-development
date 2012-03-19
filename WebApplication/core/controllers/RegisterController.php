@@ -42,8 +42,8 @@ class RegisterController extends Controller {
       
       // Next we need to add in an address because the SYSTEM_USER table uses a foreign key reference to ADDRESS
       $result = Database::execute("INSERT INTO ADDRESS (NAME, LINE_ONE, LINE_TWO, POST_CODE) VALUES ('', '$addressLineOne', '$addressLineTwo', '$postcode'");
-      
-      $result = $result->fetchAll(PDO::FETCH_ASSOC); 
+      var_dump($result);
+      //$result = $result->fetchAll(PDO::FETCH_ASSOC); 
       
   
       $addressPrimaryKey = $result['CODE']; // Get the primary key of the inserted address to use on the insert into SYSTEM_USER table.
