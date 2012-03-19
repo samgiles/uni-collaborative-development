@@ -229,8 +229,8 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
                   bValid = bValid && checkLength(usernameA, "User Name", 1, 10);
                   bValid = bValid && checkLength(password, "Password", 1, 30);
                   bValid = bValid && checkEquality(password, passwordRepeat, "Check passwords are matching");
-                  bValid = bValid && checkLength(addressLineOne, "Address Line One", 1, 10);
-                  bValid = bValid && checkLength(addressLineTwo, "Address Line Two", 0, 30);
+                  bValid = bValid && checkLength(addressLineOne, "Address Line One", 1, 50);
+                  bValid = bValid && checkLength(addressLineTwo, "Address Line Two", 0, 40);
                   bValid = bValid && checkLength(postcode, "Post Code", 4, 8);
                   
                   if (!bValid) {
