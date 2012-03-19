@@ -19,7 +19,7 @@ class RegisterController extends Controller {
       
       $fname = $_POST['fname']; // FNAME
       $lname = $_POST['lname']; // LNAME
-      $uname = $_POST['username']; // USERNAME
+      $uname = $_POST['uname']; // USERNAME
       $password = $_POST['password']; // PASSWORD
       $email = $_POST['email']; // EMAIL
       $addressLineOne = $_POST['addrlineone']; // ADDRESS LINE ONE.
@@ -41,9 +41,11 @@ class RegisterController extends Controller {
       }
       
       // Next we need to add in an address because the SYSTEM_USER table uses a foreign key reference to ADDRESS
-      $result = Database::execute("INSERT INTO ADDRESS (LINE_ONE, LINE_TWO, POST_CODE) VALUES ('$addressLineOne', '$addressLineTwo', '$postcode'");
-      $result->fetch(PDO::FETCH_ASSOC); 
-      
+      $stmt = Database::execute("INSERT INTO ADDRESS (NAME, LINE_ONE, LINE_TWO, POST_CODE) VALUES ('', '$addressLineOne', '$addressLineTwo', '$postcode'");
+
+      $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+      var_dump($result);
+  
       $addressPrimaryKey = $result['CODE']; // Get the primary key of the inserted address to use on the insert into SYSTEM_USER table.
       
       
@@ -54,7 +56,7 @@ class RegisterController extends Controller {
       
       // And then create a customer record in the CUSTOMER table using the primary 
       // key from the SYSTEM_USER insert (using the method above) give them a loyalty code of 1 for now and payment details as NULL (no need for this yet).
-       $result3 = Database::execute("INSERT INTO CUSTOMER (SYS_USER_CODE, PAYMENT_DETAILS_CODE, LOYALTY_CODE) VALUES ('$systemUserCode', '$paymentDetailsCode', '$loyaltyCode'");
+       $result3 = Database::execute("INSERT INTO CUSTOMER (SYS_USER_CODE, PAYMENT_DETAILS_CODE, LOYALTY_CODE) VALUES ('$systemUserCode', NULL, 1");
       $result3->fetch(PDO::FETCH_ASSOC);
   }
 }
