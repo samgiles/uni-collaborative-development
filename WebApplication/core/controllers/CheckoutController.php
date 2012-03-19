@@ -7,7 +7,7 @@ class CheckoutController extends Controller {
 		$this->_content = 'checkout';
 		
 		// Should probably move into new controller.
-		if (isset($_POST['process'])) {
+		if (isset($_GET['process'])) {
 		  // Process payment...
 		  // create new payment processor
 		  $paymentProcessor = new PaymentProcessor();
