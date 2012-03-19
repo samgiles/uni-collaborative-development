@@ -50,7 +50,7 @@ class RegisterController extends Controller {
       
       // finally we'll need to insert the details into the SYSTEM_USER table
       
-       $result2 = Database::execute("INSERT INTO SYSTEM_USER (F_NAME, L_NAME, PHONE_NUMBER, USERNAME, PASSWORD, EMAIL, ADDRESS_CODE) VALUES ('$fname', '$lname', '0123 456 7689', '$uname', '$password', '$email', $addressPrimaryKey");
+       $result2 = Database::execute("INSERT INTO SYSTEM_USER (F_NAME, L_NAME, PHONE_NUMBER, USERNAME, PASSWORD, EMAIL, ADDRESS_CODE) VALUES ('$fname', '$lname', '0123 456 7689', '$uname', '$password', '$email', $addressPrimaryKey)");
        $userPK = $result2->fetch(PDO::FETCH_ASSOC);
       
       // And then create a customer record in the CUSTOMER table using the primary 
