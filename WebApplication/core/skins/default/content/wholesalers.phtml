@@ -22,13 +22,13 @@
 		<tbody>
           <?php foreach ($this->wholesalers() as $wholesaler):?>
 			<tr>
-				<td>Code</td>
-    			<td>Name</td>
-				<td>Contact</td>
-                <td>Contact Number</td>
-                <td>Address Line One</td>
-                <td>Address Line Two</td>
-                <td>Postcode</td>
+				<td><?php echo $wholesaler['CODE']; ?></td>
+    			<td><?php echo $wholesaler['NAME']; ?></td>
+				<td><?php echo $wholesaler['CONTACT_NAME']; ?></td>
+                <td><?php echo $wholesaler['CONTACT_NUMBER']; ?></td>
+                <td><?php echo $wholesaler['LINE_ONE']; ?></td>
+                <td><?php echo $wholesaler['LINE_TWO']; ?></td>
+                <td><?php echo $wholesaler['POST_CODE']; ?></td>
 			</tr>
           <?php endforeach; ?>
 		</tbody>

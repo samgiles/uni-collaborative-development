@@ -8,7 +8,7 @@ class CheckoutController extends Controller {
 		
         $this->getDetails();
         
-        // Tell the view that we're an Index controller.
+        // Tell the view that we're a Checkout controller.
 		$this->addViewVariable("c", "Checkout");
 	}
     

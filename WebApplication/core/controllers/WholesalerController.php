@@ -6,8 +6,18 @@ class WholesalerController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'wholesalers';
 		
-        $this->addViewVariable('wholesalers', array()); // testing with an emoty array..
+		
+        $this->addViewVariable('wholesalers', array());
         // Tell the view that we're an Index controller.
 		$this->addViewVariable("c", "Wholesaler");
+	}
+	
+	
+	private function getAllWholesalers() {
+	  $sqlStatement = 'SELECT  `WHOLESALER`.`CODE`,`WHOLESALER`.`NAME`, `WHOLESALER`.`CONTACT_NAME`, `WHOLESALER`.`CONTACT_NUMBER`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM WHOLESALER, ADDRESS WHERE `WHOLESALER`.`ADDRESS_CODE` = `ADDRESS`.`CODE`';
+	  $result = Database::execute($sqlStatement);
+	  $result = $result->fetchAll();
+	  
+	  $this->addViewVariable('wholesalers', $result);
 	}
 }
