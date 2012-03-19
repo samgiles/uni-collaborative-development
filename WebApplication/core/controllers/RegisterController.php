@@ -47,7 +47,7 @@ class RegisterController extends Controller {
   
       $addressPrimaryKey = $result['CODE']; // Get the primary key of the inserted address to use on the insert into SYSTEM_USER table.
       
-      
+      echo "INSERT INTO SYSTEM_USER (F_NAME, L_NAME, PHONE_NUMBER, USERNAME, PASSWORD, EMAIL, ADDRESS_CODE) VALUES ('$fname', '$lname', '0123 456 7689', '$uname', '$password', '$email', {$addressPrimaryKey})";
       // finally we'll need to insert the details into the SYSTEM_USER table
        $result2 = Database::execute("INSERT INTO SYSTEM_USER (F_NAME, L_NAME, PHONE_NUMBER, USERNAME, PASSWORD, EMAIL, ADDRESS_CODE) VALUES ('$fname', '$lname', '0123 456 7689', '$uname', '$password', '$email', {$addressPrimaryKey})");
        $userPK = $result2->fetch(PDO::FETCH_ASSOC);
