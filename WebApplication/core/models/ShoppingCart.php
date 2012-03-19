@@ -21,7 +21,7 @@ class ShoppingCart {
 	/**
 	 * If the customer is logged in, then this will represent the customer code, if the user is not logged in then this will be NULL.
 	 */
-	private $_customerCode;
+	public $_customerCode;
 	
 	/**
 	 * Constructs a Shopping basket, loading the current users basket from the database.
@@ -43,6 +43,10 @@ class ShoppingCart {
 		// Load the Shopping cart from the database.
 		$this->loadFromQuery();
 
+	}
+	
+	public function getCustomerCode() {
+	  return $this->_customerCode;
 	}
 	
     public function unavailable() {
