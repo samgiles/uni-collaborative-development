@@ -19,7 +19,7 @@ class RegisterController extends Controller {
       
       $fname = $_POST['fname']; // FNAME
       $lname = $_POST['lname']; // LNAME
-      $uname = $_POST['username']; // USERNAME
+      $uname = $_POST['uname']; // USERNAME
       $password = $_POST['password']; // PASSWORD
       $email = $_POST['email']; // EMAIL
       $addressLineOne = $_POST['addrlineone']; // ADDRESS LINE ONE.
@@ -54,7 +54,7 @@ class RegisterController extends Controller {
       
       // And then create a customer record in the CUSTOMER table using the primary 
       // key from the SYSTEM_USER insert (using the method above) give them a loyalty code of 1 for now and payment details as NULL (no need for this yet).
-       $result3 = Database::execute("INSERT INTO CUSTOMER (SYS_USER_CODE, PAYMENT_DETAILS_CODE, LOYALTY_CODE) VALUES ('$systemUserCode', '$paymentDetailsCode', '$loyaltyCode'");
+       $result3 = Database::execute("INSERT INTO CUSTOMER (SYS_USER_CODE, PAYMENT_DETAILS_CODE, LOYALTY_CODE) VALUES ('$systemUserCode', NULL, 1");
       $result3->fetch(PDO::FETCH_ASSOC);
   }
 }
