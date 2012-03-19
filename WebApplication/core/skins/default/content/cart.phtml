@@ -38,9 +38,11 @@
 			<?php elseif ($total < 50):?>
 				<span>Total: £<?php echo $total?></span>
 				<span>Delivery: £3.99</span>
+				<a href="./?c=Checkout">Checkout</a>
 			<?php else:?>
 				<span>Total: £<?php echo $total?></span>
 				<span>Delivery: FREE</span>
+				<a href="./?c=Checkout">Checkout</a>
 			<?php endif;?>
 		</li>
 		<?php if($this->warnOutOfStock()):?>
