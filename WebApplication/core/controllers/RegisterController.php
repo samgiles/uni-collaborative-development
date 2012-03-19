@@ -39,12 +39,11 @@ class RegisterController extends Controller {
         // Username not taken.
         $this->addViewVariable('usernameTaken', false);
       }
-      
+      echo "INSERT INTO ADDRESS (NAME, LINE_ONE, LINE_TWO, POST_CODE) VALUES ('', '$addressLineOne', '$addressLineTwo', '$postcode')";
       // Next we need to add in an address because the SYSTEM_USER table uses a foreign key reference to ADDRESS
       $stmt = Database::execute("INSERT INTO ADDRESS (NAME, LINE_ONE, LINE_TWO, POST_CODE) VALUES ('', '$addressLineOne', '$addressLineTwo', '$postcode')");
 
       $result = $stmt->fetch(); 
-      var_dump($result);
       $addressPrimaryKey = $result['CODE']; // Get the primary key of the inserted address to use on the insert into SYSTEM_USER table.
       
       echo "INSERT INTO SYSTEM_USER (F_NAME, L_NAME, PHONE_NUMBER, USERNAME, PASSWORD, EMAIL, ADDRESS_CODE) VALUES ('$fname', '$lname', '0123 456 7689', '$uname', '$password', '$email', {$addressPrimaryKey})";
