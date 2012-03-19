@@ -54,7 +54,11 @@ $total = 0;
 				 <div class="prod_price"> <span class="price">P&P <?php if ($total > 50) { echo '£0.00'; } else { echo '£4.99'; }?></span></div>
             </div>
            
-            <div class="prod_details_tab">          
-            <a href="./?c=Checkout&process" class="prod_buy">Place Order</a>            
+            <div class="prod_details_tab">  
+            <?php if (!$this->paymentRecieved()):?>        
+            <a href="./?c=Checkout&process" class="prod_buy">Place Order</a>
+            <?php else:?>
+            <h3>Thanks! We've received your order!</h3>
+            <?php endif;?>            
             </div>                     
         </div>
