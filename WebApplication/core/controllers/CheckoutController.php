@@ -6,7 +6,18 @@ class CheckoutController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'checkout';
 		
-        $this->getDetails();
+		// Should probably move into new controller.
+		if (isset($_POST['process'])) {
+		  // Process payment...
+		  // create new payment processor
+		  $paymentProcessor = new PaymentProcessor();
+		  $authorised = $paymentProcessor->authorisePayment(array()); // mock payment processor.
+		  $this->addViewVariable('paymentRecieved', $authorised);
+		}
+		
+		$this->getDetails();
+        
+        
         
         // Tell the view that we're a Checkout controller.
 		$this->addViewVariable("c", "Checkout");
