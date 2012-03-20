@@ -9,6 +9,7 @@ class CheckoutController extends Controller {
 		$this->_content = 'checkout';
 		$this->_cart = new ShoppingCart();
 		
+		$this->getDetails();
 		
 		// Should probably move into new controller.
 		if (isset($_GET['process'])) {
@@ -22,9 +23,11 @@ class CheckoutController extends Controller {
 		  $order->update();
 		  
 		  $this->addViewVariable('paymentRecieved', $authorised);
+		  // Clear the cart.
+		  $this->_cart->clear();
 		}
 		
-		$this->getDetails();
+		
         
         
         
