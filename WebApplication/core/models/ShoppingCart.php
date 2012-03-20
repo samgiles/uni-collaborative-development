@@ -35,6 +35,7 @@ class ShoppingCart {
         $login = Session::get('login');
 		if ($login !== NULL) {
 			$this->_customerCode = $login['dbid'];
+			$this->_logger->info("Customer Code: " . $this->_customerCode . "<br>");
 		} else {
 			$this->_customerCode = NULL;
             $this->_items = NULL;
