@@ -118,7 +118,7 @@ return;
 */
 private function append($filename, $message){
 $handle = fopen($this->_path . $filename, 'a') or die('Can not open file. ' . $filename);
-fwrite($handle,"\n\r" . $message . "\n\r");
+fwrite($handle,"\n" . $message . "\n");
 fclose($handle);
 }
 }
