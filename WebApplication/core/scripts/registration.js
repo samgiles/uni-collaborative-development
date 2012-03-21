@@ -65,17 +65,24 @@ var registrationDialog = {
               }
               // Submit form.
               //$('#registration-form').submit();
-              $.post('./?c=Register', {
-            	  "fname": forename,
-            	  "lname": lastname,
-            	  "uname": usernameA,
-            	  "password": password,
-            	  "email" : email,
-            	  "addrlineone" : addressLineOne,
-            	  "addrlinetwo" : addressLineTwo,
-            	  "postcode" : postcode
+              $.post('./?c=Register&json', {
+            	  "fname": forename.val(),
+            	  "lname": lastname.val(),
+            	  "uname": usernameA.val(),
+            	  "password": password.val(),
+            	  "email" : email.val(),
+            	  "addrlineone" : addressLineOne.val(),
+            	  "addrlinetwo" : addressLineTwo.val(),
+            	  "postcode" : postcode.val()
                }, function(data){
-            	   $('#register-box').html(data);
+            	   var response = JSON.parse(data);
+            	   
+            	   if (response.usernameTaken) {
+            		   updateTips("That username is already in use! Please pick another username.");
+            		   usernameA.addClass("ui-state-error");
+            	   } else if (response.success) {
+            		   $(this).dialog("close"); // add confirmation.
+            	   }
               });
               
 			},

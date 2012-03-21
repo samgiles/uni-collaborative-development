@@ -1,6 +1,7 @@
 <?php 
 /**
  * Used for registering new System Users.
+ * @author Samuel Giles, Vishal Patel
  */
 class RegisterController extends Controller {
   public function __construct() {
@@ -8,6 +9,10 @@ class RegisterController extends Controller {
 	  $this->_layout = 'empty';
 	  $this->_content = 'register';
       
+	  if (isset($_GET['json'])) {
+	  	$this->_content = 'register.json';
+	  }
+	  
       if (!isset($_POST['fname']) && !isset($_POST['lname'])) {  // If there are no details sent by the registration form exit.
         return;
       }
@@ -44,5 +49,6 @@ class RegisterController extends Controller {
       // And then create a customer record in the CUSTOMER table using the primary 
       // key from the SYSTEM_USER insert (using the method above) give them a loyalty code of 1 for now and payment details as NULL (no need for this yet).
       $result3 = Database::execute("INSERT INTO CUSTOMER (SYS_USER_CODE, PAYMENT_DETAILS_CODE, LOYALTY_CODE) VALUES ({$user->getCode()}, NULL, 1)");
+  	  $this->addViewVariable('success', $result !== false);
   }
 }
