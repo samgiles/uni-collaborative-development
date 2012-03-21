@@ -39,7 +39,7 @@ class User {
 				$this->_logger->logController("User->save(" . print_r($this, true) . ") INSERT returned false.", 'Model::User', 'Model - INSTANCE');
 				throw new Exception("Query failed to execute correctly.");
 			}
-			
+			$pdostatement = Database::execute("SELECT LAST_INSERT_ID() as CODE"); // Get the ID of the last inserted record.
 			$row = $pdostatement->fetch(PDO::FETCH_ASSOC);
 			$this->_code = $row['CODE'];
 		} else {

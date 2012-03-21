@@ -35,8 +35,10 @@ class ShoppingCart {
 		// If the shopping cart session data is set then get the customer code from the ShoppingCartSession object.
         $login = Session::get('login');
 		if ($login !== NULL) {
-			$this->_customerCode = $login['dbid'];
-			$this->_logger->info("Customer Code: " . $this->_customerCode . "<br>");
+			$getCode = Database::execute("SELECT CODE FROM CUSTOMER WHERE SYS_USER_CODE = {$login['dbid']}");
+			$result = $getCode->fetch(PDO::FETCH_ASSOC);
+			$this->_customerCode = $result['CODE'];
+			$this->_logger->info("Customer Code: " . $this->_customerCode);
 		} else {
 			$this->_customerCode = NULL;
             $this->_items = NULL;
@@ -99,7 +101,7 @@ class ShoppingCart {
 		
 		$time = time();
 		for ($i = 0; $i < $quantity; ++$i) {
-			$values .= '(1, ' . $productCode . ', ' . $time .')';
+			$values .= '(' . $this->_customerCode . ' , ' . $productCode . ', ' . $time .')';
 			
 			if ($i >= $quantity) {
 				$values .= ',';

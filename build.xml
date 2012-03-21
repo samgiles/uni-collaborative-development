@@ -117,7 +117,7 @@
     <arg value="--min-lines" />
     <arg value="2" />
    <arg value="--min-tokens" />
-   <arg value="30" />
+   <arg value="10" />
    <arg path="${basedir}/WebApplication" />
   </exec>
  </target>
