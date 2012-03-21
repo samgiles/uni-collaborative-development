@@ -9,7 +9,7 @@ $dn = dirname(__FILE__);
 $psdn = PATH_SEPARATOR . $dn; // Path separator and dn
 
 // Set up the include paths.
-$path = $dn . '/../auth' . $psdn . '/../db' . $psdn . '/../session' . $psdn . '/../session/simple-sessions' . $psdn . '/../session/simple-sessions/session_writers' . $psdn . '/controllers'  . $psdn . '/models' . $psdn . '/../auth/adapters';
+$path = $dn . '/../auth' . $psdn . '/../db' . $psdn . '/../session' . $psdn . '/../session/simple-sessions' . $psdn . '/../session/simple-sessions/session_writers' . $psdn . '/controllers' . $psdn . '/controllers/web' . $psdn . '/controllers/backoffice' . $psdn . '/models' . $psdn . '/../auth/adapters';
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 // Set locale specifics
