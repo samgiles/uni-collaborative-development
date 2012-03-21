@@ -190,6 +190,20 @@ class User {
 		return User::createFromArray($result);
 	}
 	
+	public static function usernameExists($username) {
+		$pdostatement = Database::execute('SELECT COUNT(USERNAME) AS C FROM SYSTEM_USER WHERE USERNAME = "' . $username . '"');
+		
+		if ($pdostatement == false) {
+			$this->_logger->logController("User::usernameExists($username) returned false.", 'Model::User', 'Model - STATIC');
+			throw new Exception("Query failed to execute correctly.");
+		}
+		
+		// Fetch one row into an associative array.
+		$result = $pdostatement->fetch(PDO::FETCH_ASSOC);
+		
+		return ($result['C'] != 0);
+	}
+	
 	/**
 	 * Gets a User by their primary key.
 	 * @param int $code
