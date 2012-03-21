@@ -34,7 +34,7 @@ class RegisterController extends Controller {
 	  $address = Address::createFromArray($createAddress);
 	  $address->save();
 	  
-	  $creationFields['ADDRESS_CODE'] = $address->getCode();
+	  $creationFields['ADDRESS_CODE'] = $address;
       // This comes from the registration form...
       
 	  $user = User::createFromArray($creationFields);
