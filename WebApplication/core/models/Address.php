@@ -28,6 +28,7 @@ class Address {
 				throw new Exception("Query failed to execute correctly.");
 			}
 			
+			$pdostatement = Database::execute("SELECT LAST_INSERT_ID() as CODE"); // Get the ID of the last inserted record.
 			$row = $pdostatement->fetch(PDO::FETCH_ASSOC);
 			$this->_code = $row['CODE'];
 		} else {
