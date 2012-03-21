@@ -63,6 +63,11 @@ var registrationDialog = {
               if (!bValid) {
                 return;
               }
+              
+              var dialog = $(this);
+              
+              
+              
               // Submit form.
               //$('#registration-form').submit();
               $.post('./?c=Register&json', {
@@ -81,7 +86,7 @@ var registrationDialog = {
             		   updateTips("That username is already in use! Please pick another username.");
             		   usernameA.addClass("ui-state-error");
             	   } else if (response.success) {
-            		   $(this).dialog("close"); // add confirmation.
+            		   dialog.dialog("close"); // TODO: add confirmation.
             	   }
               });
               
