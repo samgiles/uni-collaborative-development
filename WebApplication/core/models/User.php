@@ -257,7 +257,12 @@ class User {
 	public static function createFromArray(array $array) {
 		$user = new User();
 		
-		$user->_code	     = $array['CODE'];
+		if (isset($array['CODE'])) {
+			$user->_code = $array['CODE'];
+		} else {
+			$user->_code = null;
+		}
+		
 		$user->_firstname    = $array['F_NAME'];
 		$user->_lastname     = $array['L_NAME'];
 		$user->_phonenumber  = $array['PHONE_NUMER'];

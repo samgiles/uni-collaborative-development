@@ -109,7 +109,13 @@ class Address {
 	
 	public static function createFromArray(array $array) {
 		$address = new Address();
-		$address->_code = $array['CODE'];
+		
+	   if (isset($array['CODE'])) {
+			$address->_code = $array['CODE'];
+		} else {
+			$address->_code = null;
+		}
+
 		$address->_lineone = $array['LINE_ONE'];
 		$address->_linetwo = $array['LINE_TWO'];
 		$address->_postcode = $array['POST_CODE'];
