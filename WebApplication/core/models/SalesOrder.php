@@ -17,6 +17,7 @@ class SalesOrder {
   public function update() {
     $sql = "INSERT INTO PURCHASE_INVOICE (DATE, CUSTOMER_CODE, PAYMENT_RECEIVED) VALUES (CURDATE(), {$this->_custCode}, 1)";
     $result = Database::execute($sql);
+    $result = Database::execute("SELECT LAST_INSERT_ID() as CODE"); // Get the ID of the last inserted record.
     $result = $result->fetch(PDO::FETCH_ASSOC);
     $primaryKey = $result['CODE'];
 
