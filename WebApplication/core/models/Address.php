@@ -18,6 +18,29 @@ class Address {
 		$this->_code = null;
 	}
 	
+	public function save() {
+		if ($this->_code == null) {
+			// INSERT.
+			$pdostatement = Database::execute("INSERT INTO ADDRESS (NAME, LINE_ONE, LINE_TWO, POST_CODE) VALUES ('', '{$this->getLineOne()}', '{$this->getLineTwo()}', '{$this->getPostcode()}')");
+		
+			if ($pdostatement === false) {
+				$this->_logger->logController("Address->save(" . print_r($this, true) . ") INSERT returned false.", 'Model::Address', 'Model - INSTANCE');
+				throw new Exception("Query failed to execute correctly.");
+			}
+			
+			$row = $pdostatement->fetch(PDO::FETCH_ASSOC);
+			$this->_code = $row['CODE'];
+		} else {
+			// UPDATE
+			$pdostatement = Database::execute("UPDATE ADDRESS SET NAME='', LINE_ONE='{$this->getLineOne()}', LINE_TWO='{$this->getLineTwo()}', POST_CODE='{$this->getPostcode()}' WHERE CODE = {$this->getCode()}");
+			
+			if ($pdostatement === false) {
+				$this->_logger->logController("Address->save(" . print_r($this, true) . ") UPDATE returned false.", 'Model::Address', 'Model - INSTANCE');
+				throw new Exception("Query failed to execute correctly.");
+			}
+		}
+	}
+	
 	public function setLineone($lineone) {
 		$this->_lineone = $lineone;
 	}
