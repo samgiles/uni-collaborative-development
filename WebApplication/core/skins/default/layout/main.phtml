@@ -16,35 +16,13 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
                     <div class="big_banner">
                         <a href="#">
                             <OBJECT style="z-index: -1;" CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=5,0,0,0">
-
-<PARAM NAME="MOVIE" VALUE="./images/BANNER2.swf">
-
-<PARAM NAME="PLAY" VALUE="true">
-
-<PARAM NAME="LOOP" VALUE="true">
-
-<PARAM NAME="QUALITY" VALUE="high">
-
-<PARAM NAME="SCALE" value="noborder">
-
-<EMBED SRC="./images/BANNER2.swf"
-wmode="transparent" 
-WIDTH="728px"
-HEIGHT="128px"
-
-PLAY="true" 
-
-LOOP="true"
-
-QUALITY="high" 
-
-scale="noborder"
-
-PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> 
-
-</EMBED>
-
-</OBJECT>
+                            	<PARAM NAME="MOVIE" VALUE="./images/BANNER2.swf">
+                            	<PARAM NAME="PLAY" VALUE="true">
+                            	<PARAM NAME="LOOP" VALUE="true">
+                            	<PARAM NAME="QUALITY" VALUE="high">
+                            	<PARAM NAME="SCALE" value="noborder">
+                            	<EMBED SRC="./images/BANNER2.swf" wmode="transparent"  WIDTH="728px" HEIGHT="128px" PLAY="true"  LOOP="true" QUALITY="high"  scale="noborder" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> </EMBED>
+                            </OBJECT>
                         </a>
                     </div>
                 </div>
@@ -105,10 +83,10 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
                 </div>
             
                 <div class="right_footer">
-                    <a href="index.html">home</a>
-                    <a href="products.html">products</a>
-                    <a href="products.html">about us</a>
-                    <a href="contact.html">contact us</a>
+                    <a href="./?c=Index">home</a>
+                    <a href="#">products</a>
+                    <a href="#">about us</a>
+                    <a href="#">contact us</a>
                 </div>   
             </div>                 
         </div>
@@ -133,6 +111,7 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
     <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
     <script src="scripts/basket.js" type="text/javascript"></script> <!-- Methods in here "Ajaxify" basket links so the page isn't reloaded on links that are clicked to add to basket-->
+    <script src="scripts/registration.js" type="text/javascrpt"></script>
     <script type="text/javascript">
       $(document).ready(function() {
           
@@ -167,89 +146,12 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
             });
         
         });
-          
-          $( "input:submit").button();
-          
-		
-		$( "#register-form" ).dialog({
-			autoOpen: false,
-			height: 610,
-			width: 700,
-			modal: true,
-			buttons: {
-                
-				"Create an account": function() {
-                    var tips = $( ".validateTips" );
-                    
-                function updateTips(value) {
-                    tips.text( value ).addClass( "ui-state-highlight" );
-			        setTimeout(function() {
-				      tips.removeClass( "ui-state-highlight", 1500 );
-			        }, 500 );
-                }
-                    
-                 function checkLength( o, n, min, max ) {
-    		       if ( o.val().length > max || o.val().length < min ) {
-				     o.addClass( "ui-state-error" );
-				     updateTips( "Length of " + n + " must be between " +
-					   min + " and " + max + "." );
-				      return false;
-			        } else {
-                      o.removeClass( "ui-state-error" );
-				      return true;
-			        }
-		          }
-                  
-                  function checkEquality(a,b, message) {
-                    if ( a.val() != b.val()) {
-    			     b.addClass( "ui-state-error" );
-				     updateTips( message );
-				      return false;
-			        } else {
-                      b.removeClass( "ui-state-error" );
-				      return true;
-			        }  
-                  }
-                  
-				  var forename = $('#fname');
-                  var lastname = $('#lname'); // LNAME
-                  var usernameA = $('#uname'); // USERNAME
-                  var password = $('#password'); // PASSWORD
-                  var passwordRepeat = $('#rpassword');
-                  var email = $('#email'); // EMAIL
-                  var addressLineOne = $('#addrlineone'); // ADDRESS LINE ONE.
-                  var addressLineTwo = $('#addrlinetwo'); // ADDRESS LINE TWO
-                  var postcode = $('#postcode'); // POSTCODE
-                  
-                  var bValid = true;
-                  
-                  bValid = bValid && checkLength(forename, "First Name", 1, 30);
-                  bValid = bValid && checkLength(lastname, "Last Name", 1, 30);
-                  bValid = bValid && checkLength(email, "Email", 1, 40);
-                  bValid = bValid && checkLength(usernameA, "User Name", 1, 10);
-                  bValid = bValid && checkLength(password, "Password", 1, 30);
-                  bValid = bValid && checkEquality(password, passwordRepeat, "Check passwords are matching");
-                  bValid = bValid && checkLength(addressLineOne, "Address Line One", 1, 50);
-                  bValid = bValid && checkLength(addressLineTwo, "Address Line Two", 0, 40);
-                  bValid = bValid && checkLength(postcode, "Post Code", 4, 8);
-                  
-                  if (!bValid) {
-                    return;
-                  }
-                  // Submit form.
-                  $('#registration-form').submit();
-				},
-				Cancel: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-        
+    
+        $("input:submit").button();		
+		$("#register-form").dialog(registrationDialog);
         $("#register").click(function(e) {
-            
-            $( "#register-form" ).dialog( "open" );
-            
-            });
+            $( "#register-form" ).dialog( "open" );    
+        });
           
           
           });
