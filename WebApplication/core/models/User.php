@@ -1,6 +1,8 @@
 <?php
 /**
  * Stores information about a system user.
+ * @author Samuel Giles
+ * @package application-models
  */
 class User {
 	
@@ -185,7 +187,7 @@ class User {
 		// Fetch one row into an associative array.
 		$result = $pdostatement->fetch(PDO::FETCH_ASSOC);
 		
-		return User::createFromArray($fields);
+		return User::createFromArray($result);
 	}
 	
 	/**
@@ -204,7 +206,7 @@ class User {
 		// Fetch one row into an associative array.
 		$result = $pdostatement->fetch(PDO::FETCH_ASSOC);
 		
-		return User::createFromArray($fields);
+		return User::createFromArray($result);
 	}
 	
 	/**

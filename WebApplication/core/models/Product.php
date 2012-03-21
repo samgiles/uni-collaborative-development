@@ -1,4 +1,9 @@
 <?php
+/**
+ * 
+ * @author sam
+ * @package application-models
+ */
 class Product {
     
     private $_code;

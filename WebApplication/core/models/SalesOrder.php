@@ -1,4 +1,9 @@
 <?php
+/**
+ * 
+ * @author Samuel Giles
+ * @package application-models
+ */
 class SalesOrder {
   private $_basket;
   private $_custCode;
