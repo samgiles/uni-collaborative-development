@@ -4,7 +4,7 @@
  * @author Samuel Giles
  * @package authentication
  */
-class DBAuthenticate implements Authenticate {
+class DBAuthenticate extends Authenticate {
 
 	/**
 	 * The table name in the database used to store the authentication credentials.
@@ -35,6 +35,11 @@ class DBAuthenticate implements Authenticate {
 	 * @var string
 	 */
 	protected $_primaryKey;
+	
+	/**
+	 * Information that is set on successful authentication.
+	 */
+	private $_authenticationInfo = null;
     
 	/**
 	 * Constructs a new Database Authentication adapter.  This authenticates credentials against a database.
@@ -88,10 +93,13 @@ class DBAuthenticate implements Authenticate {
               // TODO: Probably shouldn'y get the access level, here. Low Priority, this isn't as bad as setting a session variable here. 
               $accessLevel = $this->getUserAccessLevel($row['CODE']);
               
-              return array('username' => $identity, 'time' => time(), 'dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']);
+              $this->_authenticationInfo = new AuthenticationInformation(time(), $identity, array('dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']));
+              
+              $this->notify();
+              return true;
           }
         } 
-        
+        $this->notify();
         return false;
 
 	}
@@ -108,5 +116,11 @@ class DBAuthenticate implements Authenticate {
 		}
 		
 		return $sqlStatement;
+	}
+	
+	public function notify() {
+		foreach ($this->_storage as $observer) {
+			$observer->update($this);
+		}
 	}
 }

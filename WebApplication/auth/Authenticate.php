@@ -4,12 +4,15 @@
  * @author Samuel Giles
  * @package authentication
  */
-interface Authenticate {
+class Authenticate extends Observable {
+	
+	
+	
 	/**
 	 * Authenticates an entity.
 	 * @param $identity The identity of the entity.
 	 * @param $credentials The credentials of the entity.
 	 * @returns mixed Returns always FALSE on failure and may return Adapter specific information on success.
 	 */
-	function tryAuthenticate($identity, $credentials);
+	abstract function tryAuthenticate($identity, $credentials);
 }
