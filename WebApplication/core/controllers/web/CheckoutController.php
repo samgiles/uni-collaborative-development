@@ -20,24 +20,20 @@ class CheckoutController extends Controller {
 		  
 		  // Create sales order, 
 		  $order = new SalesOrder($this->_cart);
-		  $order->update();
+		  $order->save();
 		  
 		  $this->addViewVariable('paymentRecieved', $authorised);
 		  // Clear the cart.
 		  $this->_cart->clear();
 		}
-		
-		
-        
-        
-        
+
         // Tell the view that we're a Checkout controller.
 		$this->addViewVariable("c", "Checkout");
 	}
     
     private function getDetails() {
       // Get the current shopping cart.
-      
+
       $this->addViewVariable('notLoggedIn', $this->_cart->unavailable());
       $this->addViewVariable('cartItems', $this->_cart->getItems());
     }
