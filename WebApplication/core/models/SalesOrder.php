@@ -22,7 +22,7 @@ class SalesOrder {
     $primaryKey = $result['CODE'];
 
     foreach($this->_basket->getItems() as $item) {
-      $sql = "INSERT INTO PURCHASE_INVOICE_PRODUCT (PURCHASE_INVOICE_CODE, PRODUCT_CODE, QUANTITY) VALUES ($primaryKey, {$item['CODE']}, {$item['QUANTITY']})";
+      $sql = "INSERT INTO PURCHASE_INVOICE_PRODUCT (PURCHASE_INVOICE_CODE, PRODUCT_CODE, QUANTITY) VALUES ({$primaryKey}, {$item['CODE']}, {$item['QUANTITY']})";
       Database::execute($sql);
     }
   }
