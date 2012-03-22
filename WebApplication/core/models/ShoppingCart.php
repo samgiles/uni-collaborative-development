@@ -50,7 +50,7 @@ class ShoppingCart {
 	}
 	
 	public function clear() {
-		$sql = 'DROP FROM SHOPPING_CART WHERE CUSTOMERCODE = ' . $this->_customerCode;
+		$sql = 'DELETE FROM SHOPPING_CART WHERE CUSTOMERCODE = ' . $this->_customerCode;
 		Database::execute($sql);
 		$this->_items = array();
 	}
