@@ -93,7 +93,7 @@ class DBAuthenticate extends Authenticate {
               // TODO: Probably shouldn'y get the access level, here. Low Priority, this isn't as bad as setting a session variable here. 
               $accessLevel = $this->getUserAccessLevel($row['CODE']);
               
-              $this->_authenticationInfo = new AuthenticationInformation(time(), $identity, array('dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']));
+              $this->_authenticationInfo = new LoginInformation(time(), $identity, $_SERVER['REMOTE_ADDR'], array('dbid' => $row['CODE'], 'access' => $accessLevel));
               
               return true;
           }
