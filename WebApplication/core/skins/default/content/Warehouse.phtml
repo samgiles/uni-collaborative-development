@@ -1,0 +1,60 @@
+<?php 
+/**
+ * A screen for viewing and adding Warehouse staff
+ * @author Vishal Patel
+ * @package application-views-content
+ */
+?>
+<div id="users-contain" class="ui-widget">
+    <h1>Warehouse Staff:</h1>
+    <table id="users" class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>Code</th>
+				<th>Name</th>
+				<th>Contact</th>
+                <th>Contact Number</th>
+                <th>Address Line One</th>
+                <th>Address Line Two</th>
+                <th>Postcode</th>
+			</tr>
+		</thead>
+		<tbody>
+          <?php foreach ($this->wholesalers() as $Warehouse):?>
+			<tr>
+				<td><?php echo $Warehouse['CODE']; ?></td>
+    			<td><?php echo $Warehouse['NAME']; ?></td>
+				<td><?php echo $Warehouse['CONTACT_NAME']; ?></td>
+                <td><?php echo $Warehouse['CONTACT_NUMBER']; ?></td>
+                <td><?php echo $Warehouse['LINE_ONE']; ?></td>
+                <td><?php echo $Warehouse['LINE_TWO']; ?></td>
+                <td><?php echo $Warehouse['POST_CODE']; ?></td>
+                <td><?php echo $Warehouse['HIRE DATE']; ?></td>
+			</tr>
+          <?php endforeach; ?>
+		</tbody>
+	</table>
+    <button id="create-wWarehouse">Create new Warehouse</button>
+</div>
+<div id="Warehouse-form" title="Create new user">
+    <p class="validateWholesaleTips">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+		<label for="contact">Contact</label>
+		<input type="text" name="contact" id="contact" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="contactnumber">Contact Number</label>
+		<input type="text" name="contactnumber" id="contactnumber" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="addrlineone">Address Line One</label>
+    	<input type="text" name="addrlineone" id="addrlineone" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="addrlinetwo">Address Line Two</label>
+    	<input type="text" name="addrlinetwo" id="addrlinetwo" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="postcode">Post Code</label>
+    	<input type="text" name="postcode" id="postcode" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="hiredate">Hire Date</label>
+        <input type="date" name="hiredate" id="hiredate" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
