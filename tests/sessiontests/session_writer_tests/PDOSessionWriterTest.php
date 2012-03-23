@@ -5,12 +5,26 @@ include_once('DummyObject.php');
 
 class PDOSessionWriterTest extends SessionWriterTest {
   
+  private $_runtests = true;	
+	
   public function __construct() {
-  	$pdo = new PDO('@SESSIONDSN', '@SESSIONUNAME', '@SESSIONPWORD');
-  	parent::__construct(new PDOSessionWriter($pdo));
+  	try {
+  		$pdo = new PDO('mysql:host=192.168.1.101;port=3306;dbname=sessions', 'root', '123456');
+  		parent::__construct(new PDOSessionWriter($pdo));
+  	} catch(Exception $e) {
+  		$this->_runtests = false;
+  	}
+  	
   }
   
   public function testWrite() {
+  	
+  	if (!$this->_runtests) {
+  	 $this->markTestSkipped(
+              'The PDO connection to the database is not available.'
+            );
+  	}
+  	
     $testObjects = array(
     		'A' => array('a' => 0, 'b' => 1, 'c' => 2),
     		'B' => array('a' => 2, 'b' => 1, 'c' => 0),
@@ -32,6 +46,13 @@ class PDOSessionWriterTest extends SessionWriterTest {
    * @depends testWrite
    */
   public function testClear(array $testObjects) {
+  	
+   if (!$this->_runtests) {
+  	 $this->markTestSkipped(
+              'The PDO connection to the database is not available.'
+            );
+  	}
+  	
   	$this->assertTrue($this->hasWrote('A', $testObjects['A']), "A");
     $this->_writer->clear('A');
     $this->assertTrue($this->hasRemoved('A', $testObjects['A']), "A");

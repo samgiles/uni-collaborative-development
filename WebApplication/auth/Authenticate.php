@@ -4,7 +4,7 @@
  * @author Samuel Giles
  * @package authentication
  */
-class Authenticate extends Observable {
+abstract class Authenticate {
 	
 	
 	
@@ -14,5 +14,5 @@ class Authenticate extends Observable {
 	 * @param $credentials The credentials of the entity.
 	 * @returns mixed Returns always FALSE on failure and may return Adapter specific information on success.
 	 */
-	abstract function tryAuthenticate($identity, $credentials);
+	public abstract function tryAuthenticate($identity, $credentials);
 }

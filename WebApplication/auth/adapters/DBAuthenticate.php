@@ -95,7 +95,6 @@ class DBAuthenticate extends Authenticate {
               
               $this->_authenticationInfo = new AuthenticationInformation(time(), $identity, array('dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']));
               
-              $this->notify();
               return true;
           }
         } 
@@ -116,11 +115,5 @@ class DBAuthenticate extends Authenticate {
 		}
 		
 		return $sqlStatement;
-	}
-	
-	public function notify() {
-		foreach ($this->_storage as $observer) {
-			$observer->update($this);
-		}
 	}
 }
