@@ -29,13 +29,13 @@ class Login extends Observable {
 	 * Stores the current status of this login and will either be Login::LOGIN_STATUS_ACCESS or Login::LOGIN_STATUS_DENIED
 	 * @var boolean
 	 */
-	private $_loginStatus;
+	private $_loginStatus = false;
 	
 	/**
 	 * Stores additional information about the logged in user
 	 * @var LoginInformation
 	 */
-	private $_loginInformation;
+	private $_loginInformation = false;
 	
 	/**
 	 * Constructs a Login object that can be used to login using the specified authentication method.
@@ -75,7 +75,9 @@ class Login extends Observable {
 	private function setStatus($loginstatus, $user, $ip) {
 		$this->_loginStatus = $loginstatus;
 		
-		$this->_loginInformation = new LoginInformation(time(), $user, $ip, array());
+		if ($this->_loginStatus === true) {
+			$this->_loginInformation = new LoginInformation(time(), $user, $ip, array());
+		}
 		
 		$this->notify();
 	}

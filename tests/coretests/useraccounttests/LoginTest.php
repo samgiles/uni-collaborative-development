@@ -1,5 +1,4 @@
 <?php
-
 class MockAuthenticator extends Authenticate {
 	
 	private $_pass;
@@ -8,7 +7,7 @@ class MockAuthenticator extends Authenticate {
 		$this->_pass = $alwayspass;
 	}
 	
-	public function tryAuthenticate($identity, $credentials) {
+	public function tryAuthenticate($identity, $credentials) {		
 		return $this->_pass;
 	}
 	
@@ -24,29 +23,34 @@ class MockObserver extends LoginObserver {
 }
 
 class LoginTest extends PHPUnit_Framework_TestCase {
-	private $_failAuth;
+    private $_failAuth;
 	private $_passAuth;
 	
 	public function __construct() {
-		$this->_failAuth = new MockAuthenticator(false);
-		$this->_passAuth = new MockAuthenticator(true);
+		$this->_failAuth = new MockAuthenticator(Login::LOGIN_STATUS_DENIED);
+		$this->_passAuth = new MockAuthenticator(Login::LOGIN_STATUS_ACCESS);
 	}
+
 	
 	public function testHandleLogin() {
 		$login = new Login($this->_failAuth);
 		
-		$this->assertFalse($login->handleLogin('username', 'password', 'ipaddress'));
+		$this->assertFalse($login->handleLogin('username', 'password', 'ipaddress'), "Try authenticated usng the failAuth object");
 		
 		$login = new Login($this->_passAuth);
 		
-		$this->assertTrue($login->handleLogin('username', 'password', 'ipaddress'));
+		$this->assertTrue($login->handleLogin('username', 'password', 'ipaddress'), "The handle login should return true.");
 	}
 	
 	public function testGetLoginStatus() {
 		$login = new Login($this->_failAuth);
-		$login->handleLogin('username', 'password', 'ipaddress');
 		
-		$this->assertFalse($login->getLoginStatus());
+		$result = $login->handleLogin('username', 'password', 'ipaddress');
+		
+		
+		$this->assertTrue($result !== true, "The handleLogin method was expected to return false.");
+		
+		$this->assertTrue($login->getLoginStatus() !== true, "The getLoginStatus method was expected to return false.");
 		
 		$login = new Login($this->_passAuth);
 		$login->handleLogin('username', 'password', 'ipaddress');
@@ -58,12 +62,12 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 		$login = new Login($this->_failAuth);
 		$login->handleLogin('username', 'password', 'ipaddress');
 		
-		$this->assertTrue($login->getLoginInformation() instanceof LoginInformation);
+		$this->assertFalse($login->getLoginInformation() instanceof LoginInformation, "Should not have been an instanceof LoginInformation");
 		
 		$login = new Login($this->_passAuth);
 		$login->handleLogin('username', 'password', 'ipaddress');
 		
-		$this->assertTrue($login->getLoginInformation() == NULL);
+		$this->assertFalse($login->getLoginInformation() == NULL, "Login information should not have been null");
 	}
 	
 	public function testObservable() {
