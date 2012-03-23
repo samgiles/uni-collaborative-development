@@ -98,7 +98,6 @@ class DBAuthenticate extends Authenticate {
               return true;
           }
         } 
-        $this->notify();
         return false;
 
 	}
