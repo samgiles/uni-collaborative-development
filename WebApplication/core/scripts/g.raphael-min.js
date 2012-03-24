@@ -53,7 +53,7 @@ jQuery.extend((function(){
 		}
 
 		// Short days of the week.
-		var xaxis = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+		var xaxis = ["Thur", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
 		
 		r.text(190,10, message + days.startDate + " / " + days.month + " / " + days.year);
 		var data = r.linechart(50, 20, width, 200, x, days.data, { 
