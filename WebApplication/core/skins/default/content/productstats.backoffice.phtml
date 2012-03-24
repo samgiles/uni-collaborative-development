@@ -1,7 +1,7 @@
 <?php 
 /**
  *  Displays a product's information using a 'Product' object.
- *  @author James Legros, Samuel Giles
+ *  @author Samuel Giles
  *  @package application-views-content
  */
 
@@ -71,7 +71,7 @@ svg {
 <div id="chart-controls" style="width: 100%"><p id="graph-tip">Select a start and end date</p><label for="start-date">Show sales from</label><input id="start-date" name="start-date" type="text"><label for="end-date">to</label><input id="end-date" name="end-date" type="text"> <button id="update-graph">Update</button></span></div>
 
 
-<div id="confirm-action" title="Please confirm"><p><span class="ui-icon ui-icon-alert" style="float:left; margin: 0 7px 20px 0;"></span><p class="validate-tip"></p><span class="message"></span></p></div>
+<div id="confirm-action" title="Please confirm"><p><span class="" id="icon" style="float:left; margin: 0 7px 20px 0;"></span><p class="validate-tip"></p><span class="message"></span></p></div>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -103,31 +103,86 @@ $(document).ready(function() {
 							$(this).dialog("close");
 							$("#confirm-action .message").html('');
 							$("#confirm-action .validate-tip").html('');
+							$("#unit-count").removeClass("ui-state-error");
+							$("#confirm-action #icon").removeClass("ui-icon");
+							$("#confirm-action #icon").removeClass("ui-icon-alert");
 						}
 				}
 			});
 			break;
-
-		
+		case 'editdescription':
+			$("#confirm-action").dialog({
+				resizable: false,
+				autoOpen: false,
+				height: 565,
+				width: 500,
+				modal: true,
+				buttons: {
+						"Save": function() {
+								action();
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							$("#confirm-action .message").html('');
+							$("#confirm-action .validate-tip").html('');
+							$("#unit-count").removeClass("ui-state-error");
+							$("#confirm-action #icon").removeClass("ui-icon");
+							$("#confirm-action #icon").removeClass("ui-icon-alert");
+						}
+				}
+			});
+			break;
+		case 'editprice':
+			$("#confirm-action").dialog({
+				resizable: false,
+				autoOpen: false,
+				height: 165,
+				modal: true,
+				buttons: {
+						"Save": function() {
+							if (!validation()) {
+								return false;
+							}
+								
+								action();
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							$("#confirm-action .message").html('');
+							$("#confirm-action .validate-tip").html('');
+							$("#unit-count").removeClass("ui-state-error");
+							$("#confirm-action #icon").removeClass("ui-icon");
+							$("#confirm-action #icon").removeClass("ui-icon-alert");
+						}
+				}
+			});
 		}
 	}
 	
-	
+	var doValidateNumber = function(){ 
+		var value = $("#unit-count").val();
+		if (!isNumeric(value)) {
+			$("#unit-count").addClass("ui-state-error");
+			$("#confirm-action #icon").addClass("ui-icon");
+			$("#confirm-action #icon").addClass("ui-icon-alert");
+			$("#confirm-action .validate-tip").html("Check the value is a number");
+			return false;
+		}
+
+		$("#unit-count").removeClass("ui-state-error");
+		$("#confirm-action #icon").removeClass("ui-icon");
+		$("#confirm-action #icon").removeClass("ui-icon-alert");
+		$("#confirm-action .validate-tip").html("");
+		
+		
+		return true;
+	}
 	
 	$("#reorder-button").click(function(e) {
 		createDialog('reorder', function() {
 						// Do reorder.
 						
-				}, function() {
-				// validate.
-				var value = $("#unit-count").val();
-				if (!isNumeric(value)) {
-					$("#uni-count").addClass("ui-state-error");
-					$("#confirm-action .validate-tip").html("Check the value is a number");
-					return false;
-				}
-				return true;
-			});
+				}, doValidateNumber);
 		$("#confirm-action .message").html('How many units do you wish to reorder?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
 		$("#confirm-action").dialog("open");
 	});
@@ -136,22 +191,29 @@ $(document).ready(function() {
 		createDialog('reorderlevel', function() {
 			// Do reorder.
 			
-		}, function() {
-		// validate.
-		var value = $("#unit-count").val();
-		if (!isNumeric(value)) {
-			$("#uni-count").addClass("ui-state-error");
-			$("#confirm-action .validate-tip").html("Check the value is a number");
-			return false;
-		}
-		return true;
-	});
+		}, doValidateNumber);
 		$("#confirm-action .message").html('Change the reorder level?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
 		$("#confirm-action").dialog("open");
 	});
 
+	$("#edit-description").click(function(e) {
+		createDialog('editdescription', function() {
+			// do update
+			}, function() {});
+		$("#confirm-action .message").html('<textarea id="description" style="width:100%; height:85%;"><?php echo $product->getDescription(); ?></textarea>');
+		$("#confirm-action").dialog("open");
+	});
 
+	$('#edit-price').click(function(e) {
+		createDialog('editprice', function() {
+			// Do reorder.
+			
+	}, doValidateNumber);
+		$("#confirm-action .message").html('What price do you wish to set?</span><span><input id="unit-count" type="text" value="<?php echo $product->getUnitPrice(); ?>" >');
+		$("#confirm-action").dialog("open");
 
+		});
+	
 	
 	function days_between(a, b) {
 		// number of milli secs in a day
