@@ -23,7 +23,7 @@ class Database {
 	 */
 	public static function GetHandle(){
 		if (is_null(Database::$_this)){
-	 		Database::$_this = new Database('@DBNAME', '@DBNAME', '@DBUNAME', '@DBPWORD');
+	 		Database::$_this = new Database('@DBHOST', '@DBNAME', '@DBUNAME', '@DBPWORD');
 	 	}
 	 	
 	 	return Database::$_this->_dbHandle;
