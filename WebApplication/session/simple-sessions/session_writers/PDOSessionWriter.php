@@ -10,10 +10,13 @@ class PDOSessionWriter extends SessionWriter {
   
   public function __construct(PDO $pdoObject) {
     $this->_pdoObject = $pdoObject;
+    $this->_pdoReadStatement = NULL;
+    $this->_pdoWriteStatement = NULL;
+    $this->_pdoDeleteStatement = null;
   }
 
   public function read($hash) {
-      if ($this->_pdoReadStatement === NULL) {
+      if ($this->_pdoReadStatement === NULL || !isset($this->_pdoReadStatement)) {
   	  $this->_pdoReadStatement = $this->_pdoObject->prepare("SELECT `SESSION`.`VALUE` FROM `SESSION` WHERE `SESSION`.`KEY`=:hash LIMIT 1;");
   	}
     $this->_pdoReadStatement->bindValue(':hash', $hash, PDO::PARAM_STR);

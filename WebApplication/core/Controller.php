@@ -67,12 +67,14 @@ abstract class Controller {
       // 111 <- Admin
       
       $login = Session::get('login');
-      if ($login === NULL) {
+      if ($login === NULL || !($login instanceof LoginInformation)) {
         $this->_content = 'nopermission';
         return false;
       }
       
-      $level = $login['access'];
+      
+      $level = $login->getTag();
+      $level = $level['access-level'];
       
       
       $hasPerms = $accessLevel & $level;  // Bitwise AND

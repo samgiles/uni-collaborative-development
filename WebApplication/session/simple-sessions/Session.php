@@ -13,7 +13,7 @@ class Session {
   private $_sessionWriter;
   private $_dontWrite = true;
   
-  private static $instance = NULL;
+  private static $instance;
   
   /**
    * Starts a Session given a SessionWriter, this checks for a cookie that can identify a session with a client/request, if one hasn't been started yet then 
@@ -23,18 +23,18 @@ class Session {
    * @param string $sessionPath The path on the server in which the session will be available on. If set to '/', the session will be available within the entire domain. If set to '/foo/', the session is only be available within the /foo/ directory and all sub-directories such as /foo/bar/ of domain. The default value is the current directory that the session is started in.
    */
   public static function start(SessionWriter $sessionWriter, $sessionExpires = 0, $sessionPath = -1) {
-    if (Session::$instance === NULL) {
+    if (!isset(self::$instance) || self::$instance === NULL) {
         //We've got to tie a particular user to a Session, so we'll create a hash for them if we haven't already.
   	  $httpPersistedHash = $sessionWriter->getHttpPersistKey(Session::$HTTP_PERSIST_NAME);
       if ($httpPersistedHash !== NULL) {
         $new = false;
       } else {
         $httpPersistedHash = hash('sha256', $_SERVER['REMOTE_ADDR'] . time() . rand(0, 100));
-        $sessionWriter->httpPersist(Session::$HTTP_PERSIST_NAME, $httpPersistedHash, $sessionExpires, $sessionPath === -1 ? $_SERVER['PATH_INFO'] : $sessionPath);
+        $sessionWriter->httpPersist(Session::$HTTP_PERSIST_NAME, $httpPersistedHash, $sessionExpires, $sessionPath === -1 ? dirname($_SERVER['REQUEST_URI']) : $sessionPath);
       	$new = true;
       }
       
-      Session::$instance = new Session($sessionWriter, $httpPersistedHash, $new);
+      self::$instance = new Session($sessionWriter, $httpPersistedHash, $new);
   	}
   }
   
@@ -45,6 +45,13 @@ class Session {
   	
   	if (!$new) {
       $this->_objects = $sessionWriter->read($hash);
+      
+      // check the session is still valid
+      if (!isset($this->_objects)) {
+      	// If it isn't its most likely been corrupted, just clear and start fresh.
+      	$this->clearAll();
+      }
+      
   	}
   }
   
@@ -56,11 +63,11 @@ class Session {
 
 
   public static function get($key) {
-    if (Session::sessionStarted()) {
+    if (self::sessionStarted()) {
       $key = (string)$key;
       
-      if (isset(Session::$instance->_objects[$key])) {
-        return Session::$instance->_objects[$key];
+      if (isset(self::$instance->_objects[$key])) {
+        return self::$instance->_objects[$key];
       }
       
     }
@@ -68,20 +75,24 @@ class Session {
   }
 
   public static function set($key, $value) {
-    if (Session::sessionStarted()) {
-      Session::$instance->_objects[$key] = $value;
-      Session::$instance->_dontWrite = false;
+    if (self::sessionStarted()) {
+      self::$instance->_objects[$key] = $value;
+      self::$instance->_dontWrite = false;
       return true;
     }
     return false;
   }
   
+  private function clearAll() {
+  	$this->_sessionWriter->clear($this->_idHash);
+  	$this->_sessionWriter->httpClear(self::$HTTP_PERSIST_NAME);
+  	$this->_dontWrite = true;
+  	$this->_objects = array();
+  }
+  
   public static function clear() {
-    if (Session::sessionStarted()) {
-      $session = Session::$instance;
-      $session->_sessionWriter->clear($session->_idHash);
-      $session->_sessionWriter->httpClear(Session::$HTTP_PERSIST_NAME);
-      $session->_dontWrite = true;
+    if (self::sessionStarted()) {
+      $session = self::$instance->clearAll();
       return true;
     }
     
@@ -89,7 +100,7 @@ class Session {
   }
   
   public static function sessionStarted() {
-    if (Session::$instance === NULL) {
+    if (self::$instance === NULL || !isset(self::$instance)) {
       trigger_error('Session not started, start session with `Session::start($sessionWriter)`', E_USER_NOTICE);
       return false;
     }

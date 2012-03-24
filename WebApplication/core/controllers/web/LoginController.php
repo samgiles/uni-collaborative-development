@@ -77,6 +77,7 @@ class LoginController extends Controller {
   
   private function addLoginHandlers(Login $login) {
   	// simply instantiating the object and passing in the Login object is enough to associate it
+  	$securityHandler = new SecurityObserver($login);
   	$sessionHandler = new LoginSessionObserver($login);
   	
   }
@@ -84,7 +85,7 @@ class LoginController extends Controller {
   
   private function checkSession() {
       $authInfo = false;
-  	  $loginDetails = Session::get('login');
+  	  $loginDetails = Session::get('LOGIN');
 
       // Session Hash doesn't exist if NULL
       if ($loginDetails != NULL && $loginDetails instanceof LoginInformation) {

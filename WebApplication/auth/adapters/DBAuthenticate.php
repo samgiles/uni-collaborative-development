@@ -57,23 +57,7 @@ class DBAuthenticate extends Authenticate {
         
 	}
     
-    /**
-     * Gets the User access level of a user given a USER ID/CODE
-     * @param int $uid
-     */
-    private function getUserAccessLevel($uid) {
-      //TODO: Remove this, this shouldn't be here as it has nothing to do with authenticating a user and violates the SRP. Probably best to move into LoginController or something.
-      $sql = 'SELECT ACCESS_LEVEL_CODE FROM STAFF WHERE USER_CODE = ' . $uid;
-      $result = Database::execute($sql);
-      $result = $result->fetchAll();
-      if (count($result) <= 0) {
-        // Non staff member. 
-        return AccessLevels::ANYONE; // Anyone can access.
-      } else {
-
-        return $result[0]['ACCESS_LEVEL_CODE'];  
-      }
-    }
+    
     
     /**
      * Authenticates an entity with a given identity and credential.
@@ -90,11 +74,6 @@ class DBAuthenticate extends Authenticate {
             
           if ($row[$this->_credential] === md5($credential)){
               // Successful
-              // TODO: Probably shouldn'y get the access level, here. Low Priority, this isn't as bad as setting a session variable here. 
-              $accessLevel = $this->getUserAccessLevel($row['CODE']);
-              
-              $this->_authenticationInfo = new LoginInformation(time(), $identity, $_SERVER['REMOTE_ADDR'], array('dbid' => $row['CODE'], 'access' => $accessLevel));
-              
               return true;
           }
         } 
