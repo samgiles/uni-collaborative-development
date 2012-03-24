@@ -79,38 +79,76 @@ $(document).ready(function() {
 	function isNumeric(number) {
 		return (number - 0) == number && number.length > 0;  // http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
 	}
-	
-	$("#confirm-action").dialog({
-			resizable: false,
-			autoOpen: false,
-			height: 165,
-			modal: true,
-			buttons: {
-					"Reorder": function() {
-							// validate.
-							var value = $("#unit-count").val();
-							if (!isNumeric(value)) {
-								$("#uni-count").addClass("ui-state-error");
-								$("#confirm-action .validate-tip").html("Check the value is a number");
-								return false;
-							}
 
-							// Do reorder.
-					},
-					"Cancel": function() {
-						$(this).dialog("close");
-						$("#confirm-action .message").html('');
-						$("#confirm-action .validate-tip").html('');
-					}
-			}
-		});
+	var createDialog = function(type, action, validation) {
+		switch (type) {
+		
+		case 'reorderlevel':
+		case 'reorder':
+			$("#confirm-action").dialog({
+				resizable: false,
+				autoOpen: false,
+				height: 165,
+				modal: true,
+				buttons: {
+						"Reorder": function() {
+								// validate.
+								if (!validation()) {
+									return false;
+								}
+
+								action();
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							$("#confirm-action .message").html('');
+							$("#confirm-action .validate-tip").html('');
+						}
+				}
+			});
+			break;
+
+		
+		}
+	}
+	
+	
 	
 	$("#reorder-button").click(function(e) {
+		createDialog('reorder', function() {
+						// Do reorder.
+						
+				}, function() {
+				// validate.
+				var value = $("#unit-count").val();
+				if (!isNumeric(value)) {
+					$("#uni-count").addClass("ui-state-error");
+					$("#confirm-action .validate-tip").html("Check the value is a number");
+					return false;
+				}
+				return true;
+			});
 		$("#confirm-action .message").html('How many units do you wish to reorder?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
 		$("#confirm-action").dialog("open");
 	});
 	
-
+	$("#change-reorder").click(function(e) {
+		createDialog('reorderlevel', function() {
+			// Do reorder.
+			
+		}, function() {
+		// validate.
+		var value = $("#unit-count").val();
+		if (!isNumeric(value)) {
+			$("#uni-count").addClass("ui-state-error");
+			$("#confirm-action .validate-tip").html("Check the value is a number");
+			return false;
+		}
+		return true;
+	});
+		$("#confirm-action .message").html('Change the reorder level?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
+		$("#confirm-action").dialog("open");
+	});
 
 
 
