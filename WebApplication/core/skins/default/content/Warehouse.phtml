@@ -20,7 +20,7 @@
 			</tr>
 		</thead>
 		<tbody>
-          <?php foreach ($this->wholesalers() as $Warehouse):?>
+          <?php foreach ($this->Warehouse() as $Warehouse):?>
 			<tr>
 				<td><?php echo $Warehouse['CODE']; ?></td>
     			<td><?php echo $Warehouse['NAME']; ?></td>
@@ -37,7 +37,7 @@
     <button id="create-wWarehouse">Create new Warehouse</button>
 </div>
 <div id="Warehouse-form" title="Create new user">
-    <p class="validateWholesaleTips">All form fields are required.</p>
+    <p class="validateWarehouseTips">All form fields are required.</p>
 
 	<form>
 	<fieldset>

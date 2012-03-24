@@ -1,0 +1,57 @@
+/"ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>Code</th>
+				<th>Name</th>
+                <th>Contact Number</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Office Number</th>
+                <th>Access Level</th>
+                <th></th>
+			</tr>
+		</thead>
+		<tbody>
+          <?php foreach ($this->Staff() as $Staff):?>
+			<tr>
+				<td><?php echo $Staff['CODE']; ?></td>
+    			<td><?php echo $Staff['NAME']; ?></td>
+                <td><?php echo $Staff['CONTACT_NUMBER']; ?></td>
+                <td><?php echo $Staff['USERNAME']; ?></td>
+                <td><?php echo $Staff['PASSWORD']; ?></td>
+                <td><?php echo $Staff['OFFICE_NUMBER']; ?></td>
+                <td><?php echo $Staff['ACCESS_LEVEL']; ?></td>
+			</tr>
+          <?php endforeach; ?>
+		</tbody>
+	</table>
+    <button id="create-Staff">Create new Staff</button>
+</div>
+<div id="Staff-form" title="Create new user">
+    <p class="validateStaffTips">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="contact">Contact</label>
+		<input type="text" name="contact" id="contact" value="" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="contactnumber">Contact Number</label>
+		<input type="text" name="contactnumber" id="contactnumber" value="" class="text ui-widget-content ui-corner-all" />
+       
+       <label for="username">Username</label>
+    	<input type="text" name="username" id="username" value="" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="password">Password</label>
+    	<input type="text" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="officenumber">Office Number</label>
+    	<input type="text" name="officenumber" id="officenumber" value="" class="text ui-widget-content ui-corner-all" />
+        
+                <label for="postcode">Access Level</label>
+        <input type="text" name="accesslevel<" id="accesslevel" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
