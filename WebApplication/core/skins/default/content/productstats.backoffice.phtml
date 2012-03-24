@@ -1,0 +1,53 @@
+<?php 
+/**
+ *  Displays a product's information using a 'Product' object.
+ *  @author James Legros, Samuel Giles
+ *  @package application-views-content
+ */
+
+/**
+ * The product this template is displaying.
+ * @var Product
+ */
+$product = $this->product(); 
+?>
+<div class="center_title_bar"><?php echo $product->getTitle();?></div>
+<div class="prod_box_big">
+	<div class="center_prod_box_big">            
+    	<div class="product_img_big">
+        	<a href="#" title="">
+            	<img src="images/p3.jpg" alt="" title="" border="0" />
+            </a>
+        </div>
+        <div class="details_big_box">
+        <div class="product_title_big"><?php echo $product->getTitle();?>                     </div>
+        	<div class="specifications">
+            	<p>Available: 
+                	<?php if($product->getStockLevel() > 0): ?>
+                     <span class="blue">In stock</span>
+                     <?php else:?>
+                     <span class="blue red">Out Of stock</span>
+                     <?php endif;?>
+                </p>
+                <p>Description :</p>  
+                <p>
+             	   <?php echo $product->getDescription(); ?>
+                </p>
+           	</div>
+            <div class="prod_price_big">
+            	<span class="reduce">&pound;<?php echo $product->getUnitPrice(); ?> </span>
+            </div>
+        </div>                        
+    </div>      
+</div>
+        
+<div id="sales-chart" style="width: 1000px"></div>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$.get("./?c=ProductAudit&pid=<?php echo $product->getCode();?>", function(data) {
+			var object = JSON.parse(data);
+			$.salesChart($("#sales-chart")[0], object);
+		});
+});
+</script>
