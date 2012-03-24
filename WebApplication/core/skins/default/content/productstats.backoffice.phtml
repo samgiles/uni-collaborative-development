@@ -23,24 +23,24 @@ $product = $this->product();
         <div class="product_title_big"><?php echo $product->getTitle();?>                     </div>
         	<div class="specifications">
             	<p>  <?php if($product->getStockLevel() > 0): ?>
-                     <span class="blue">Stock Level: <?php echo $product->getStockLevel(); ?></span>
+                     <span class="blue" pid="<?php echo $product->getCode(); ?>">Stock Level: <?php echo $product->getStockLevel(); ?></span>
                      <?php else:?>
                      <span class="blue red">Out of stock!</span>
                      <?php endif;?>
                 </p>
-                <button>Reorder</button>
+                <button id="reorder-button" pid="<?php echo $product->getCode(); ?>">Reorder</button>
                 <p>Reorder level: <?php echo $product->getReorderLevel(); ?></p>
-                <button>Change re-order level</button>
+                <button id="change-reorder" pid="<?php echo $product->getCode(); ?>">Change re-order level</button>
                 <p>Description :</p>  
                 <p>
              	   <?php echo $product->getDescription(); ?>
                 </p>
-                <button>Edit Description</button>
+                <button id="edit-description" pid="<?php echo $product->getCode(); ?>">Edit Description</button>
            	</div>
-            <div class="prod_price_big">
+            <div class="prod_price">
             	<span class="reduce">&pound;<?php echo $product->getUnitPrice(); ?> </span>
-            	<button>Change Price</button>
             </div>
+            <button id="edit-price" pid="<?php echo $product->getCode(); ?>">Change Price</button>
         </div>                        
     </div>      
 </div>
@@ -62,14 +62,59 @@ $product = $this->product();
 svg {
 	min-width: 520px;
 }
+
+#unit-count .validate-tip {
+	padding-bottom: 5px;
+}
 </style>
 
 <div id="chart-controls" style="width: 100%"><p id="graph-tip">Select a start and end date</p><label for="start-date">Show sales from</label><input id="start-date" name="start-date" type="text"><label for="end-date">to</label><input id="end-date" name="end-date" type="text"> <button id="update-graph">Update</button></span></div>
 
+
+<div id="confirm-action" title="Please confirm"><p><span class="ui-icon ui-icon-alert" style="float:left; margin: 0 7px 20px 0;"></span><p class="validate-tip"></p><span class="message"></span></p></div>
+
 <script type="text/javascript">
 $(document).ready(function() {
 
+	function isNumeric(number) {
+		return (number - 0) == number && number.length > 0;  // http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+	}
+	
+	$("#confirm-action").dialog({
+			resizable: false,
+			autoOpen: false,
+			height: 165,
+			modal: true,
+			buttons: {
+					"Reorder": function() {
+							// validate.
+							var value = $("#unit-count").val();
+							if (!isNumeric(value)) {
+								$("#uni-count").addClass("ui-state-error");
+								$("#confirm-action .validate-tip").html("Check the value is a number");
+								return false;
+							}
 
+							// Do reorder.
+					},
+					"Cancel": function() {
+						$(this).dialog("close");
+						$("#confirm-action .message").html('');
+						$("#confirm-action .validate-tip").html('');
+					}
+			}
+		});
+	
+	$("#reorder-button").click(function(e) {
+		$("#confirm-action .message").html('How many units do you wish to reorder?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
+		$("#confirm-action").dialog("open");
+	});
+	
+
+
+
+
+	
 	function days_between(a, b) {
 		// number of milli secs in a day
 	    var oneday = 86400000;
