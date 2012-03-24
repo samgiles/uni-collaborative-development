@@ -66,7 +66,7 @@ abstract class Controller {
       // 100 <- General Staff
       // 111 <- Admin
       
-      $login = Session::get('login');
+      $login = Session::get('LOGIN');
       if ($login === NULL || !($login instanceof LoginInformation)) {
         $this->_content = 'nopermission';
         return false;
