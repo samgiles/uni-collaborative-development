@@ -80,6 +80,26 @@ class Product {
       $this->_wholesaleCost = $result[0]['WHOLESALE_COST'];
     }
     
+    public function setDescription($description) {
+    	$this->_description = $description;
+    }
+    
+    public function setReorderLevel($level) {
+    	$this->_reorderLevel = $level;
+    } 
+    
+    public function setPhotoPath($path) {
+    	$this->_photoPath = $path;
+    }
+    
+    public function setStockLevel($level) {
+    	$this->_stockLevel = $level;
+    }
+    
+    public function setUnitPrice($price) {
+    	$this->_unitPrice = $price;
+    }
+    
     public function getCode() {
       return $this->_code;   
     }
