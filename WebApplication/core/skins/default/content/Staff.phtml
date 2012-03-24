@@ -3,18 +3,21 @@
  * A screen for viewing and adding Staff
  * @author Vishal Patel
  * @package application-views-content
- */
+ */                
 ?>
 <div id="users-contain" class="ui-widget">
 		<thead>
 			<tr class="ui-widget-header ">
 				<th>Code</th>
-				<th>Name</th>
-                <th>Contact Number</th>
+				<th>First Name</th>
+                <th>Last Name</th>
                 <th>Username</th>
-                <th>Password</th>
-                <th>Office Number</th>
-                <th>Access Level</th>
+                <th>Email</th>
+                <th>Dept</th>
+                <th>Location</th>
+                <th>Line One</th>
+                <th>Line Two</th>
+                <th>Post Code</th>
                 <th></th>
 			</tr>
 		</thead>
@@ -22,43 +25,56 @@
           <?php foreach ($this->Staff() as $Staff):?>
 			<tr>
 				<td><?php echo $Staff['CODE']; ?></td>
-    			<td><?php echo $Staff['NAME']; ?></td>
-                <td><?php echo $Staff['CONTACT_NUMBER']; ?></td>
+    			<td><?php echo $Staff['F_NAME']; ?></td>
+                <td><?php echo $Staff['L_NAME']; ?></td>
                 <td><?php echo $Staff['USERNAME']; ?></td>
-                <td><?php echo $Staff['PASSWORD']; ?></td>
-                <td><?php echo $Staff['OFFICE_NUMBER']; ?></td>
-                <td><?php echo $Staff['ACCESS_LEVEL']; ?></td>
+                <td><?php echo $Staff['EMAIL']; ?></td>
+                <td><?php echo $Staff['DEPT']; ?></td>
+                <td><?php echo $Staff['LOCATION']; ?></td>
+                <td><?php echo $Staff['LINE_ONE']; ?></td>
+                <td><?php echo $Staff['LINE_TWO']; ?></td>
+                <td><?php echo $Staff['POST_CODE']; ?></td>
+                
 			</tr>
           <?php endforeach; ?>
 		</tbody>
 	</table>
     <button id="create-Staff">Create new Staff</button>
 </div>
-<div id="Staff-form" title="Create new user">
+<div id="Staff-form" title="Create New Staff User">
     <p class="validateStaffTips">All form fields are required.</p>
 
 	<form>
 	<fieldset>
-		<label for="name">Name</label>
-		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+        <label for="Code">Code</label>
+		<input type="text" Code="Code" id="Code" class="text ui-widget-content ui-corner-all" />
         
-		<label for="contact">Contact</label>
-		<input type="text" name="contact" id="contact" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="First Name">Name</label>
+		<input type="text" name="First Name" id="First name" class="text ui-widget-content ui-corner-all" />
         
-		<label for="contactnumber">Contact Number</label>
-		<input type="text" name="contactnumber" id="contactnumber" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="Last Name">Name</label>
+		<input type="text" name="Last Name" id="Last Name" class="text ui-widget-content ui-corner-all" />
+        
+                <label for="Username">Name</label>
+		<input type="text" name="Username" id="Username" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="Email">Contact</label>
+		<input type="text" name="Email" id="Email" value="" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="Dept">Dept</label>
+		<input type="text" name="Dept" id="Dept" value="" class="text ui-widget-content ui-corner-all" />
        
-       <label for="username">Username</label>
-    	<input type="text" name="username" id="username" value="" class="text ui-widget-content ui-corner-all" />
+       <label for="Location">Location</label>
+    	<input type="text" name="Location" id="Location" value="" class="text ui-widget-content ui-corner-all" />
         
-        <label for="password">Password</label>
-    	<input type="text" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="Line One">Password</label>
+    	<input type="text" name="Line One" id="Line One" value="" class="text ui-widget-content ui-corner-all" />
         
-        <label for="officenumber">Office Number</label>
-    	<input type="text" name="officenumber" id="officenumber" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="Line Two">Line Two</label>
+    	<input type="text" name="Line Two" id="Line Two" value="" class="text ui-widget-content ui-corner-all" />
         
-                <label for="postcode">Access Level</label>
-        <input type="text" name="accesslevel<" id="accesslevel" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="postcode">Access Level</label>
+        <input type="text" name="Post Code<" id="Post Code" value="" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	</form>
 </div>
