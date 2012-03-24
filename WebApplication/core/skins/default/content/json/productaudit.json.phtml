@@ -1,0 +1,10 @@
+{
+	startDate: <?php echo $this->startDate(); ?>,
+	month: <?php echo $this->startMonth(); ?>,
+	year: <?php echo $this->startYear(); ?>,
+	data: [<?php 
+			$sales = $this->sales(); 
+			$values = implode(",", $sales);
+			echo $values;
+		   ?>]
+}

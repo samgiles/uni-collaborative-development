@@ -10,7 +10,7 @@ class RegisterController extends Controller {
 	  $this->_content = 'register';
       
 	  if (isset($_GET['json'])) {
-	  	$this->_content = 'register.json';
+	  	$this->_content = 'json/register.json';
 	  }
 	  
       if (!isset($_POST['fname']) && !isset($_POST['lname'])) {  // If there are no details sent by the registration form exit.

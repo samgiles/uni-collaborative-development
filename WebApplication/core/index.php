@@ -38,7 +38,7 @@ require_once("Logger.php");
 ini_set('display_errors', E_STRICT);
 
 // Start session handling
-Session::start(new PDOSessionWriter(new PDO("@SESSIONDSN", '@SESSIONUNAME', '@SESSIONPWORD')));
+Session::start(new PDOSessionWriter(new PDO("mysql:host=localhost;dbname=sessions", 'root', 'lifts1')));
 
 
 
