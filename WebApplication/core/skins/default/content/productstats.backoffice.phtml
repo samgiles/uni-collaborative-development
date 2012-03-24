@@ -16,38 +16,162 @@ $product = $this->product();
 	<div class="center_prod_box_big">            
     	<div class="product_img_big">
         	<a href="#" title="">
-            	<img src="images/p3.jpg" alt="" title="" border="0" />
+            	<img src="<?php echo $product->getPhotoPath(); ?>" alt="" title="" border="0" />
             </a>
         </div>
         <div class="details_big_box">
         <div class="product_title_big"><?php echo $product->getTitle();?>                     </div>
         	<div class="specifications">
-            	<p>Available: 
-                	<?php if($product->getStockLevel() > 0): ?>
-                     <span class="blue">In stock</span>
+            	<p>  <?php if($product->getStockLevel() > 0): ?>
+                     <span class="blue">Stock Level: <?php echo $product->getStockLevel(); ?></span>
                      <?php else:?>
-                     <span class="blue red">Out Of stock</span>
+                     <span class="blue red">Out of stock!</span>
                      <?php endif;?>
                 </p>
+                <button>Reorder</button>
+                <p>Reorder level: <?php echo $product->getReorderLevel(); ?></p>
+                <button>Change re-order level</button>
                 <p>Description :</p>  
                 <p>
              	   <?php echo $product->getDescription(); ?>
                 </p>
+                <button>Edit Description</button>
            	</div>
             <div class="prod_price_big">
             	<span class="reduce">&pound;<?php echo $product->getUnitPrice(); ?> </span>
+            	<button>Change Price</button>
             </div>
         </div>                        
     </div>      
 </div>
         
 <div id="sales-chart" style="width: 1000px"></div>
+
+<style>
+#chart-controls > label, input, button {
+	display: inline;
+	padding: 2px;
+}
+
+#graph-tip {
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border: 1px solid #fff;
+}
+
+svg {
+	min-width: 520px;
+}
+</style>
+
+<div id="chart-controls" style="width: 100%"><p id="graph-tip">Select a start and end date</p><label for="start-date">Show sales from</label><input id="start-date" name="start-date" type="text"><label for="end-date">to</label><input id="end-date" name="end-date" type="text"> <button id="update-graph">Update</button></span></div>
+
 <script type="text/javascript">
 $(document).ready(function() {
+
+
+	function days_between(a, b) {
+		// number of milli secs in a day
+	    var oneday = 86400000;
+
+	    // get dates millisecs
+	    var ams = a.getTime();
+	    var bms = b.getTime();
+
+	    var diff = Math.abs(ams - bms);
+	    
+	    return Math.round(diff / oneday);
+	}
+
 	
-	$.get("./?c=ProductAudit&pid=<?php echo $product->getCode();?>", function(data) {
-			var object = JSON.parse(data);
-			$.salesChart($("#sales-chart")[0], object);
+	$("#start-date, #end-date").datepicker({
+			numberOfMonths: 1,
+			defaultDate: "-1w"
 		});
+
+	$("button").button();
+
+	$("#update-graph").click(function(e){
+		e.preventDefault();
+		var noStartDate = false;
+		if ($("#start-date").val() == '') {
+			noStartDate = true;
+			$("#start-date").addClass("ui-state-error");
+		} else {
+			$("#start-date").removeClass("ui-state-error");
+		}
+		
+		var noEndDate = false;
+		if ($("#end-date").val() == '') {
+			noEndDate = true;
+			$("#end-date").addClass("ui-state-error");
+		} else {
+			$("#end-date").removeClass("ui-state-error");
+		}
+
+		if (noStartDate && noEndDate) {
+			$("#graph-tip").html("You need to specify a start and an end date using the input boxes below").addClass( "ui-state-highlight" );
+	        setTimeout(function() {
+	        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+	          }, 500 );;
+			return false;
+		}
+
+		if (noStartDate) {
+			$("#graph-tip").html("You need to specify a start date using the input boxes below").addClass( "ui-state-highlight" );
+	        setTimeout(function() {
+	        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+	          }, 500 );;
+			return false;
+		}
+		
+		if (noEndDate) {
+			$("#graph-tip").html("You need to specify an end date using the input boxes below").addClass( "ui-state-highlight" );
+	        setTimeout(function() {
+	        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+	          }, 500 );
+			return false;
+		}
+
+		// Ok..
+		$("#graph-tip").html("Updating graph, one moment please...").addClass( "ui-state-highlight" );
+        setTimeout(function() {
+        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+          }, 500 );
+
+		var startDate = $("#start-date").datepicker("getDate");
+		var endDate = $("#end-date").datepicker("getDate");
+
+		var range = days_between(startDate, endDate);
+		var startDay = startDate.getDate();
+		var startMonth = startDate.getMonth();
+		var startYear = startDate.getFullYear();
+
+		updateChart(startDay, startMonth, startYear, range, function() {
+			$("#graph-tip").html("Select a start and end date")
+			});
+		
+	});
+	
+	var updateChart = function(startday, startmonth, startyear, dayrange, callbackchain) {
+		callbackchain = callbackchain || function() { /* Do nothing*/ };
+		var url = "./?c=ProductAudit&pid=<?php echo $product->getCode();?>";
+		// Attach extra parameters if we need to.
+		if (startday) {
+			url += "&day=" + startday + "&month=" + (startmonth + 1) + "&year=" + startyear + "&range=" + dayrange;
+		}
+		
+		$.get(url, function(data) {
+			var object = JSON.parse(data);
+			$("#sales-chart").html("");
+			$.salesChart($("#sales-chart")[0], object);
+			callbackchain(data);
+		});
+	};
+	
+	
+	
+	updateChart();
+	
 });
 </script>

@@ -42,7 +42,7 @@ jQuery.extend((function(){
 	var createSalesChart = function(inId, json, message){
 		var days = json;
 		var width = ((days.data.length + 1) * 100) / 2;
-		var r = Raphael(inId, width + 170, 600);
+		var r = Raphael(inId, width + 170, 250);
 		
 		var message = message || "Sales figures for week begining: "
 		// Build X axis defaults:

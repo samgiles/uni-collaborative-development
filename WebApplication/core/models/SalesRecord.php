@@ -7,13 +7,13 @@ class SalesRecord {
 	
 	private $_figures;
 	
-	public function __construct(Product $product, $dayFrom, $monthfrom, $yearFrom, $numberOfDays, $overrideWithTime = null)  {
+	public function __construct(Product $product, $dayfrom, $monthfrom, $yearfrom, $numberOfDays, $overrideWithTime = null)  {
 		$this->_product = $product;
 		
 		if ($overrideWithTime !== null) {
 			$this->_startTime = $overrideWithTime;
 		} else {
-			$this->_startTime = mktime(0,0,0, $monthFrom, $dayFrom, $yearFrom);
+			$this->_startTime = mktime(0,0,0, $monthfrom, $dayfrom, $yearfrom);
 		}
 	
 		$this->_days = $numberOfDays;

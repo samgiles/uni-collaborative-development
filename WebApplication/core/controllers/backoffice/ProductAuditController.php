@@ -35,6 +35,7 @@ class ProductAuditController extends Controller {
 		} else {
 			// Use time and date 7 days ago from now.
 			$timestamp = time() - 604800; // 604 800s number of secs in 7 days.
+			$timestamp = $timestamp - ($timestamp % 86400); // round to previous midnight.
 			$this->_report = new SalesRecord($this->_product, -1, -1, -1, $this->_range, $timestamp);
 		}
 		
