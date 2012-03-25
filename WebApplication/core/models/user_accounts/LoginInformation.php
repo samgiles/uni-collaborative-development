@@ -1,4 +1,11 @@
-<?php
+<?php 
+/**
+ * This class is used to store login information and it is the object that is serialized by the Session's for session persistance.
+ * It can hold additional key => value objects in the tage acessible via the getTag($key) and setTag($key, $value) methods.
+ * @author Samuel Giles
+ * @package user-accounts
+ * @version 1.0
+ */
 class LoginInformation {
 	
 	private $_tag;

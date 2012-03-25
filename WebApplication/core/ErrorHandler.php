@@ -7,11 +7,11 @@
 
 function fatal_error_handler() {
 	
-	if (@is_array($e = @error_get_last())) {
-		$code = $e['type'] ?: 0;
-		$msg = $e['message'] ?: '';
-		$file = $e['file']  ?: '';
-		$line = $e['line'] ?: '';
+	if (@is_array($error = @error_get_last())) {
+		$code = $error['type'] ?: 0;
+		$msg = $error['message'] ?: '';
+		$file = $error['file']  ?: '';
+		$line = $error['line'] ?: '';
 		if ($code > 0) {
 			error_handler($code, $msg, $file, $line);
 		}

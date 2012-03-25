@@ -12,8 +12,7 @@ class Dispatch {
 	 * @param  $requests  Typically the $_REQUESTS array.
 	 * @param $posts Typically the $_POST array
 	 */
-	public static function get($requests, $posts){
-
+	public static function get($requests){
 		if (isset($requests['c'])){
 			$controllerName = ((string)$requests['c']) . 'Controller';
 			if (class_exists($controllerName, true)) {
