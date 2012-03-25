@@ -12,5 +12,7 @@ class ProductController extends Controller {
         } else {
           $this->addViewVariable('invalid_pcode', true);
         }
+        
+        $this->addViewVariable('c', 'Product');
 	}
 }

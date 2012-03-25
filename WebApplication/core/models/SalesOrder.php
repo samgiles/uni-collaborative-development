@@ -29,6 +29,9 @@ class SalesOrder {
        	
       $sql = "INSERT INTO PURCHASE_INVOICE_PRODUCT (PURCHASE_INVOICE_CODE, PRODUCT_CODE, QUANTITY, UNIT_PRICE) VALUES ({$primaryKey}, {$item['CODE']}, {$item['QUANTITY']}, {$price})";
       Database::execute($sql);
+      
+      $sql = "UPDATE PRODUCT SET STOCK_LEVEL=(STOCK_LEVEl - {$item['QUANTITY']}) WHERE CODE = {$item['CODE']}";
+      Database::execute($sql);
     }
   }
 }

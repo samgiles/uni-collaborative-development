@@ -31,7 +31,7 @@
 	var basket = (function() {
 		// First we need to hook into any href links used for updating the quantities in the basket to use ajax.
 		var ajaxifyLinks = function() {
-			$("a.basket-control-link").each(function(i){
+			$(".basket-control-link").each(function(i){
 				var href = this.href;
 				this.href = "#";
 				$(this).click(function(e){
@@ -49,7 +49,7 @@
 			});
 		};
 		
-		$("a.add-to-basket").each(function(i) {
+		$(".add-to-basket").each(function(i) {
                var href = this.href;
                this.href = "#";
                

@@ -12,8 +12,6 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
          <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
          <script type="text/javascript" src="./scripts/raphael-min.js"></script>
          <script type="text/javascript" src="./scripts/g.raphael-min.js"></script>
-    <script src="scripts/basket.js" type="text/javascript"></script> <!-- Methods in here "Ajaxify" basket links so the page isn't reloaded on links that are clicked to add to basket-->
-    <script src="scripts/registration.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="main_container">    
@@ -34,7 +32,7 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
                 </div>
         
                 <div id="logo">
-                    <a href="index.html"><img class="site-logo" src="images/CD-earth.png" alt="SGC" title="SGC" border="0" /></a>
+                    <a href="./?c=Index"><img class="site-logo" src="images/CD-earth.png" alt="SGC" title="SGC" border="0" /></a>
         	    </div>
                 
                 <div id="basket-container">
@@ -56,9 +54,10 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
                             <li><a href="#" id="register" class="nav right">Register</a></li>
                             <li><a href="#" id="login" class="nav right">Log In</a></li>
                         <?php else: ?>
+                        	<?php /* if ($authObject->getLoginInformation()->getTag()) */ ?>
                             <li><a href="#" onclick="alert('Need to Implement an account screen, remove this when implemented'); //REMOVE ONCLICK STUFF ON IMPLEMENTATION" class="nav right">My Account</a></li>
                             <li><a class="nav right" href="#" id="basket-button">Basket</a></li>
-                            <li><a class="nav right" href="./?c=Login&logout<?php  echo ($this->c() !== NULL)? '&go-to=' . $this->c() : '' ; ?>">Log out</a></li>
+                            <li><a class="nav right" href="./?c=Login&logout<?php  echo ($this->c() !== NULL)? '&go-to=' . $this->c() : '&go-to=Index' ; ?>">Log out</a></li>
                         <?php endif; ?>
                     </ul>
                     <div class="search">
@@ -113,6 +112,8 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
 
             <div id="mask"></div>
 </div>
+<script src="scripts/basket.js" type="text/javascript"></script> <!-- Methods in here "Ajaxify" basket links so the page isn't reloaded on links that are clicked to add to basket-->
+    <script src="scripts/registration.js" type="text/javascript"></script>
 <!-- end of main_container -->
     <script type="text/javascript">
       $(document).ready(function() {
@@ -128,7 +129,7 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
             modal: true
           });
           
-    $('.add-to-basket').click(function(e) {
+    $('a.add-to-basket').click(function(e) {
         <?php if($authObject->getAuthenticated()):?>
         $('#basket-button').click();
         <?php else: ?>
@@ -139,6 +140,7 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
 				}
 			}});
         <?php endif; ?>
+        return false;
         });
         
     $('#basket-button').click(function(e) {
