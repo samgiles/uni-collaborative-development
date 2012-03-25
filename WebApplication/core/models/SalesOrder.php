@@ -21,7 +21,13 @@ class SalesOrder {
     $primaryKey = $result['CODE'];
 
     foreach($this->_basket->getItems() as $item) {
-      $sql = "INSERT INTO PURCHASE_INVOICE_PRODUCT (PURCHASE_INVOICE_CODE, PRODUCT_CODE, QUANTITY) VALUES ({$primaryKey}, {$item['CODE']}, {$item['QUANTITY']})";
+      // Get unit price
+      $unitpriceSql = "SELECT UNIT_PRICE FROM PRODUCT WHERE CODE = {$item['CODE']}";
+      $result = Database::execute($unitpriceSql);
+      $result = $result->fetchAll();
+      $price = $result[0]['UNIT_PRICE'];
+       	
+      $sql = "INSERT INTO PURCHASE_INVOICE_PRODUCT (PURCHASE_INVOICE_CODE, PRODUCT_CODE, QUANTITY, UNIT_PRICE) VALUES ({$primaryKey}, {$item['CODE']}, {$item['QUANTITY']}, {$price})";
       Database::execute($sql);
     }
   }

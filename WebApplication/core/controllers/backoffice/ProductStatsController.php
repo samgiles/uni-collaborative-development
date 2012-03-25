@@ -39,6 +39,8 @@ class ProductStatsController extends Controller {
 			// Run wholesale order..
 		}
 		
+		$this->_product->save();
+		
 	}
 	
 	private function productUpdateReorderLevel($level) {

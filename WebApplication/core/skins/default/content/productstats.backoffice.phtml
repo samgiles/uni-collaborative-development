@@ -76,6 +76,55 @@ svg {
 <script type="text/javascript">
 $(document).ready(function() {
 
+	jQuery(function($) { $.extend({
+	    form: function(url, data, method) {
+	        if (method == null) method = 'POST';
+	        if (data == null) data = {};
+
+	        var form = $('<form>').attr({
+	            method: method,
+	            action: url
+	         }).css({
+	            display: 'none'
+	         });
+
+	        var addData = function(name, data) {
+	            if ($.isArray(data)) {
+	                for (var i = 0; i < data.length; i++) {
+	                    var value = data[i];
+	                    addData(name + '[]', value);
+	                }
+	            } else if (typeof data === 'object') {
+	                for (var key in data) {
+	                    if (data.hasOwnProperty(key)) {
+	                        addData(name + '[' + key + ']', data[key]);
+	                    }
+	                }
+	            } else if (data != null) {
+	                form.append($('<input>').attr({
+	                  type: 'hidden',
+	                  name: String(name),
+	                  value: String(data)
+	                }));
+	            }
+	        };
+
+	        for (var key in data) {
+	            if (data.hasOwnProperty(key)) {
+	                addData(key, data[key]);
+	            }
+	        }
+
+	        return form.appendTo('body');
+	    }
+	}); });
+		
+
+
+
+
+
+	
 	function isNumeric(number) {
 		return (number - 0) == number && number.length > 0;  // http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
 	}
@@ -181,7 +230,7 @@ $(document).ready(function() {
 	$("#reorder-button").click(function(e) {
 		createDialog('reorder', function() {
 						// Do reorder.
-						
+						$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {reorder: $('#unit-count').val()}).submit();
 				}, doValidateNumber);
 		$("#confirm-action .message").html('How many units do you wish to reorder?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
 		$("#confirm-action").dialog("open");
@@ -190,7 +239,7 @@ $(document).ready(function() {
 	$("#change-reorder").click(function(e) {
 		createDialog('reorderlevel', function() {
 			// Do reorder.
-			
+			$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {reorderlevel: $('#unit-count').val()}).submit();
 		}, doValidateNumber);
 		$("#confirm-action .message").html('Change the reorder level?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
 		$("#confirm-action").dialog("open");
@@ -199,15 +248,16 @@ $(document).ready(function() {
 	$("#edit-description").click(function(e) {
 		createDialog('editdescription', function() {
 			// do update
+			$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {description: $('#description').val()}).submit();
 			}, function() {});
-		$("#confirm-action .message").html('<textarea id="description" style="width:100%; height:85%;"><?php echo $product->getDescription(); ?></textarea>');
+		$("#confirm-action .message").html('<textarea id="description" style="width:100%; height:85%;"><?php echo htmlspecialchars_decode(htmlspecialchars($product->getDescription(), ENT_QUOTES), ENT_NOQUOTES); ?></textarea>');
 		$("#confirm-action").dialog("open");
 	});
 
 	$('#edit-price').click(function(e) {
 		createDialog('editprice', function() {
 			// Do reorder.
-			
+			$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {price: $('#unit-count').val()}).submit();
 	}, doValidateNumber);
 		$("#confirm-action .message").html('What price do you wish to set?</span><span><input id="unit-count" type="text" value="<?php echo $product->getUnitPrice(); ?>" >');
 		$("#confirm-action").dialog("open");

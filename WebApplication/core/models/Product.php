@@ -52,7 +52,18 @@ class Product {
     }
     
     public function save() {
-         
+         if ($this->_code == NULL || !isset($this->_code)) {
+         	// New
+         } else {
+         	// Update
+         	// Will need to UPDATE.
+         	$pdostatement = Database::execute("UPDATE PRODUCT SET STOCK_LEVEL='{$this->getStockLevel()}', UNIT_PRICE='{$this->getUnitPrice()}', DESCRIPTION='{$this->getDescription()}', REORDER_LEVEL='{$this->getReorderLevel()}' WHERE CODE={$this->getCode()}");
+         		
+         	if ($pdostatement === false) {
+         		$this->_logger->logController("Product->save(" . print_r($this, true) . ") UPDATE returned false.", 'Model::Product', 'Model - INSTANCE');
+         		throw new Exception("Query failed to execute correctly.");
+         	}
+         }
     }
     
     public function delete() {

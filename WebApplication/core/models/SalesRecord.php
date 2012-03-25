@@ -32,7 +32,7 @@ class SalesRecord {
 	private function totalSql($start, $range, $productcode) {
 		
 		$sql = 
-			'SELECT SUM(`PURCHASE_INVOICE_PRODUCT`.`QUANTITY`) AS TOTAL FROM `PURCHASE_INVOICE`, `PURCHASE_INVOICE_PRODUCT` WHERE `PURCHASE_INVOICE`.`CODE` = `PURCHASE_INVOICE_PRODUCT`.`PURCHASE_INVOICE_CODE` AND ' . 
+			'SELECT SUM(`PURCHASE_INVOICE_PRODUCT`.`QUANTITY` * `PURCHASE_INVOICE_PRODUCT`.`UNIT_PRICE`) AS TOTAL FROM `PURCHASE_INVOICE`, `PURCHASE_INVOICE_PRODUCT` WHERE `PURCHASE_INVOICE`.`CODE` = `PURCHASE_INVOICE_PRODUCT`.`PURCHASE_INVOICE_CODE` AND ' . 
 			'`PURCHASE_INVOICE`.`DATE` > ' . $start . ' AND ' .
 			'`PURCHASE_INVOICE`.`DATE` < '. ($start + $range) . ' AND ' .
 			'`PURCHASE_INVOICE_PRODUCT`.`PRODUCT_CODE` = ' . $productcode . ' AND ' .
@@ -50,7 +50,7 @@ class SalesRecord {
 		$result = $result->fetchAll();
 		
 		if ($result) {
-			return $result[0]['TOTAL'] * $this->_product->getUnitPrice();
+			return $result[0]['TOTAL'] ?: 0; // Coalesce to 0
 		}
 		
 		return 0;
