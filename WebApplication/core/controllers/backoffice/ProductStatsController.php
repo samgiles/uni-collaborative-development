@@ -1,4 +1,9 @@
 <?php 
+/**
+ * Displays information of a product, providing an interface for the viewing of sales figures and and interface to edit product details.
+ * @author Samuel Giles
+ * @package application-controllers
+ */
 class ProductStatsController extends Controller {
 
 	private $_product;
@@ -7,10 +12,6 @@ class ProductStatsController extends Controller {
 
 	private $_report;
 
-	
-	
-	
-	
 	public function __construct() {
 		$this->_skin = 'default';
 		$this->_layout = 'main';

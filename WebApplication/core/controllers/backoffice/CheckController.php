@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * PHP Test Controller.
+ * 
+ * TODO
+ * 
+ * @author Vishal Patel
+ * @package application-controllers
+ */
 class CheckController extends Controller {
     
     public function __construct() {

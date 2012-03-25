@@ -1,4 +1,10 @@
 <?php
+/**
+ * Provides the interface for viewing the list of Wholesalers.
+ * @author Samuel Giles
+ * @package application-controller
+ * @version 0.2
+ */
 class WholesalerController extends Controller {
     
     public function __construct() {
