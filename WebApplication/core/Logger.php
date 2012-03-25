@@ -2,8 +2,11 @@
 /**
 * A really simple, lightweight logging class. The only configuration needed is of the static $relativePath variable to the path where log files will be stored.
 * This needs to be the relative to where this file is installed.
+* 
+* Extended with project specific methods.
+* 
 * @author Samuel E Giles
-* @version 0.5 August 2011
+* @version 0.8 August 2011
 * @license GPLv3 http://www.gnu.org/licenses/gpl.txt
 * @package core
 */
@@ -43,6 +46,10 @@ return Logger::$_instance;
 */
 private function __construct(){
 $this->_path = dirname(__FILE__) . Logger::$_relativePath;
+}
+
+public function logController($message, $controllerName, $sender) {
+	$this->log($message, $sender, $controllerName);
 }
 
 /**
@@ -111,7 +118,7 @@ return;
 */
 private function append($filename, $message){
 $handle = fopen($this->_path . $filename, 'a') or die('Can not open file. ' . $filename);
-fwrite($handle,"\n\r" . $message . "\n\r");
+fwrite($handle,"\n" . $message . "\n");
 fclose($handle);
 }
 }

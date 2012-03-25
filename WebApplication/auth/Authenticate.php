@@ -4,12 +4,15 @@
  * @author Samuel Giles
  * @package authentication
  */
-interface Authenticate {
+abstract class Authenticate {
+	
+	
+	
 	/**
 	 * Authenticates an entity.
 	 * @param $identity The identity of the entity.
 	 * @param $credentials The credentials of the entity.
 	 * @returns mixed Returns always FALSE on failure and may return Adapter specific information on success.
 	 */
-	function tryAuthenticate($identity, $credentials);
+	public abstract function tryAuthenticate($identity, $credentials);
 }

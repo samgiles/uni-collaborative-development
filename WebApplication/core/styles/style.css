@@ -195,6 +195,7 @@ text-align:center;
 line-height:24px;
 text-decoration:none;
 color: #006600;
+font-size: 11px;
 }
 /*---------prod_box_big----------*/
 .prod_box_big{
@@ -384,7 +385,7 @@ padding:10px 0 0 60px;
 .search {
 top: -34px;
 position: relative;
-width: 500px;
+width: 400px;
 margin-left: 220px;
     }
     
@@ -396,3 +397,9 @@ margin-left: 220px;
     	input.text { margin-bottom:12px; width:95%; padding: .4em; }
 		fieldset { padding:0; border:0; margin-top:25px; }
 th { padding: .6em 10px; }
+
+.site-logo {
+	height: 130px;
+margin-top: -40px;
+margin-left: 30px;
+}

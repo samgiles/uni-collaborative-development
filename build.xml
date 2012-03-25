@@ -114,6 +114,10 @@
   <exec executable="phpcpd">
    <arg value="--log-pmd" />
    <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+    <arg value="--min-lines" />
+    <arg value="5" />
+   <arg value="--min-tokens" />
+   <arg value="10" />
    <arg path="${basedir}/WebApplication" />
   </exec>
  </target>

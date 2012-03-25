@@ -32,11 +32,10 @@ class View {
 	
 	/**
 	 * Magic method if the method doesn't exist we'll call the method in the pagemodel.  Allows us to use the following form in the View fragments:  <code><?php echo $this->dtd(); ?></code>
-	 * This example gets the dtd variable from the page model.
-	 * @param $name The name of the method.
-	 * @param $params Method parameters.
+	 * This example gets the dtd variable from the page model providing the dtd key has been set.
+	 * @param $name The name of the object.
 	 */
-	public function __call($name, $params){
+	public function __call($name, $arguments){
 		if (!method_exists($this, $name)){
 			return $this->_controller->getPageModel()->$name();
 		}
@@ -44,7 +43,7 @@ class View {
 	
 	public function includeController($controllerName, $requestArray) {
 		$requests = array('c' => $controllerName) + $requestArray;
-		$controller = Dispatch::get($requests, array());
+		$controller = Dispatch::get($requests);
 		array_merge($_GET, $requests);
 		$view = new View($controller);
 		$view->render();

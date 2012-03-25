@@ -6,6 +6,9 @@
 class AnObscureController extends Controller {
 }
 
+class IndexController extends Controller {
+}
+
 class DispatchTests extends PHPUnit_Framework_TestCase {
   
   /**
@@ -18,7 +21,7 @@ class DispatchTests extends PHPUnit_Framework_TestCase {
     
     // No controller specified.
     $controller = Dispatch::get(array(), array());
-    $this->assertTrue($controller === NULL);
+    $this->assertTrue($controller instanceof IndexController);
   }
-	
+
 }

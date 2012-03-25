@@ -1,0 +1,372 @@
+<?php 
+/**
+ *  Displays a product's information using a 'Product' object.
+ *  @author Samuel Giles
+ *  @package application-views-content
+ */
+
+/**
+ * The product this template is displaying.
+ * @var Product
+ */
+$product = $this->product(); 
+?>
+<div class="center_title_bar"><?php echo $product->getTitle();?></div>
+<div class="prod_box_big">
+	<div class="center_prod_box_big">            
+    	<div class="product_img_big">
+        	<a href="#" title="">
+            	<img border="0" style="width: 71px; height: 71px" title="" alt="" src="<?php echo $product->getPhotoPath(); ?>">
+            </a>
+        </div>
+        <div class="details_big_box">
+        <div class="product_title_big"><?php echo $product->getTitle();?>                     </div>
+        	<div class="specifications">
+            	<p>  <?php if($product->getStockLevel() > 0): ?>
+                     <span class="blue" pid="<?php echo $product->getCode(); ?>">Stock Level: <?php echo $product->getStockLevel(); ?></span>
+                     <?php else:?>
+                     <span class="blue red">Out of stock!</span>
+                     <?php endif;?>
+                </p>
+                <button id="reorder-button" pid="<?php echo $product->getCode(); ?>">Reorder</button>
+                <p>Reorder level: <?php echo $product->getReorderLevel(); ?></p>
+                <button id="change-reorder" pid="<?php echo $product->getCode(); ?>">Change re-order level</button>
+                <p>Description :</p>  
+                <p>
+             	   <?php echo $product->getDescription(); ?>
+                </p>
+                <button id="edit-description" pid="<?php echo $product->getCode(); ?>">Edit Description</button>
+           	</div>
+            <div class="prod_price">
+            	<span class="reduce">&pound;<?php echo $product->getUnitPrice(); ?> </span>
+            </div>
+            <button id="edit-price" pid="<?php echo $product->getCode(); ?>">Change Price</button>
+        </div>                        
+    </div>      
+</div>
+        
+<div id="sales-chart" style="width: 1000px"></div>
+
+<style>
+#chart-controls > label, input, button {
+	display: inline;
+	padding: 2px;
+}
+
+#graph-tip {
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border: 1px solid #fff;
+}
+
+svg {
+	min-width: 520px;
+}
+
+#unit-count .validate-tip {
+	padding-bottom: 5px;
+}
+</style>
+
+<div id="chart-controls" style="width: 100%"><p id="graph-tip">Select a start and end date</p><label for="start-date">Show sales from</label><input id="start-date" name="start-date" type="text"><label for="end-date">to</label><input id="end-date" name="end-date" type="text"> <button id="update-graph">Update</button></span></div>
+
+
+<div id="confirm-action" title="Please confirm"><p><span class="" id="icon" style="float:left; margin: 0 7px 20px 0;"></span><p class="validate-tip"></p><span class="message"></span></p></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	jQuery(function($) { $.extend({
+	    form: function(url, data, method) {
+	        if (method == null) method = 'POST';
+	        if (data == null) data = {};
+
+	        var form = $('<form>').attr({
+	            method: method,
+	            action: url
+	         }).css({
+	            display: 'none'
+	         });
+
+	        var addData = function(name, data) {
+	            if ($.isArray(data)) {
+	                for (var i = 0; i < data.length; i++) {
+	                    var value = data[i];
+	                    addData(name + '[]', value);
+	                }
+	            } else if (typeof data === 'object') {
+	                for (var key in data) {
+	                    if (data.hasOwnProperty(key)) {
+	                        addData(name + '[' + key + ']', data[key]);
+	                    }
+	                }
+	            } else if (data != null) {
+	                form.append($('<input>').attr({
+	                  type: 'hidden',
+	                  name: String(name),
+	                  value: String(data)
+	                }));
+	            }
+	        };
+
+	        for (var key in data) {
+	            if (data.hasOwnProperty(key)) {
+	                addData(key, data[key]);
+	            }
+	        }
+
+	        return form.appendTo('body');
+	    }
+	}); });
+		
+
+
+
+
+
+	
+	function isNumeric(number) {
+		return (number - 0) == number && number.length > 0;  // http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+	}
+
+	var createDialog = function(type, action, validation) {
+		switch (type) {
+		
+		case 'reorderlevel':
+		case 'reorder':
+			$("#confirm-action").dialog({
+				resizable: false,
+				autoOpen: false,
+				height: 165,
+				modal: true,
+				buttons: {
+						"Reorder": function() {
+								// validate.
+								if (!validation()) {
+									return false;
+								}
+
+								action();
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							$("#confirm-action .message").html('');
+							$("#confirm-action .validate-tip").html('');
+							$("#unit-count").removeClass("ui-state-error");
+							$("#confirm-action #icon").removeClass("ui-icon");
+							$("#confirm-action #icon").removeClass("ui-icon-alert");
+						}
+				}
+			});
+			break;
+		case 'editdescription':
+			$("#confirm-action").dialog({
+				resizable: false,
+				autoOpen: false,
+				height: 565,
+				width: 500,
+				modal: true,
+				buttons: {
+						"Save": function() {
+								action();
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							$("#confirm-action .message").html('');
+							$("#confirm-action .validate-tip").html('');
+							$("#unit-count").removeClass("ui-state-error");
+							$("#confirm-action #icon").removeClass("ui-icon");
+							$("#confirm-action #icon").removeClass("ui-icon-alert");
+						}
+				}
+			});
+			break;
+		case 'editprice':
+			$("#confirm-action").dialog({
+				resizable: false,
+				autoOpen: false,
+				height: 165,
+				modal: true,
+				buttons: {
+						"Save": function() {
+							if (!validation()) {
+								return false;
+							}
+								
+								action();
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							$("#confirm-action .message").html('');
+							$("#confirm-action .validate-tip").html('');
+							$("#unit-count").removeClass("ui-state-error");
+							$("#confirm-action #icon").removeClass("ui-icon");
+							$("#confirm-action #icon").removeClass("ui-icon-alert");
+						}
+				}
+			});
+		}
+	}
+	
+	var doValidateNumber = function(){ 
+		var value = $("#unit-count").val();
+		if (!isNumeric(value)) {
+			$("#unit-count").addClass("ui-state-error");
+			$("#confirm-action #icon").addClass("ui-icon");
+			$("#confirm-action #icon").addClass("ui-icon-alert");
+			$("#confirm-action .validate-tip").html("Check the value is a number");
+			return false;
+		}
+
+		$("#unit-count").removeClass("ui-state-error");
+		$("#confirm-action #icon").removeClass("ui-icon");
+		$("#confirm-action #icon").removeClass("ui-icon-alert");
+		$("#confirm-action .validate-tip").html("");
+		
+		
+		return true;
+	}
+	
+	$("#reorder-button").click(function(e) {
+		createDialog('reorder', function() {
+						// Do reorder.
+						$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {reorder: $('#unit-count').val()}).submit();
+				}, doValidateNumber);
+		$("#confirm-action .message").html('How many units do you wish to reorder?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
+		$("#confirm-action").dialog("open");
+	});
+	
+	$("#change-reorder").click(function(e) {
+		createDialog('reorderlevel', function() {
+			// Do reorder.
+			$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {reorderlevel: $('#unit-count').val()}).submit();
+		}, doValidateNumber);
+		$("#confirm-action .message").html('Change the reorder level?</span><span><input id="unit-count" type="text" value="<?php echo $product->getReorderLevel(); ?>" >');
+		$("#confirm-action").dialog("open");
+	});
+
+	$("#edit-description").click(function(e) {
+		createDialog('editdescription', function() {
+			// do update
+			$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {description: $('#description').val()}).submit();
+			}, function() {});
+		$("#confirm-action .message").html('<textarea id="description" style="width:100%; height:85%;"><?php echo htmlspecialchars_decode(htmlspecialchars($product->getDescription(), ENT_QUOTES), ENT_NOQUOTES); ?></textarea>');
+		$("#confirm-action").dialog("open");
+	});
+
+	$('#edit-price').click(function(e) {
+		createDialog('editprice', function() {
+			// Do reorder.
+			$.form('./?c=ProductStats&pid=<?php echo $product->getCode(); ?>', {price: $('#unit-count').val()}).submit();
+	}, doValidateNumber);
+		$("#confirm-action .message").html('What price do you wish to set?</span><span><input id="unit-count" type="text" value="<?php echo $product->getUnitPrice(); ?>" >');
+		$("#confirm-action").dialog("open");
+
+		});
+	
+	
+	function days_between(a, b) {
+		// number of milli secs in a day
+	    var oneday = 86400000;
+
+	    // get dates millisecs
+	    var ams = a.getTime();
+	    var bms = b.getTime();
+
+	    var diff = Math.abs(ams - bms);
+	    
+	    return Math.round(diff / oneday);
+	}
+
+	
+	$("#start-date, #end-date").datepicker({
+			numberOfMonths: 1,
+			defaultDate: "-1w"
+		});
+
+	$("button").button();
+
+	$("#update-graph").click(function(e){
+		e.preventDefault();
+		var noStartDate = false;
+		if ($("#start-date").val() == '') {
+			noStartDate = true;
+			$("#start-date").addClass("ui-state-error");
+		} else {
+			$("#start-date").removeClass("ui-state-error");
+		}
+		
+		var noEndDate = false;
+		if ($("#end-date").val() == '') {
+			noEndDate = true;
+			$("#end-date").addClass("ui-state-error");
+		} else {
+			$("#end-date").removeClass("ui-state-error");
+		}
+
+		if (noStartDate && noEndDate) {
+			$("#graph-tip").html("You need to specify a start and an end date using the input boxes below").addClass( "ui-state-highlight" );
+	        setTimeout(function() {
+	        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+	          }, 500 );;
+			return false;
+		}
+
+		if (noStartDate) {
+			$("#graph-tip").html("You need to specify a start date using the input boxes below").addClass( "ui-state-highlight" );
+	        setTimeout(function() {
+	        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+	          }, 500 );;
+			return false;
+		}
+		
+		if (noEndDate) {
+			$("#graph-tip").html("You need to specify an end date using the input boxes below").addClass( "ui-state-highlight" );
+	        setTimeout(function() {
+	        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+	          }, 500 );
+			return false;
+		}
+
+		// Ok..
+		$("#graph-tip").html("Updating graph, one moment please...").addClass( "ui-state-highlight" );
+        setTimeout(function() {
+        	$("#graph-tip").removeClass( "ui-state-highlight", 1500 );
+          }, 500 );
+
+		var startDate = $("#start-date").datepicker("getDate");
+		var endDate = $("#end-date").datepicker("getDate");
+
+		var range = days_between(startDate, endDate);
+		var startDay = startDate.getDate();
+		var startMonth = startDate.getMonth();
+		var startYear = startDate.getFullYear();
+
+		updateChart(startDay, startMonth, startYear, range, function() {
+			$("#graph-tip").html("Select a start and end date")
+			});
+		
+	});
+	
+	var updateChart = function(startday, startmonth, startyear, dayrange, callbackchain) {
+		callbackchain = callbackchain || function() { /* Do nothing*/ };
+		var url = "./?c=ProductAudit&pid=<?php echo $product->getCode();?>";
+		// Attach extra parameters if we need to.
+		if (startday) {
+			url += "&day=" + startday + "&month=" + (startmonth + 1) + "&year=" + startyear + "&range=" + dayrange;
+		}
+		
+		$.get(url, function(data) {
+			var object = JSON.parse(data);
+			$("#sales-chart").html("");
+			$.salesChart($("#sales-chart")[0], object);
+			callbackchain(data);
+		});
+	};
+	
+	
+	
+	updateChart();
+	
+});
+</script>

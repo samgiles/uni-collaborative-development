@@ -1,4 +1,12 @@
 <?php
+/**
+ * A controller that can be used to display some products in a simple graphical list.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.1
+ * @todo Include another product.
+ */
 class LatestProductsController extends Controller {
  
  public function __construct() {

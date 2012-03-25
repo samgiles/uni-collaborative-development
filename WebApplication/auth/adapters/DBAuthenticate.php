@@ -4,7 +4,7 @@
  * @author Samuel Giles
  * @package authentication
  */
-class DBAuthenticate implements Authenticate {
+class DBAuthenticate extends Authenticate {
 
 	/**
 	 * The table name in the database used to store the authentication credentials.
@@ -35,6 +35,11 @@ class DBAuthenticate implements Authenticate {
 	 * @var string
 	 */
 	protected $_primaryKey;
+	
+	/**
+	 * Information that is set on successful authentication.
+	 */
+	private $_authenticationInfo = null;
     
 	/**
 	 * Constructs a new Database Authentication adapter.  This authenticates credentials against a database.
@@ -52,23 +57,7 @@ class DBAuthenticate implements Authenticate {
         
 	}
     
-    /**
-     * Gets the User access level of a user given a USER ID/CODE
-     * @param int $uid
-     */
-    private function getUserAccessLevel($uid) {
-      //TODO: Remove this, this shouldn't be here as it has nothing to do with authenticating a user and violates the SRP. Probably best to move into LoginController or something.
-      $sql = 'SELECT ACCESS_LEVEL_CODE FROM STAFF WHERE USER_CODE = ' . $uid;
-      $result = Database::execute($sql);
-      $result = $result->fetchAll();
-      if (count($result) <= 0) {
-        // Non staff member. 
-        return AccessLevels::ANYONE; // Anyone can access.
-      } else {
-
-        return $result[0]['ACCESS_LEVEL_CODE'];  
-      }
-    }
+    
     
     /**
      * Authenticates an entity with a given identity and credential.
@@ -85,13 +74,9 @@ class DBAuthenticate implements Authenticate {
             
           if ($row[$this->_credential] === md5($credential)){
               // Successful
-              // TODO: Probably shouldn'y get the access level, here. Low Priority, this isn't as bad as setting a session variable here. 
-              $accessLevel = $this->getUserAccessLevel($row['CODE']);
-              
-              return array('username' => $identity, 'time' => time(), 'dbid' => $row['CODE'], 'access' => $accessLevel, 'ip' => $_SERVER['REMOTE_ADDR']);
+              return true;
           }
         } 
-        
         return false;
 
 	}

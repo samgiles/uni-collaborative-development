@@ -1,0 +1,85 @@
+<?php 
+/**
+ * A screen for viewing and adding Staff
+ * @author Vishal Patel
+ * @package application-views-content
+ */                
+?>
+<div id="users-contain" class="ui-widget">
+    <h1>Staff:</h1>
+	<table id="users" class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>Code</th>
+				<th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Dept</th>
+                <th>Location</th>
+                <th>Line One</th>
+                <th>Line Two</th>
+                <th>Post Code</th>
+                <th></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php var_dump($this->Staff()); ?>
+          <?php foreach ($this->Staff() as $Staff):?>
+			<tr>
+				<td><?php echo $Staff['CODE']; ?></td>
+    			<td><?php echo $Staff['F_NAME']; ?></td>
+                <td><?php echo $Staff['L_NAME']; ?></td>
+                <td><?php echo $Staff['USERNAME']; ?></td>
+                <td><?php echo $Staff['EMAIL']; ?></td>
+                <td><?php echo $Staff['DEPT']; ?></td>
+                <td><?php echo $Staff['LOCATION']; ?></td>
+                <td><?php echo $Staff['LINE_ONE']; ?></td>
+                <td><?php echo $Staff['LINE_TWO']; ?></td>
+                <td><?php echo $Staff['POST_CODE']; ?></td>
+                
+                <td><button>Edit</button> <button>Delete</button></td>
+                
+			</tr>
+          <?php endforeach; ?>
+		</tbody>
+	</table>
+    <button id="create-Staff">Create new Staff</button>
+</div>
+<div id="Staff-form" title="Create New Staff User">
+    <p class="validateStaffTips">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+        <label for="Code">Code</label>
+		<input type="text" code="Code" id="Code" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="First Name">First Name</label>
+		<input type="text" name="First Name" id="First name" class="text ui-widget-content ui-corner-all" />
+		
+		<label for="Last Name">Last Name</label>
+		<input type="text" name="Last Name" id="Last Name" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="Username">Username</label>
+		<input type="text" name="Username" id="Username" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="Email">Email</label>
+		<input type="text" name="Email" id="Email" value="" class="text ui-widget-content ui-corner-all" />
+        
+		<label for="Dept">Dept</label>
+		<input type="text" name="Dept" id="Dept" value="" class="text ui-widget-content ui-corner-all" />
+       
+        <label for="Location">Location</label>
+    	<input type="text" name="Location" id="Location" value="" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="Line One">Line One</label>
+    	<input type="text" name="Line One" id="Line One" value="" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="Line Two">Line Two</label>
+    	<input type="text" name="Line Two" id="Line Two" value="" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="Postcode">Postcode</label>
+        <input type="text" name="Post Code<" id="Post Code" value="" class="text ui-widget-content ui-corner-all" />
+        </fieldset>
+	</form>
+</div>

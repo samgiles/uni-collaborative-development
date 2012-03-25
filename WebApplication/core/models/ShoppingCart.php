@@ -3,6 +3,7 @@
  * A Shopping Cart model that can persist across a single session and store basket information in the database.
  * @author Samuel Giles
  * TODO:  Update this when Product Models are created.
+ * @package application-models
  */
 class ShoppingCart {
 	
@@ -32,10 +33,12 @@ class ShoppingCart {
 		$this->_logger = Logger::GetLogger();
 		
 		// If the shopping cart session data is set then get the customer code from the ShoppingCartSession object.
-        $login = Session::get('login');
+        $login = Session::get('LOGIN');
 		if ($login !== NULL) {
-			$this->_customerCode = $login['dbid'];
-			$this->_logger->info("Customer Code: " . $this->_customerCode . "<br>");
+			$getCode = Database::execute("SELECT `CUSTOMER`.`CODE` FROM CUSTOMER, SYSTEM_USER WHERE `SYSTEM_USER`.`USERNAME` = '{$login->getIdentity()}' AND `SYSTEM_USER`.`CODE` = `CUSTOMER`.`SYS_USER_CODE`");
+			$result = $getCode->fetch(PDO::FETCH_ASSOC);
+			$this->_customerCode = $result['CODE'];
+			$this->_logger->info("Customer Code: " . $this->_customerCode);
 		} else {
 			$this->_customerCode = NULL;
             $this->_items = NULL;
@@ -44,6 +47,12 @@ class ShoppingCart {
 		// Load the Shopping cart from the database.
 		$this->loadFromQuery();
 
+	}
+	
+	public function clear() {
+		$sql = 'DELETE FROM SHOPPING_CART WHERE CUSTOMERCODE = ' . $this->_customerCode;
+		Database::execute($sql);
+		$this->_items = array();
 	}
 	
 	public function getCustomerCode() {
@@ -68,16 +77,20 @@ class ShoppingCart {
 	 */
 	public function removeProduct($productCode, $quantity) {
 		
-		$cartSQL = 'DELETE FROM SHOPPING_CART WHERE PRODUCTCODE = ' . $productCode . ' AND CUSTOMERCODE = ' . $this->_customerCode . ' LIMIT ' . $quantity; // Integrate with log in system.
-		$statement = Database::execute($cartSQL);	
-		
-		$this->_logger->info('Executed Remove Statement: ' . $cartSQL);
-		
-		$this->_items[$productCode]['QUANTITY'] -= $quantity;
-		
-		if ($this->_items[$productCode]['QUANTITY'] <= 0) {
-			unset($this->_items[$productCode]);
+		if (isset($this->_items[$productCode])) { // Prevent the quantity being set from a request sent after the quantity has already reached 0.
+			$this->_items[$productCode]['QUANTITY'] -= $quantity;
+				
+			if ($this->_items[$productCode]['QUANTITY'] <= 0) {
+				unset($this->_items[$productCode]);
+			}
+			
+			$cartSQL = 'DELETE FROM SHOPPING_CART WHERE PRODUCTCODE = ' . $productCode . ' AND CUSTOMERCODE = ' . $this->_customerCode . ' LIMIT ' . $quantity; // Integrate with log in system.
+			$statement = Database::execute($cartSQL);
+			
+			$this->_logger->info('Executed Remove Statement: ' . $cartSQL);
+			
 		}
+		
 	}
 	
 	/**
@@ -92,7 +105,7 @@ class ShoppingCart {
 		
 		$time = time();
 		for ($i = 0; $i < $quantity; ++$i) {
-			$values .= '(1, ' . $productCode . ', ' . $time .')';
+			$values .= '(' . $this->_customerCode . ' , ' . $productCode . ', ' . $time .')';
 			
 			if ($i >= $quantity) {
 				$values .= ',';
@@ -109,6 +122,10 @@ class ShoppingCart {
 		
 		$statement = Database::execute($cartSQL);
 		$this->_logger->info('Executed INSERT statement. ' . $cartSQL);
+		
+		if (!$this->_items) {
+			$this->_items = array();
+		}
 		
 		if (array_key_exists($productCode, $this->_items)) {
 			$this->_items[$productCode]['QUANTITY'] += 1;

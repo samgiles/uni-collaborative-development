@@ -10,7 +10,5 @@ class OrderController extends Controller {
 		$this->_skin = 'default';
 		$this->_layout = 'main2';
 		$this->_content = 'CreateOrderBackOffice';
-		
-
 	}
 }

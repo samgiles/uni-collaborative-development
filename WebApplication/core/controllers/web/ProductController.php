@@ -1,4 +1,11 @@
 <?php
+/**
+ * Used for the display of a product page.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.3
+ */
 class ProductController extends Controller {
     
 	public function __construct() {
@@ -12,5 +19,7 @@ class ProductController extends Controller {
         } else {
           $this->addViewVariable('invalid_pcode', true);
         }
+        
+        $this->addViewVariable('c', 'Product');
 	}
 }

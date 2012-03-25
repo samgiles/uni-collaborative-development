@@ -66,14 +66,14 @@ abstract class Controller {
       // 100 <- General Staff
       // 111 <- Admin
       
-      $login = Session::get('login');
-      if ($login === NULL) {
+      $login = Session::get('LOGIN');
+      if ($login === NULL || !($login instanceof LoginInformation)) {
         $this->_content = 'nopermission';
         return false;
       }
       
-      $level = $login['access'];
       
+      $level = $login->getTag('access-level');
       
       $hasPerms = $accessLevel & $level;  // Bitwise AND
       if ($hasPerms == $accessLevel) {

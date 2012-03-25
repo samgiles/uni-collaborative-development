@@ -1,4 +1,11 @@
 <?php
+/**
+ * Manages and Displays the checkout.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.4
+ */
 class CheckoutController extends Controller {
     
 	private $_cart;
@@ -9,6 +16,7 @@ class CheckoutController extends Controller {
 		$this->_content = 'checkout';
 		$this->_cart = new ShoppingCart();
 		
+		$this->getDetails();
 		
 		// Should probably move into new controller.
 		if (isset($_GET['process'])) {
@@ -19,22 +27,20 @@ class CheckoutController extends Controller {
 		  
 		  // Create sales order, 
 		  $order = new SalesOrder($this->_cart);
-		  $order->update();
+		  $order->save();
 		  
 		  $this->addViewVariable('paymentRecieved', $authorised);
+		  // Clear the cart.
+		  $this->_cart->clear();
 		}
-		
-		$this->getDetails();
-        
-        
-        
+
         // Tell the view that we're a Checkout controller.
 		$this->addViewVariable("c", "Checkout");
 	}
     
     private function getDetails() {
       // Get the current shopping cart.
-      
+
       $this->addViewVariable('notLoggedIn', $this->_cart->unavailable());
       $this->addViewVariable('cartItems', $this->_cart->getItems());
     }

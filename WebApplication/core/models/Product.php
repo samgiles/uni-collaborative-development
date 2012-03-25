@@ -1,4 +1,9 @@
 <?php
+/**
+ * 
+ * @author sam
+ * @package application-models
+ */
 class Product {
     
     private $_code;
@@ -47,7 +52,18 @@ class Product {
     }
     
     public function save() {
-         
+         if ($this->_code == NULL || !isset($this->_code)) {
+         	// New
+         } else {
+         	// Update
+         	// Will need to UPDATE.
+         	$pdostatement = Database::execute("UPDATE PRODUCT SET STOCK_LEVEL='{$this->getStockLevel()}', UNIT_PRICE='{$this->getUnitPrice()}', DESCRIPTION='{$this->getDescription()}', REORDER_LEVEL='{$this->getReorderLevel()}' WHERE CODE={$this->getCode()}");
+         		
+         	if ($pdostatement === false) {
+         		$this->_logger->logController("Product->save(" . print_r($this, true) . ") UPDATE returned false.", 'Model::Product', 'Model - INSTANCE');
+         		throw new Exception("Query failed to execute correctly.");
+         	}
+         }
     }
     
     public function delete() {
@@ -73,6 +89,26 @@ class Product {
       $this->_downloadCount = $result[0]['DOWNLOAD_COUNT'];
       $this->_wholesalerCode = $result[0]['WHOLESALER_CODE'];
       $this->_wholesaleCost = $result[0]['WHOLESALE_COST'];
+    }
+    
+    public function setDescription($description) {
+    	$this->_description = $description;
+    }
+    
+    public function setReorderLevel($level) {
+    	$this->_reorderLevel = $level;
+    } 
+    
+    public function setPhotoPath($path) {
+    	$this->_photoPath = $path;
+    }
+    
+    public function setStockLevel($level) {
+    	$this->_stockLevel = $level;
+    }
+    
+    public function setUnitPrice($price) {
+    	$this->_unitPrice = $price;
     }
     
     public function getCode() {

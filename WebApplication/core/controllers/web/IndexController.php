@@ -1,4 +1,11 @@
 <?php
+/**
+ * The main index page.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.4
+ */
 class IndexController extends Controller {
     
 	public function __construct() {
