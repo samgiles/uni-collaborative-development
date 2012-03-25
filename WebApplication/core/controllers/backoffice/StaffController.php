@@ -3,7 +3,7 @@ class StaffController extends Controller {
     
     public function __construct() {
     	$this->_skin = 'default';
-		$this->_layout = 'main';
+		$this->_layout = 'main2';
 		$this->_content = 'Staff';
 		
 		$this->requiredAccess(AccessLevels::GENERALSTAFF | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
