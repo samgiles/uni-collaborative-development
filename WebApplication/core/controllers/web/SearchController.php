@@ -1,4 +1,11 @@
 <?php
+/**
+ * Used for querying the products, can sort the products in ascending or descending price order.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackager web-controllers
+ * @version 1.2
+ */
 class SearchController extends Controller {
  
  public function __construct() {

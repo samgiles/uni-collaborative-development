@@ -1,4 +1,12 @@
 <?php
+/**
+ * Handles the Shopping cart.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.8
+ * @todo Update and refactor to use the Product model.
+ */
 class ShoppingCartController extends Controller {
 	
 	private $_cart;
