@@ -1,19 +1,20 @@
 <?php
 /**
- * 
+ * Provides the interface for viewing the list of Wholesalers.
  * @author Vishal Patel
- * @package application-controllers
+ * @package application-controller
+ * @version 0.2
  */
-class SupervisorController extends Controller {
+class WholesalerController extends Controller {
     
     public function __construct() {
-    	$this->_skin = 'default';
-		$this->_layout = 'main2';
+		$this->_skin = 'default';
+		$this->_layout = 'main';
 		$this->_content = 'Supervisor';
 		
-        // testing
-        if (!$this->requiredAccess(AccessLevels::SUPERVISOR)) {
-          return;
-        }
+		$this->requiredAccess(AccessLevels::SUPERVISOR | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
+        $this->getAllWholesalers();
+        // Tell the view that we're an Index controller.
+		$this->addViewVariable("c", "Supervisor");
 	}
-}
+	}

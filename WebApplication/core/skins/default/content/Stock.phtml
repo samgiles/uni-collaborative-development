@@ -1,0 +1,57 @@
+<?php 
+/**
+ * A screen for viewing and adding Wholesale providers
+ * @author Samuel Giles
+ * @package application-views-content
+ */
+?>
+<div id="users-contain" class="ui-widget">
+    <h1>Wholesalers:</h1>
+	<table id="users" class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>Code</th>
+				<th>Name</th>
+				<th>Contact</th>
+                <th>Contact Number</th>
+                <th>Address Line One</th>
+                <th>Address Line Two</th>
+                <th>Postcode</th>
+			</tr>
+		</thead>
+		<tbody>
+          <?php foreach ($this->wholesalers() as $Stock):?>
+			<tr>
+				<td><?php echo $Stock['CODE']; ?></td>
+    			<td><?php echo $Stock['NAME']; ?></td>
+				<td><?php echo $Stock['CONTACT_NAME']; ?></td>
+                <td><?php echo $Stock['CONTACT_NUMBER']; ?></td>
+                <td><?php echo $Stock['LINE_ONE']; ?></td>
+                <td><?php echo $Stock['LINE_TWO']; ?></td>
+                <td><?php echo $Stock['POST_CODE']; ?></td>
+			</tr>
+          <?php endforeach; ?>
+		</tbody>
+	</table>
+    <button id="create-wholesaler">Create new Wholesaler</button>
+</div>
+<div id="wholesaler-form" title="Create new user">
+    <p class="validateWholesaleTips">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+		<label for="contact">Contact</label>
+		<input type="text" name="contact" id="contact" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="contactnumber">Contact Number</label>
+		<input type="text" name="contactnumber" id="contactnumber" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="addrlineone">Address Line One</label>
+    	<input type="text" name="addrlineone" id="addrlineone" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="addrlinetwo">Address Line Two</label>
+    	<input type="text" name="addrlinetwo" id="addrlinetwo" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="postcode">Post Code</label>
+    	<input type="text" name="postcode" id="postcode" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
