@@ -13,6 +13,22 @@ class SoftwareController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'Software.web';
 		
+		$this->loadProducts();
+		
         $this->addViewVariable('c', 'Software');
-}
+	}
+	
+	private function loadProducts() {
+		
+		$sql = "SELECT CODE FROM PRODUCT WHERE CATEGORY = 1";
+		$result = Database::execute($sql);
+		$result = $result->fetchAll();
+		
+		$products = array();
+		foreach ($result as $prod) {
+			$products[] = Product::createFromId($prod['CODE']);
+		}
+		$this->addViewVariable('products', $products);
+	}
+	
 }

@@ -1,59 +1,22 @@
 <div class="center_title_bar">Software</div>
+    <?php 
+    $products = $this->products() ?: array();
     
+    foreach ($products as $product):?>
         <div class="prod_box">
 
             <div class="center_prod_box">            
-                 <div class="product_title"><a href="details.html">Windows 7 Profetional</a></div>
-                 <div class="product_img"><a href="details.html"><a href="details.html"><img src="images/prosmall.png" alt="" title="" border="0" /></a></div>
-                 <div class="prod_price"><span class="reduce">&pound;102</span><span class="price"></span></div>                        
+                 <div class="product_title"><a href="./?c=Product&pid=<?php echo $product->getCode(); ?>"><?php echo $product->getTitle();?></a></div>
+                 <div class="product_img"><a href="./?c=Product&pid=<?php echo $product->getCode(); ?>"><img src="<?php echo $product->getPhotoPath(); ?>" alt="" title="" border="0" /></a></div>
+                 <div class="prod_price"><span class="reduce"><?php echo str_replace('GBP', '£', money_format('%=.2i', ($product->getUnitPrice())));?></span><span class="price"></span></div>                        
             </div>
            
             <div class="prod_details_tab">
-            <a href="buy.html" class="prod_buy">Add to Cart</a>          
-            <a href="details.html" class="prod_details">Details</a>            
-            </div>                     
-        </div>
+            
+            <a href="./?c=ShoppingCart&add&productid=<?php  echo $product->getCode(); ?>&quantity=1" class="prod_buy add-to-basket">Add to Cart</a>          
+            <a href="./?c=Product&pid=<?php echo $product->getCode(); ?>" class="prod_details">Details</a>            
+          </div>                     
+	</div>
+	<?php endforeach;?>
     
-    	<div class="prod_box">
-
-            <div class="center_prod_box">            
-                 <div class="product_title"><a href="details.html">Windows 7 Ultimate</a></div>
-                 <div class="product_img"><a href="details.html"><img src="images/ultimatesmall.png" alt="" title="" border="0" /></a></div>
-                 <div class="prod_price">&pound;135</div>                        
-            </div>
-           
-            <div class="prod_details_tab">
-            <a href="buy.html" class="prod_buy">Add to Cart</a>          
-            <a href="details.html" class="prod_details">Details</a>            
-            </div>                     
-        </div>    
- 
-
-     	<div class="prod_box">
-
-            <div class="center_prod_box">            
-                 <div class="product_title"><a href="details.html">Windows Office Home And Student</a></div>
-                 <div class="product_img"><a href="details.html"><img src="images/officesmall.png" alt="" title="" border="0" /></a></div>
-                 <div class="prod_price"><span class="reduce">&pound;84</span><span class="price"></span></div>                        
-            </div>
-           
-            <div class="prod_details_tab">
-            <a href="buy.html" class="prod_buy">Add to Cart</a>          
-            <a href="details.html" class="prod_details">Details</a>            
-            </div>                     
-        </div>
- 
-     	<div class="prod_box">
-
-            <div class="center_prod_box">            
-                 <div class="product_title"><a href="details.html">Windows 7 Home Priemium</a></div>
-                 <div class="product_img"><a href="details.html"><img src="images/homesmall.png" alt="" title="" border="0" /></a></div>
-                 <div class="prod_price"><span class="reduce">&pound;69</span><span class="price"></span></div>                        
-            </div>
-           
-            <div class="prod_details_tab">
-            <a href="buy.html" class="prod_buy">Add to Cart</a>          
-            <a href="details.html" class="prod_details">Details</a>            
-            </div>                     
-        </div>
-   </div><!-- end of center content -->
+    
