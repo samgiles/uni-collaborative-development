@@ -13,6 +13,6 @@ class SoftwareController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'Software.web';
 		
-       
+        $this->addViewVariable('c', 'Software');
 }
 }
