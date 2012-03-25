@@ -12,15 +12,15 @@ class ListProductsController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'products';
 
-		//$this->requiredAccess(AccessLevels::WAREHOUSE | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
-		$this->getAllWholesalers();
+		
+		$this->getAllProducts();
 		// Tell the view that we're an Index controller.
-		$this->addViewVariable("c", "Wholesaler");
+		$this->addViewVariable("c", "Product");
 	}
 
 
-	private function getAllWholesalers() {
-		$sqlStatement = 'SELECT  `WHOLESALER`.`CODE`,`WHOLESALER`.`NAME`, `WHOLESALER`.`CONTACT_NAME`, `WHOLESALER`.`CONTACT_NUMBER`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM WHOLESALER, ADDRESS WHERE `WHOLESALER`.`ADDRESS_CODE` = `ADDRESS`.`CODE`';
+	private function getAllProducts() {
+		$sqlStatement = 'SELECT  `PRODUCT`.`CODE`,`PRODUCT`.`PHOTOGRAPH`, `PRODUCT`.`STOCK_LEVEL`, `PRODUCT`.`REORDER_LEVEL`, `PRODUCT`.`DOWNLOAD_COUNT`, `PRODUCT`.`UNIT_PRICE`, `PRODUCT`.`WHOLESALER_CODE`,`PRODUCT`.`WHOLESALE_COST`,`PRODUCT`.`DESCRIPTION`,`PRODUCT`.`TITLE`,`PRODUCT`.`CATEGORY`, FROM PRODUCT;'
 		$result = Database::execute($sqlStatement);
 		$result = $result->fetchAll();
 		 
