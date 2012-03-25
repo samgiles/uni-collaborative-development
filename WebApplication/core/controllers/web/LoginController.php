@@ -24,25 +24,14 @@ class LoginController extends Controller {
     
     $this->_auth = new DBAuthenticate("SYSTEM_USER", "CODE", "USERNAME", "PASSWORD", array());  // Table name: SYSTEM_USER, Primary Key: CODE, Username attribute USERNAME , Password attrbute name PASSWORD. 
      
-    if ($containerController !== NULL) { // Used to redirect a user back to the previous page they were on when logging in.
-      $this->addViewVariable('setRedirect', $containerController);   
-    }
-     
     if (isset($_GET['logout'])) {
       $this->actionLogout();
       header("Location: " . $_SERVER['HTTP_REFERER']);
       exit(0);
     }
     
-    
     // check for an authenticated session already.
     $authInfo = $this->checkSession();
-    
-    if ($authInfo) {
-    	$this->_hasAuthenticated = true;
-    } else {
-    	$this->_hasAuthenticated = false;
-    }
     
     if (isset($_POST['uname']) && isset($_POST['pword'])) {
     	$authInfo = $this->doLogin($_POST['uname'], $_POST['pword'], $_SERVER['REMOTE_ADDR']);
@@ -58,14 +47,14 @@ class LoginController extends Controller {
     
     $this->_loginInformation = $authInfo;
 
-     
-    $this->addViewVariable('invalidDetails', $this->_invalidDetails); 
-    $this->addViewVariable('hasAuthenticated', $this->_hasAuthenticated);
-  	
   	if (isset($_GET['go-to'])) {
       header("Location: " . $_SERVER['HTTP_REFERER']);
       exit(0);
     }
+    
+    $this->addViewVariable('invalidDetails', $this->_invalidDetails);
+    $this->addViewVariable('hasAuthenticated', $this->_hasAuthenticated);
+     
   }
   
   private function actionLogout() {
@@ -100,8 +89,14 @@ class LoginController extends Controller {
           $authInfo = $loginDetails;
         }
       }
-    
-    return $authInfo;
+      
+      if ($authInfo) {
+      	$this->_hasAuthenticated = true;
+      } else {
+      	$this->_hasAuthenticated = false;
+      } 
+      
+      return $authInfo;
   }
 
   private function logout() {
