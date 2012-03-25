@@ -15,6 +15,8 @@ class SoftwareController extends Controller {
 		
 		$this->loadProducts();
 		
+		
+		$this->addViewVariable('pageTitle', "Software");
         $this->addViewVariable('c', 'Software');
 	}
 	
