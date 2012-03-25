@@ -14,6 +14,8 @@ class LoginController extends Controller {
  private $_auth;
  private $_redirect = false;
  
+ private $_loginInformation;
+ 
   public function __construct($containerController = NULL) {
     $this->_skin = 'default';
     $this->_content = 'login';
@@ -44,9 +46,9 @@ class LoginController extends Controller {
     }
     
     if (isset($_POST['uname']) && isset($_POST['pword'])) {
-    	$result = $this->doLogin($_POST['uname'], $_POST['pword'], $_SERVER['REMOTE_ADDR']);
+    	$authInfo = $this->doLogin($_POST['uname'], $_POST['pword'], $_SERVER['REMOTE_ADDR']);
     	
-    	if ($result) {
+    	if ($authInfo) {
     		$this->_hasAuthenticated = true;
     		$this->_invalidDetails = false;
     	} else {
@@ -54,6 +56,8 @@ class LoginController extends Controller {
     		$this->_invalidDetails = true;
     	}
     }
+    
+    $this->_loginInformation = $authInfo;
 
      
     $this->addViewVariable('invalidDetails', $this->_invalidDetails); 
@@ -105,5 +109,7 @@ class LoginController extends Controller {
     return $this->_hasAuthenticated;
   }
 
-
+  public function getLoginInformation() {
+  	return $this->_loginInformation;
+  }
 }

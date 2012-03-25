@@ -25,8 +25,8 @@ class LoginInformation {
 		return $this->_identity;
 	}
 	
-	public function getTag() {
-		return $this->_tag;
+	public function getTag($key) {
+		return $this->_tag[$key];
 	}
 	
 	public function addTag($key, $object) {
