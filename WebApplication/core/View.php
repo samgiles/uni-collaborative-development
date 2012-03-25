@@ -35,7 +35,7 @@ class View {
 	 * This example gets the dtd variable from the page model providing the dtd key has been set.
 	 * @param $name The name of the object.
 	 */
-	public function __call($name){
+	public function __call($name, $arguments){
 		if (!method_exists($this, $name)){
 			return $this->_controller->getPageModel()->$name();
 		}
