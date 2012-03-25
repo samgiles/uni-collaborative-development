@@ -3,7 +3,7 @@
  * Manages the authentication and logging in of a user, a LoginObserver can register to recieve notifications on a login action.
  * @author Samuel Giles
  * @version 1.1
- * @package UserAccounts
+ * @package user-accounts
  */
 class Login extends Observable {
 	

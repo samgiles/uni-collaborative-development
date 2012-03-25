@@ -1,4 +1,10 @@
 <?php
+/**
+ * Listens to the Login object and sets a tag,  ..
+ * @author Samuel Giles
+ * @package user-accounts
+ * @version 1.0
+ **/
 class SecurityObserver extends LoginObserver {
 	
 	public function handleUpdate(Login $login) {
