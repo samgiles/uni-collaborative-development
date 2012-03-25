@@ -43,7 +43,7 @@ class View {
 	
 	public function includeController($controllerName, $requestArray) {
 		$requests = array('c' => $controllerName) + $requestArray;
-		$controller = Dispatch::get($requests, array());
+		$controller = Dispatch::get($requests);
 		array_merge($_GET, $requests);
 		$view = new View($controller);
 		$view->render();

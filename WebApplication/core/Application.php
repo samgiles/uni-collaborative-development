@@ -23,7 +23,7 @@ class Application {
 	 */
 	private function __construct() {
 		// Dispatch the application.
-		$this->_controller = Dispatch::get($_GET, $_POST);
+		$this->_controller = Dispatch::get($_GET);
 		
 		// Create a view from the controller's association.
 		$this->_view = new View($this->_controller);
