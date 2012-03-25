@@ -1,6 +1,6 @@
 <?php
 /**
- * Listens to the Login object and sets a tag,  ..
+ * Listens to the Login object and sets a tag in the login information setting the required access.
  * @author Samuel Giles
  * @package user-accounts
  * @version 1.0
