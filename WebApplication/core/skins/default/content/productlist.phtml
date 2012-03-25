@@ -1,0 +1,71 @@
+<?php 
+/**
+ * A screen for viewing and adding Wholesale providers
+ * @author James Legros
+ * @package application-views-content
+ */
+?>
+<div id="users-contain" class="ui-widget">
+    <h1>Products:</h1>
+    <table id="users" class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+				<th>Code</th>
+				<th>Photograph</th>
+				<th>Stock Level</th>
+                <th>Reorder Level</th>
+                <th>Download Count</th>
+                <th>Unit Price</th>
+                <th>Wholesaler Code</th>
+                <th>Description</th>
+                <th>Title</th>
+                <th>Category</th>
+			</tr>
+		</thead>
+		<tbody>
+          <?php foreach ($this->products() as $products):?>
+			<tr>
+				<td><?php echo $products['CODE']; ?></td>
+    			<td><?php echo $products['PHOTOGRAPH']; ?></td>
+				<td><?php echo $products['STOCK_LEVEL']; ?></td>
+                <td><?php echo $products['REORDER_LEVEL']; ?></td>
+                <td><?php echo $products['DOWNLOAD_COUNT']; ?></td>
+                <td><?php echo $products['UNIT_PRICE']; ?></td>
+                <td><?php echo $products['WHOLESALER_CODE']; ?></td>
+                <td><?php echo $products['DESCRIPTION']; ?></td>
+                <td><?php echo $products['TITLE']; ?></td>
+                 <td><?php echo $products['CATEGORY']; ?></td>
+			</tr>
+          <?php endforeach; ?>
+		</tbody>
+	</table>
+    <button id="create-product">Create new Product</button>
+</div>
+<div id="product-form" title="Create new product">
+    <p class="validateProduct">All form fields are required.</p>
+
+	<form>
+	<fieldset>
+		<label for="code">Code</label>
+		<input type="text" name="code" id="code" class="text ui-widget-content ui-corner-all" />
+		<label for="photograph">Photograph</label>
+		<input type="text" name="photograph" id="photograph" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="stocklevel">Stock Level</label>
+		<input type="text" name="stocklevel" id="stocklevel" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="reorderlevel">Reorder Level</label>
+    	<input type="text" name="reorderlevel" id="reorderlevel" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="downloadcount">Download Count</label>
+    	<input type="text" name="downloadcount" id="downloadcount" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="unitprice">Unit Price</label>
+    	<input type="text" name="unitprice" id="unitprice" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="wholesalercode">Wholesaler Code</label>
+    	<input type="text" name="wholesalercode" id="wholesalercode" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="description">Description</label>
+    	<input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="title">Title</label>
+    	<input type="text" name="title" id="title" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="category">Category</label>
+    	<input type="text" name="category" id="category" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
