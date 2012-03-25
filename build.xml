@@ -129,6 +129,8 @@
    <arg path="${basedir}/WebApplication" />
    <arg value="--target" />
    <arg path="${basedir}/build/api" />
+   <arg value="--title" />
+   <arg path="'Collaborative Development (5CS012)'" />
   </exec>
  </target>
 	
