@@ -30,6 +30,10 @@ class LoginController extends Controller {
       exit(0);
     }
     
+    if ($containerController !== NULL) { // Used to redirect a user back to the previous page they were on when logging in.
+    	$this->addViewVariable('setRedirect', $containerController);
+    }
+    
     // check for an authenticated session already.
     $authInfo = $this->checkSession();
     
@@ -94,7 +98,7 @@ class LoginController extends Controller {
       	$this->_hasAuthenticated = true;
       } else {
       	$this->_hasAuthenticated = false;
-      } 
+      }
       
       return $authInfo;
   }
