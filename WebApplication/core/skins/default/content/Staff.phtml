@@ -37,6 +37,8 @@
                 <td><?php echo $Staff['LINE_TWO']; ?></td>
                 <td><?php echo $Staff['POST_CODE']; ?></td>
                 
+                <td><button>Edit</button> <button>Delete</button></td>
+                
 			</tr>
           <?php endforeach; ?>
 		</tbody>
@@ -51,28 +53,31 @@
         <label for="Code">Code</label>
 		<input type="text" code="Code" id="Code" class="text ui-widget-content ui-corner-all" />
         
-		<label for="First Name">Name</label>
+		<label for="First Name">First Name</label>
 		<input type="text" name="First Name" id="First name" class="text ui-widget-content ui-corner-all" />
+		
+		<label for="Last Name">Last Name</label>
+		<input type="text" name="Last Name" id="Last Name" class="text ui-widget-content ui-corner-all" />
         
-        <label for="Username">Name</label>
+        <label for="Username">Username</label>
 		<input type="text" name="Username" id="Username" class="text ui-widget-content ui-corner-all" />
         
-		<label for="Email">Contact</label>
+		<label for="Email">Email</label>
 		<input type="text" name="Email" id="Email" value="" class="text ui-widget-content ui-corner-all" />
         
 		<label for="Dept">Dept</label>
 		<input type="text" name="Dept" id="Dept" value="" class="text ui-widget-content ui-corner-all" />
        
-       <label for="Location">Location</label>
+        <label for="Location">Location</label>
     	<input type="text" name="Location" id="Location" value="" class="text ui-widget-content ui-corner-all" />
         
-        <label for="Line One">Password</label>
+        <label for="Line One">Line One</label>
     	<input type="text" name="Line One" id="Line One" value="" class="text ui-widget-content ui-corner-all" />
         
         <label for="Line Two">Line Two</label>
     	<input type="text" name="Line Two" id="Line Two" value="" class="text ui-widget-content ui-corner-all" />
         
-        <label for="postcode">Access Level</label>
+        <label for="Postcode">Postcode</label>
         <input type="text" name="Post Code<" id="Post Code" value="" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	</form>
