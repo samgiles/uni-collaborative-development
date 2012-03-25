@@ -1,0 +1,47 @@
+<script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+<style>
+.severe-error {
+	margin-top: 50px;
+	margin-left: 50px;
+}
+
+#errdesc {
+	width: 600px;
+	height: 200px;
+}
+</style>
+<script>
+function postForm() {
+	var theData = "errreport=true&errno=<?php echo urlencode($errno); ?>&errstr=<?php echo urlencode($errstr); ?>&errfile=<?php echo urlencode($errfile); ?>&errline=<?php echo urlencode($errline); ?>&erruri=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>";
+	$.ajax({
+			type: "POST",
+			url: "./?c=Index",
+			data: theData,
+			success: function() { /* Succeeded but user will have gone from here by now... */ }
+		});
+	return false;
+}
+</script>
+<div class="severe-error">
+<h2>Something went wrong :(</h2>
+<p><a id="go-back" href="#Go-Back?">Go back to the previous page</a></p>
+<p>Please describe what you were doing so we can squash our bugs as soon as possible!</p>
+<form action="./?c=Index" method="POST">
+<input id="errreport"   type="hidden" value="true" name="errreport" />
+<input id="errno"   type="hidden" value="<?php echo urlencode($errno); ?>" name="errno" />
+<input id="errstr"  type="hidden" value="<?php echo urlencode($errstr); ?>" name="errstr" />
+<input id="errfile" type="hidden" value="<?php echo urlencode($errfile); ?>" name="errfile" />
+<input id="errline" type="hidden" value="<?php echo urlencode($errline); ?>" name="errline" />
+<input id="erruri"  type="hidden" value="<?php echo urlencode($_SERVER['REQUEST_URI']);?>" name="erruri" />
+<textarea id="errdesc"name="errdesc"></textarea>
+<input id="report-error" type="submit" value="send" />
+</form>
+</div>
+<script>
+$('#go-back').click(function(e) {
+	e.preventDefault();
+	postForm();
+	history.back();
+	return false;
+});
+</script>
