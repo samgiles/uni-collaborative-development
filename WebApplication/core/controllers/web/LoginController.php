@@ -27,12 +27,10 @@ class LoginController extends Controller {
       $this->addViewVariable('setRedirect', $containerController);   
     }
      
-    if (isset($_GET['go-to'])) {
-      $this->_redirect = $_GET['go-to'];
-    }
-     
     if (isset($_GET['logout'])) {
       $this->actionLogout();
+      header("Location: " . $_SERVER['HTTP_REFERER']);
+      exit(0);
     }
     
     
@@ -62,7 +60,11 @@ class LoginController extends Controller {
      
     $this->addViewVariable('invalidDetails', $this->_invalidDetails); 
     $this->addViewVariable('hasAuthenticated', $this->_hasAuthenticated);
-    $this->addViewVariable('redirect', $this->_redirect);
+  	
+  	if (isset($_GET['go-to'])) {
+      header("Location: " . $_SERVER['HTTP_REFERER']);
+      exit(0);
+    }
   }
   
   private function actionLogout() {

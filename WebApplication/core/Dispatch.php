@@ -11,14 +11,17 @@ class Dispatch {
 	 * With the controller defined by the {URI}?c={controllerName}&{restOfQueryString}
 	 * @param  $requests  Typically the $_REQUESTS array.
 	 * @param $posts Typically the $_POST array
-	 * TODO Remove tightly coupled dependence on a query string - $_GET['c'] - in the determination of the controller.
 	 */
 	public static function get($requests, $posts){
 
 		if (isset($requests['c'])){
 			$controllerName = ((string)$requests['c']) . 'Controller';
-			return new $controllerName();
+			if (class_exists($controllerName, true)) {
+				return new $controllerName();
+			} else {
+				return new ErrorController();
+			}
 		}
-		return NULL; // TODO return 404 error controller.
+		return new IndexController(); // just default to this.
 	}
 }
