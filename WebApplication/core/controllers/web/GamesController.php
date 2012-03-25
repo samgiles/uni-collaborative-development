@@ -1,12 +1,12 @@
 <?php
 /**
- * The software page.
- * @author James Legros, Samuel Giles
+ * The games page.
+ * @author Sameul Giles
  * @package application-controllers
  * @subpackage web-controllers
  * @version 0.4
  */
-class SoftwareController extends Controller {
+class GamesController extends Controller {
     
     public function __construct() {
 		$this->_skin = 'default';
@@ -17,12 +17,12 @@ class SoftwareController extends Controller {
 		
 		
 		$this->addViewVariable('pageTitle', "Software");
-        $this->addViewVariable('c', 'Software');
+        $this->addViewVariable('c', 'Games');
 	}
 	
 	private function loadProducts() {
 		
-		$sql = "SELECT CODE FROM PRODUCT WHERE CATEGORY = 1";
+		$sql = "SELECT CODE FROM PRODUCT WHERE CATEGORY = 0";
 		$result = Database::execute($sql);
 		$result = $result->fetchAll();
 		
