@@ -1,4 +1,11 @@
 <?php
+/**
+ * Manages and Displays the checkout.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.4
+ */
 class CheckoutController extends Controller {
     
 	private $_cart;

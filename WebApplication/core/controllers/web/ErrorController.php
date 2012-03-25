@@ -1,4 +1,11 @@
 <?php
+/**
+ * A simple 404 error controller.
+ * @author Samuel Giles
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @todo Generalise for any error not just 404.
+ */
 class ErrorController extends Controller {
 	public function __construct() {
 		$this->_skin = 'default';

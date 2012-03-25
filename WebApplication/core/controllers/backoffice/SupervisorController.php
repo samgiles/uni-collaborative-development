@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * 
+ * @author Vishal Patel
+ * @package application-controllers
+ */
 class SupervisorController extends Controller {
     
     public function __construct() {

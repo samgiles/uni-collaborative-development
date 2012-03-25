@@ -2,7 +2,8 @@
 /**
  * Handles login and logout functionality and manages the session status of authenticated users.
  * @author Samuel Giles
- * @package controllers-web
+ * @package application-controllers
+ * @subpackage web-controllers
  */
 class LoginController extends Controller {
     

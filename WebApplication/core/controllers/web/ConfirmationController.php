@@ -1,4 +1,11 @@
 <?php
+/**
+ * Order Confirmation Screen.
+ * @author Hezekiah Lloyd Ball
+ * @package application-controllers
+ * @subpackage web-controllers
+ * @version 0.0.1 - Not included yet -> TODO Set up redirect in CheckoutController on successful payment and order update.
+ */
 class ConfirmationController extends Controller {
     
     public function __construct() {
