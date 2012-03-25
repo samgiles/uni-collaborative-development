@@ -24,6 +24,6 @@ class ListProductsController extends Controller {
 		$result = Database::execute($sqlStatement);
 		$result = $result->fetchAll();
 		 
-		$this->addViewVariable('wholesalers', $result);
+		$this->addViewVariable('products', $result);
 	}
 }
