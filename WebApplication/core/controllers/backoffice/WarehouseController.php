@@ -20,7 +20,7 @@ class WarehouseController extends Controller {
 	
 	
 	private function getAllWarehouse() {
-	  $sqlStatement =
+	  $sqlStatement = "";
 	  $result = Database::execute($sqlStatement);
 	  $result = $result->fetchAll();
 	  
@@ -29,4 +29,4 @@ class WarehouseController extends Controller {
 }
 
 /**
-      $sqlStatement NEEDS ADDING TO FUNCTION!!! *\
+      $sqlStatement NEEDS ADDING TO FUNCTION!!! */
