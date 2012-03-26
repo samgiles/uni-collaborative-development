@@ -27,3 +27,6 @@ class WarehouseController extends Controller {
 	  $this->addViewVariable('Warehouse', $result);
 	}
 }
+
+/**
+      $sqlStatement NEEDS ADDING TO FUNCTION!!! *\

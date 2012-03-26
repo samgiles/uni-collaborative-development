@@ -27,3 +27,6 @@ class SupervisorController extends Controller {
 	  $this->addViewVariable('Supervisor', $result);
 	}
 }
+
+/**
+      $sqlStatement NEEDS ADDING TO FUNCTION!!! *\
