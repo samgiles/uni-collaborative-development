@@ -10,7 +10,7 @@ class ListProductsController extends Controller {
 	public function __construct() {
 		$this->_skin = 'default';
 		$this->_layout = 'main';
-		$this->_content = 'products';
+		$this->_content = 'Products';
 
 		
 		$this->getAllProducts();
