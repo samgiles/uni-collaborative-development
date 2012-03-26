@@ -58,7 +58,7 @@ $authObject = new LoginController($this->c()); // This must be at the top ?>
                             <li><a href="#" id="login" class="nav right">Log In</a></li>
                         <?php else: ?>
                         	<?php if ($authObject->getLoginInformation()->getTag('access-level') !== AccessLevels::ANYONE): ?>
-                        	<li><a href="#" class="nav right">Staff</a></li>
+                        	<li><a href="./?c=BackOffice" class="nav right">Staff</a></li>
                         	<?php else:?>
                             <li><a href="#" onclick="alert('Need to Implement an account screen, remove this when implemented'); //REMOVE ONCLICK STUFF ON IMPLEMENTATION" class="nav right">My Account</a></li>
                             <li><a class="nav right" href="#" id="basket-button">Basket</a></li>

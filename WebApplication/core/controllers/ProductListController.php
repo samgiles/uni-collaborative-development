@@ -6,6 +6,8 @@ class ProductListController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'product';
         
+
+		
         if (isset($_GET['pid'])) {
           $product = Product::createFromId($_GET['pid']);
           $product = $this->addViewVariable('product', $product);
