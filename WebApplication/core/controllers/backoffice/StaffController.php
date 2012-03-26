@@ -1,4 +1,10 @@
 <?php
+/**
+ * Provides the interface for viewing the list of Warehouse.
+ * @author Vishal Patel
+ * @package application-controller
+ * @version 0.2
+ */
 class StaffController extends Controller {
     
     public function __construct() {
@@ -11,11 +17,12 @@ class StaffController extends Controller {
         // Tell the view that we're an Index controller.
 		$this->addViewVariable("c", "Staff");
         
-    } 
+    }
 	
 	private function getAllStaff() {
-	  $sqlStatement = 'SELECT  `st`.`CODE`,`su`.`F_NAME`, `su`.`L_NAME`, `su`.`USERNAME`, `su`.`EMAIL`, `OFFICE`.`DEPT`, `OFFICE`.`LOCATION`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM `SYSTEM_USER` su JOIN `STAFF` st ON `su`.`CODE` = `st`.`USER_CODE`,`OFFICE`,`ADDRESS WHERE `st`.`OFFICE_CODE` = `OFFICE`.`CODE` AND` ADDRESS`.`CODE` = `su`.`ADDRESS_CODE`';
-	  
+	  $sqlStatement = 'SELECT `st`.`CODE`, `su`.`F_NAME`, `su`.`L_NAME`, `su`.`USERNAME`, `su`.`EMAIL`, `OFFICE`.`DEPT`, `OFFICE`.`LOCATION`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM `SYSTEM_USER` su JOIN `STAFF` st ON `su`.`CODE` = `st`.`USER_CODE`, `OFFICE`, `ADDRESS` WHERE `st`.`OFFICE_CODE` = `OFFICE`.`CODE` AND `ADDRESS`.`CODE` = `su`.`ADDRESS_CODE`';
+	  $result = Database::execute($sqlStatement);
+	  $result = $result->fetchAll();
 	  /**
 			Vish
 			
@@ -60,7 +67,7 @@ class StaffController extends Controller {
 	   */
 	  $result = Database::execute($sqlStatement);
 	  $result = $result->fetchAll();
-	var_dump ($result);  
+
 	  $this->addViewVariable('Staff', $result);
 	
 	}

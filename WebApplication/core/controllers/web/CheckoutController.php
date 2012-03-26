@@ -40,7 +40,12 @@ class CheckoutController extends Controller {
     
     private function getDetails() {
       // Get the current shopping cart.
+      
+    	$sql = "SELECT SYS_USER_CODE FROM CUSTOMER WHERE CODE =" . $this->_cart->getCustomerCode();
+    	$result = Database::execute($sql);
+    	$result = $result->fetchAll();
 
+	  $this->addViewVariable('customer', User::getByCode($result[0]['SYS_USER_CODE']));
       $this->addViewVariable('notLoggedIn', $this->_cart->unavailable());
       $this->addViewVariable('cartItems', $this->_cart->getItems());
     }

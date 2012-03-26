@@ -3,6 +3,7 @@
  * A screen for viewing and adding Products
  * @author James Legros
  * @package application-views-content
+ * @version 0.9 - Added Javascript -- Sam
  */
 ?>
 <div id="users-contain" class="ui-widget">
@@ -19,7 +20,7 @@
                 <th>Wholesaler Code</th>
                 <th>Description</th>
                 <th>Title</th>
-                <th>Category</th>
+                <th>Details/Edit</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,22 +33,45 @@
                 <td><?php echo $products['DOWNLOAD_COUNT']; ?></td>
                 <td><?php echo $products['UNIT_PRICE']; ?></td>
                 <td><?php echo $products['WHOLESALER_CODE']; ?></td>
-                <td><?php echo $products['DESCRIPTION']; ?></td>
+                <td>
+                	<div id="desc<?php echo $products['CODE']; ?>" title="Description">
+                		<p><?php echo $products['DESCRIPTION']; ?> </p>
+					</div>
+					<button id="showdesc<?php echo $products['CODE']; ?>">View</button>
+					<script>
+						$(document).ready(function() {
+							$("#desc<?php echo $products['CODE']; ?>").dialog({
+								autoOpen: false,
+								height: 400,
+								width: 500,
+								modal: true,
+								buttons: {
+										"Close" : function(){
+												$(this).dialog("close");
+											}
+									}
+								});
+							$("#showdesc<?php echo $products['CODE']; ?>").button();
+							$("#showdesc<?php echo $products['CODE']; ?>").click(function() {
+								$("#desc<?php echo $products['CODE']; ?>").dialog("open");
+							})
+							
+							});
+					</script>
+           		</td>
                 <td><?php echo $products['TITLE']; ?></td>
-                 <td><?php echo $products['CATEGORY']; ?></td>
+                <td><a href="./?c=ProductStats&pid=<?php echo $products['CODE'];?>">Details / Edit</a></td>
 			</tr>
           <?php endforeach; ?>
 		</tbody>
 	</table>
-    <button id="create-product">Create new Product</button>
+    <button id="create-product" style="margin-top: 20px;">Create new Product</button>
 </div>
 <div id="product-form" title="Create new product">
     <p class="validateProduct">All form fields are required.</p>
 
 	<form>
 	<fieldset>
-		<label for="code">Code</label>
-		<input type="text" name="code" id="code" class="text ui-widget-content ui-corner-all" />
 		<label for="photograph">Photograph</label>
 		<input type="text" name="photograph" id="photograph" value="" class="text ui-widget-content ui-corner-all" />
 		<label for="stocklevel">Stock Level</label>
@@ -64,11 +88,25 @@
     	<input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all" />
         <label for="title">Title</label>
     	<input type="text" name="title" id="title" value="" class="text ui-widget-content ui-corner-all" />
-        <label for="category">Category</label>
+        <label for="category">Category</label><!-- Should be a drop down -->
     	<input type="text" name="category" id="category" value="" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	</form>
 </div>
+<script>
+	$(document).ready(function(){
+				
+			$("#product-form").dialog({
+					autoOpen: false
+					
+				});
 
+			$("#create-product").click(function(){
+					$("#product-form").dialog("open");
+				}).button();
+			
+
+		});
+</script>
              
                 
