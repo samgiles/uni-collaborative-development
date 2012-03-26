@@ -3,7 +3,7 @@ class StaffController extends Controller {
     
     public function __construct() {
     	$this->_skin = 'default';
-		$this->_layout = 'main2';
+		$this->_layout = 'main';
 		$this->_content = 'Staff';
 		
 		$this->requiredAccess(AccessLevels::GENERALSTAFF | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
@@ -15,7 +15,8 @@ class StaffController extends Controller {
 	
 	private function getAllStaff() {
 	  $sqlStatement = 'SELECT `st`.`CODE`, `su`.`F_NAME`, `su`.`L_NAME`, `su`.`USERNAME`, `su`.`EMAIL`, `OFFICE`.`DEPT`, `OFFICE`.`LOCATION`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM `SYSTEM_USER` su JOIN `STAFF` st ON `su`.`CODE` = `st`.`USER_CODE`, `OFFICE`, `ADDRESS` WHERE `st`.`OFFICE_CODE` = `OFFICE`.`CODE` AND `ADDRESS`.`CODE` = `su`.`ADDRESS_CODE`';
-	  
+	  $result = Database::execute($sqlStatement);
+	  $result = $result->fetchAll();
 	  /**
 			Vish
 			
