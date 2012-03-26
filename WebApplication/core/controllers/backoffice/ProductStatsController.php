@@ -40,9 +40,15 @@ class ProductStatsController extends Controller {
 		
 		if (isset($_POST['reorder'])) {
 			// Run wholesale order..
+			$this->productReorder($_POST['reorder']);
 		}
 		
 		$this->_product->save();
+		
+	}
+	
+	private function productReorder($number) {
+		// 
 		
 	}
 	
