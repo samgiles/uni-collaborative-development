@@ -38,7 +38,7 @@
 <div id="wholesaler-form" title="Create new user">
     <p class="validateWholesaleTips">All form fields are required.</p>
 
-	<form>
+	<form method="POST" action="./?c=Wholesaler">
 	<fieldset>
 		<label for="name">Name</label>
 		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
@@ -52,6 +52,7 @@
     	<input type="text" name="addrlinetwo" id="addrlinetwo" value="" class="text ui-widget-content ui-corner-all" />
         <label for="postcode">Post Code</label>
     	<input type="text" name="postcode" id="postcode" value="" class="text ui-widget-content ui-corner-all" />
+    	<input type="submit" value="Add" />
 	</fieldset>
 	</form>
 </div>
