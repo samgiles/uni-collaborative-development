@@ -17,6 +17,8 @@ class ProductStatsController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'productstats.backoffice';
 		
+		$this->requiredAccess(AccessLevels::GENERALSTAFF | AccessLevels::Admin | AccessLevels::SUPERVISOR);
+		
 		if (isset($_GET['pid'])){
 			$this->_product = Product::createFromId($_GET['pid']);
 			$this->addViewVariable('product', $this->_product);
