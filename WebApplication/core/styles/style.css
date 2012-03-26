@@ -357,8 +357,9 @@ padding:10px 0 0 60px;
 
 /* q is the Search input box */
 #q {  
-  width: 400px;
+  width: 200px;
   display: inline;
+  margin-left: 100px;
 }
 
 
