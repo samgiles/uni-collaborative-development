@@ -211,7 +211,7 @@ class User {
 	 */
 	public static function getByCode($code) {
 		$pdostatement = Database::execute('SELECT * FROM SYSTEM_USER WHERE CODE = ' . $code);
-		
+
 		if ($pdostatement == false) {
 			$this->_logger->logController("User::getUserByCode($code) returned false.", 'Model::User', 'Model - STATIC');
 			throw new Exception("Query failed to execute correctly.");
@@ -265,11 +265,11 @@ class User {
 		
 		$user->_firstname    = $array['F_NAME'];
 		$user->_lastname     = $array['L_NAME'];
-		$user->_phonenumber  = $array['PHONE_NUMER'];
+		//$user->_phonenumber  = $array['PHONE_NUMER'];
 		$user->_username     = $array['USERNAME'];
 		$user->_passwordHash = md5($array['PASSWORD']);
 		$user->_email		 = $array['EMAIL'];
-		$user->_address 	 = $array['ADDRESS_CODE'];
+		$user->_address 	 = Address::getAddressByCode($array['ADDRESS_CODE']);
 		
 		return $user;
 	}
