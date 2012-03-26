@@ -8,7 +8,7 @@
             <div class="center_prod_box">            
                  <div class="product_title"><a href="./?c=Product&pid=<?php echo $product->getCode(); ?>"><?php echo $product->getTitle();?></a></div>
                  <div class="product_img"><a href="./?c=Product&pid=<?php echo $product->getCode(); ?>"><img src="<?php echo $product->getPhotoPath(); ?>" alt="" title="" border="0" /></a></div>
-                 <div class="prod_price"><span class="reduce"><?php echo str_replace('GBP', '£', money_format('%=.2i', ($product->getUnitPrice())));?></span><span class="price"></span></div>                        
+                 <div class="prod_price"><span class="reduce"><?php echo str_replace('GBP', '£', money_format('%=.2i', ($product->getUnitPrice())))£;?></span><span class="price"></span></div>                        
             </div>
            
             <div class="prod_details_tab">
