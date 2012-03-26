@@ -36,3 +36,4 @@ class WholesalerController extends Controller {
 							"values({$_POST['name']}, {$_POST['contact']}, {$_POST['contactnumber']}, {$_POST['addrlineone']},{$_POST['addrline2']}, {$_POST['postcode]})";
 	        Database::execute($sqlStatement);
     }
+}
