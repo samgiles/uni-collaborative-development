@@ -95,6 +95,10 @@ class Address {
 	
 	public static function getAddressByCode($code) {
 		
+		if ($code instanceof Address) {
+			return $code;
+		}
+		
 		$pdostatement = Database::execute('SELECT * FROM ADDRESS WHERE CODE = ' . $code);
 		
 		if ($pdostatement == false) {
