@@ -33,7 +33,7 @@ class WholesalerController extends Controller {
 
     private function addWholesaler() {
     		$sqlStatement = 'INSERT INTO `WHOLESALER`.`CODE`,`WHOLESALER`.`NAME`, `WHOLESALER`.`CONTACT_NAME`, `WHOLESALER`.`CONTACT_NUMBER`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM WHOLESALER, ADDRESS WHERE `WHOLESALER`.`ADDRESS_CODE` = `ADDRESS`.`CODE`' .
-							"values({$_POST['name']}, {$_POST['contact']}, {$_POST['contactnumber']}, {$_POST['addrlineone']},{$_POST['addrline2']}, {$_POST['postcode]})";
+							"values({$_POST['name']}, {$_POST['contact']}, {$_POST['contactnumber']}, {$_POST['addrlineone']},{$_POST['addrline2']}, {$_POST['postcode']})";
 	        Database::execute($sqlStatement);
     }
 }
