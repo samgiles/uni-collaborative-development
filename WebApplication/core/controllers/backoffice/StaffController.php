@@ -67,7 +67,7 @@ class StaffController extends Controller {
 	   */
 	  $result = Database::execute($sqlStatement);
 	  $result = $result->fetchAll();
-	var_dump ($result);  
+
 	  $this->addViewVariable('Staff', $result);
 	
 	}
