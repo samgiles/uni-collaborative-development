@@ -1,4 +1,10 @@
 <?php
+/**
+ * Provides the interface for viewing the list of Warehouse.
+ * @author Vishal Patel
+ * @package application-controller
+ * @version 0.2
+ */
 class StaffController extends Controller {
     
     public function __construct() {
