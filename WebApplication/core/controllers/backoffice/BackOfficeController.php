@@ -5,6 +5,8 @@ class BackOfficeController extends Controller {
 		$this->_content = 'backoffice';
 		$this->_layout = 'main';
 		
+		$this->requiredAccess(AccessLevels::ADMIN | AccessLevels::GENERALSTAFF | AccessLevels::SUPERVISOR | AccessLevels::WAREHOUSE);
+		
 		$this->addViewVariable('c', 'BackOffice');
 	}
 }
