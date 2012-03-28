@@ -45,6 +45,7 @@ class View {
 	 * Magic method if the method doesn't exist we'll call the method in the pagemodel.  Allows us to use the following form in the View fragments:  <code><?php echo $this->dtd(); ?></code>
 	 * This example gets the dtd variable from the page model providing the dtd key has been set.
 	 * @param $name The name of the object.
+	 * @param $arguments Not used in this implmentation, but required by the php engine.
 	 */
 	public function __call($name, $arguments){
 		if (!method_exists($this, $name)){
