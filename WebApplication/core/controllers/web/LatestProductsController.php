@@ -4,8 +4,7 @@
  * @author Samuel Giles
  * @package application-controllers
  * @subpackage web-controllers
- * @version 0.1
- * @todo Include another product.
+ * @version 0.1.
  */
 class LatestProductsController extends Controller {
  

@@ -2,7 +2,7 @@
 /**
  * Used for registering new System Users.
  * @author Samuel Giles, Vishal Patel
- * @package applciation-controllers
+ * @package application-controllers
  * @subpackage web-controllers
  * @version 1.2
  */
