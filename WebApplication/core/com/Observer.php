@@ -7,5 +7,9 @@
  * @version 0.2
  */
 abstract class Observer {
+	/**
+	 * Updates an observer with the new Observable.
+	 * @param Observable $subject the subject that this Observer is observing.
+	 */
 	abstract public function update (Observable $subject);
 }
