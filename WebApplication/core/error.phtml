@@ -1,3 +1,14 @@
+<?php 
+/**
+ * This script can be used to present to users a helpful error page with reporting capabilities, this form has a "go back to previous page" link and an error report form that can
+ * be used to capture user information about the error they may have encountered.
+ * If the user decides not to enter information about the error, if they click the "go back" link, an HTTP request is fired off via ajax with the error details so that they can be reported,
+ * this allows us to easily attach some extra user input information about an error with little back-end overhead.
+ * @author Samuel Giles
+ * @package core
+ * @version 0.2
+ */
+?>
 <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
 <style>
 .severe-error {
@@ -11,6 +22,9 @@
 }
 </style>
 <script>
+/**
+ * Post the form with the error data.
+ */
 function postForm() {
 	var theData = "errreport=true&errno=<?php echo urlencode($errno); ?>&errstr=<?php echo urlencode($errstr); ?>&errfile=<?php echo urlencode($errfile); ?>&errline=<?php echo urlencode($errline); ?>&erruri=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>";
 	$.ajax({
@@ -38,6 +52,9 @@ function postForm() {
 </form>
 </div>
 <script>
+/**
+ * Post the form before going back in the browser history.
+ */
 $('#go-back').click(function(e) {
 	e.preventDefault();
 	postForm();
