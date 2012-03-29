@@ -7,6 +7,8 @@
  */                
  
 $getid = $_GET['id'];
+$geteid = $_GET['eid'];
+
 
 if($getid)
 {
@@ -18,10 +20,16 @@ Database::execute($sql);
 
 }
  
- $geteid = $_GET['eid'];
+ 
 
 if($geteid)
 {
+    
+
+      //$sql1 = 'SELECT * FROM ``';
+//Database::execute($sql1);
+
+
     
  echo "<br><br>Editing<br><br><br>
  
@@ -65,7 +73,7 @@ if($geteid)
  
  
  
- die;
+ 
  
  
 }
