@@ -6,19 +6,7 @@
  * @version 0.2
  */
  
- 
-$getid = $_GET['id'];
 
-if($getid)
-{
-
-
-$sql = "DELETE FROM STAFF WHERE CODE='{$getid}' LIMIT 1";
-
-Database::execute($sql);
-
-}
- 
 class StaffController extends Controller {
     
     public function __construct() {
