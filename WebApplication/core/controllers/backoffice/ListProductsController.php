@@ -10,8 +10,8 @@ class ListProductsController extends Controller {
 	public function __construct() {
 		$this->_skin = 'default';
 		$this->_layout = 'main';
-		$this->_content = 'products';
-
+		$this->_content = 'Products';
+		$this->requiredAccess(AccessLevels::GENERALSTAFF | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
 		
 		$this->getAllProducts();
 		// Tell the view that we're an Index controller.

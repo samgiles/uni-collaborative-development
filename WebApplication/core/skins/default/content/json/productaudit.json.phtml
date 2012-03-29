@@ -1,3 +1,30 @@
+<?php 
+/**
+ * This represents some data that can be associated from a start date.
+ * 
+ * i.e. The length of the data array is the range of days, therefore the following JSON representation:
+ * 
+ * {
+ * 	startDate: 10,
+ * 	month: 1,
+ *  year: 2012
+ *  data: [100, 238, 2397]
+ * }
+ * 
+ * This data will typically represent values tied into dates therefore:
+ * 
+ * 10/01/2012 = 100, 
+ * 11/01/2012 = 238, 
+ * 13/01/2012 = 2397
+ * 
+ * Notice how the date range is specified by the length of the data array and is not explicit.
+ * 
+ * @author Samuel Giles
+ * @package content-json
+ * @subpackage content
+ * @version 0.3
+ */
+?>
 {
 	"startDate": <?php echo (int)$this->startDate(); ?>,
 	"month": <?php echo (int)$this->startMonth(); ?>,

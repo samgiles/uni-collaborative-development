@@ -12,15 +12,15 @@ class SupervisorController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'Supervisor';
 		
-		$this->requiredAccess(AccessLevels::WAREHOUSE | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
+		$this->requiredAccess(AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
         $this->getAllSupervisor();
-        // Tell the view that we're an Index controller.
+        // Tell the view that we're a Supervisor controller.
 		$this->addViewVariable("c", "Supervisor");
 	}
 	
 	
 	private function getAllSupervisor() {
-	  $sqlStatement =
+	  $sqlStatement = "";
 	  $result = Database::execute($sqlStatement);
 	  $result = $result->fetchAll();
 	  
@@ -28,5 +28,4 @@ class SupervisorController extends Controller {
 	}
 }
 
-/**
-      $sqlStatement NEEDS ADDING TO FUNCTION!!! *\
+/** $sqlStatement NEEDS ADDING TO FUNCTION!!! */

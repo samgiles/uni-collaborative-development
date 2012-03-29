@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Provides the user interface with feedback related to the registration process.
+ * @author Samuel Giles
+ * @package content-json
+ * @subpackage content
+ * @version 0.1
+ */
+?>
 {
   "usernameTaken": <?php echo ($this->usernameTaken()) ? "true" : "false"; ?>,
   "success"		 : <?php echo ($this->success()) ? "true" : "false";?>

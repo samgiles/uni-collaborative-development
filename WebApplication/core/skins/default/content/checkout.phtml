@@ -11,6 +11,9 @@
  */
 $cart = $this->cartItems(); 
 $total = 0;
+
+$customer = $this->customer();
+
 ?>
        <div class="center_title_bar"><center>Checkout</center></div>
     
@@ -18,7 +21,12 @@ $total = 0;
 
             <div class="center_prod_box">            
                  <div class="product_title">Address to deliver to</div>
-                 <div class="prod_price"> <span class="price"><p>Example name</p><p>01 Example way</p><p>Example</p><p>Example City</p><p>Example postcode</p>
+                 <div class="prod_price"> <span class="price">
+                 <p>
+                 <?php echo $customer->getFirstname() . " " . $customer->getLastname(); ?></p>
+                 <p><?php echo $customer->getAddress()->getLineOne(); ?></p>
+                 <p><?php echo $customer->getAddress()->getLineTwo(); ?></p>
+                 <p><?php echo $customer->getAddress()->getPostcode(); ?></p>
     			 </span></div>                        
             </div>               
         </div>

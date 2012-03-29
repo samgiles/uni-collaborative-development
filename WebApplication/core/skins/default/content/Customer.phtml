@@ -2,7 +2,9 @@
 /**
  * A screen for viewing and adding Customer
  * @author Vishal Patel
- * @package application-views-content
+ * @package application-views
+ * @subpackage application-views-content
+ * @version 0.2
  */                
 ?>
 <div id="users-contain" class="ui-widget">
@@ -16,33 +18,23 @@
                 <th>Last Name</th>
                 <th>Phone Number</th>
                 <th>Email</th>
-                <th>Location</th>
                 <th>Line One</th>
                 <th>Line Two</th>
                 <th>Post Code</th>
-                <th>Card Name</th>
-                <th>Payment Account Number</th>
-                <th>Expiry Date</th>
-                <th></th>
 			</tr>
 		</thead>
 		<tbody>
-		<?php var_dump($this->Staff()); ?>
-          <?php foreach ($this->Staff() as $Staff):?>
+          <?php foreach ($this->Customer() as $Customer):?>
 			<tr>
-				<td><?php echo $Staff['CODE']; ?></td>
-                <td><?php echo $Staff['USERNAME']; ?></td>
-    			<td><?php echo $Staff['F_NAME']; ?></td>
-                <td><?php echo $Staff['L_NAME']; ?></td>
-                <td><?php echo $Staff['PHONE_NUMBER']; ?></td>
-                <td><?php echo $Staff['EMAIL']; ?></td>
-                <td><?php echo $Staff['LOCATION']; ?></td>
-                <td><?php echo $Staff['LINE_ONE']; ?></td>
-                <td><?php echo $Staff['LINE_TWO']; ?></td>
-                <td><?php echo $Staff['POST_CODE']; ?></td>
-                <td><?php echo $Staff['CARD_NAME']; ?></td>
-                <td><?php echo $Staff['P_ACCOUNT_DATE']; ?></td>
-                <td><?php echo $Staff['EXPIRY_DATE']; ?></td>
+				<td><?php echo $Customer['CODE']; ?></td>
+                <td><?php echo $Customer['USERNAME']; ?></td>
+    			<td><?php echo $Customer['F_NAME']; ?></td>
+                <td><?php echo $Customer['L_NAME']; ?></td>
+                <td><?php echo $Customer['PHONE_NUMBER']; ?></td>
+                <td><?php echo $Customer['EMAIL']; ?></td>
+                <td><?php echo $Customer['LINE_ONE']; ?></td>
+                <td><?php echo $Customer['LINE_TWO']; ?></td>
+                <td><?php echo $Customer['POST_CODE']; ?></td>
                 <td><button>Edit</button> <button>Delete</button></td>
                 
 			</tr>

@@ -16,7 +16,7 @@ class GamesController extends Controller {
 		$this->loadProducts();
 		
 		
-		$this->addViewVariable('pageTitle', "Software");
+		$this->addViewVariable('pageTitle', "Games");
         $this->addViewVariable('c', 'Games');
 	}
 	

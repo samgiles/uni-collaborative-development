@@ -76,7 +76,7 @@ abstract class Controller {
       $level = $login->getTag('access-level');
       
       $hasPerms = $accessLevel & $level;  // Bitwise AND
-      if ($hasPerms == $accessLevel) {
+      if ($hasPerms != 0) {
         // OK!
         return true;
       } else {

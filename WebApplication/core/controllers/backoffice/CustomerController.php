@@ -20,7 +20,7 @@ class CustomerController extends Controller {
 	
 	
 	private function getAllCustomer() {
-	  $sqlStatement =
+      $sqlStatement = 'SELECT `CUSTOMER`.`CODE`,`su`.`USERNAME`, `su`.`F_NAME`, `su`.`L_NAME`, `su`.`PHONE_NUMBER`, `su`.`EMAIL`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE`  FROM `SYSTEM_USER` su JOIN `CUSTOMER` ON `su`.`CODE` = `CUSTOMER`.`SYS_USER_CODE`, `ADDRESS` WHERE `ADDRESS`.`CODE` = `su`.`ADDRESS_CODE`';
 	  $result = Database::execute($sqlStatement);
 	  $result = $result->fetchAll();
 	  

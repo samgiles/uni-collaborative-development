@@ -17,6 +17,8 @@ class ProductStatsController extends Controller {
 		$this->_layout = 'main';
 		$this->_content = 'productstats.backoffice';
 		
+		$this->requiredAccess(AccessLevels::GENERALSTAFF | AccessLevels::ADMIN | AccessLevels::SUPERVISOR);
+		
 		if (isset($_GET['pid'])){
 			$this->_product = Product::createFromId($_GET['pid']);
 			$this->addViewVariable('product', $this->_product);
@@ -38,9 +40,15 @@ class ProductStatsController extends Controller {
 		
 		if (isset($_POST['reorder'])) {
 			// Run wholesale order..
+			$this->productReorder($_POST['reorder']);
 		}
 		
 		$this->_product->save();
+		
+	}
+	
+	private function productReorder($number) {
+		// 
 		
 	}
 	

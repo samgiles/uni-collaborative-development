@@ -4,8 +4,7 @@
  * @author Samuel Giles
  * @package application-controllers
  * @subpackage web-controllers
- * @version 0.1
- * @todo Include another product.
+ * @version 0.1.
  */
 class LatestProductsController extends Controller {
  
@@ -15,7 +14,7 @@ class LatestProductsController extends Controller {
   $this->_content = 'latestproducts';
   
   // Ideally we need to load from database some random titles.
-  $this->addViewVariable('products', array(0 => Product::createFromId(1), 1 => Product::createFromId(2))); // $product is typeof Product.
+  $this->addViewVariable('products', array(0 => Product::createFromId(2), 1 => Product::createFromId(3), 2 => Product::createFromId(4))); // $product is typeof Product.
  }
     
     

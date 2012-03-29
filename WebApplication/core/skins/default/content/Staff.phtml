@@ -2,7 +2,8 @@
 /**
  * A screen for viewing and adding Staff
  * @author Vishal Patel
- * @package application-views-content
+ * @package application-views
+ * @subpackage application-views-content
  */                
  
  
@@ -27,7 +28,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?php var_dump($this->Staff()); ?>
           <?php foreach ($this->Staff() as $Staff):?>
 			<tr>
 				<td><?php echo $Staff['CODE']; ?></td>
