@@ -20,8 +20,9 @@ class ShoppingCart {
 	private $_logger;
 	
 	/**
-	 * If the customer is logged in, then this will represent the customer code, if the user is not logged in then this will be NULL.
+	 * This is where the customers code be entered to identify customer.
 	 */
+     
 	public $_customerCode;
 	
 	/**

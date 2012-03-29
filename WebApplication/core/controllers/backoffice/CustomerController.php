@@ -27,3 +27,6 @@ class CustomerController extends Controller {
 	  $this->addViewVariable('Customer', $result);
 	}
 }
+
+/**
+      $sqlStatement NEEDS ADDING TO FUNCTION!!! *\

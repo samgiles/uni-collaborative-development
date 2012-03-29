@@ -4,15 +4,39 @@
  * @author Samuel Giles
  * @package application-models
  */
+ 
+         /**
+	 * Logging object.
+	 * @var Logger
+	 */
+     
 class Address {
-	
+    
+	    /**
+	 * Logging object.
+	 * @var Logger
+	 */
 	private $_logger;
-	
+	    /**
+        *This is where the code from
+        */
 	private $_code; // PK
+    
+        /**
+        *This is where
+        */
+    
 	private $_lineone;
+    
+            /**
+        *This is where the code from
+        */
+        
 	private $_linetwo;
+    
 	private $_postcode;
 	
+    
 	public function __construct() {
 		$this->_logger = Logger::GetLogger();
 		$this->_code = null;

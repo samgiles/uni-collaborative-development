@@ -5,17 +5,25 @@
  * @package application-models
  */
 class User {
+    
+    ////where your login is saved////////
 	
 	private $_logger;
 	
 	private $_code; // PK
 	
 	private $_firstname;
-	private $_lastname;
-	private $_phonenumber;
-	private $_username;
-	private $_passwordHash;
-	private $_email;
+	
+    private $_lastname;
+	
+    private $_phonenumber;
+	
+    private $_username;
+	
+    private $_passwordHash;
+	
+    private $_email;
+    
 	private $_address; // Address primarykey.
 	
 	/**

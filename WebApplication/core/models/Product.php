@@ -7,19 +7,58 @@
 class Product {
     
     private $_code;
+    
+        /**
+	 * 
+	 */
     private $_photoPath;
+    
+            /**
+     * 
+	 */
     private $_stockLevel;
-    private $_unitPrice;
-    private $_description;
+    
+            /**
+     * 
+	 */
+     private $_unitPrice;
+    
+            /**
+     * 
+	 */
+     private $_description;
+    
+            /**
+     * 
+	 */
     private $_title;
+    
+            /**
+     * 
+	 */
     
     // Back Office stuff: i.e. Customers don't need to touch this.
     private $_reorderLevel;
+    
+            /**
+     * 
+	 */
     private $_downloadCount;
+    
+            /**
+     * 
+	 */
     private $_wholesalerCode;
-    private $_wholesaleCost;
 
-    private $_logger;
+            /**
+     * 
+	 */
+    private $_wholesaleCost;
+    
+            /**
+     * 
+	 */
+     private $_logger;
     
     private function __construct($recordId = NULL) {
      $this->_logger = Logger::getLogger();
@@ -35,6 +74,10 @@ class Product {
     public static function createFromId($recordId) {
      return new Product($recordId);   
     }
+    
+            /**
+     * This
+	 */
     
     public static function createFromTuple($dbTuple) {
       $prod = new Product();
@@ -90,31 +133,45 @@ class Product {
       $this->_wholesalerCode = $result[0]['WHOLESALER_CODE'];
       $this->_wholesaleCost = $result[0]['WHOLESALE_COST'];
     }
-    
+                /**
+     * sets the Decription
+     */
     public function setDescription($description) {
     	$this->_description = $description;
     }
-    
+                    /**
+     * sets the ReorderLevel
+     */
     public function setReorderLevel($level) {
     	$this->_reorderLevel = $level;
     } 
-    
+                        /**
+     * sets the PhotoPath
+     */
     public function setPhotoPath($path) {
     	$this->_photoPath = $path;
     }
-    
+                            /**
+     * sets the StockLevel
+     */
     public function setStockLevel($level) {
     	$this->_stockLevel = $level;
     }
-    
+                            /**
+     * sets the UnitPrice
+     */
     public function setUnitPrice($price) {
     	$this->_unitPrice = $price;
     }
-    
+                                /**
+     * sets the Code
+     */
     public function getCode() {
       return $this->_code;   
     }
-    
+                                    /**
+     * sets the ReorderLevel
+     */
     public function getReorderLevel() {
       return $this->_reorderLevel;
     }

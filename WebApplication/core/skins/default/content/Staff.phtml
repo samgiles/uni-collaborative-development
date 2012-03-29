@@ -38,7 +38,7 @@
                 <td><?php echo $Staff['LINE_TWO']; ?></td>
                 <td><?php echo $Staff['POST_CODE']; ?></td>
                 
-                <td><button>Edit</button> <button>Delete</button></td>
+                <td><button>Edit</button> <button><a href="?c=Staff&id=<? echo  $Staff['CODE']; ?>">Delete</a></button></td>
                 
 			</tr>
           <?php endforeach; ?>
