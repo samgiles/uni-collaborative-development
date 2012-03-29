@@ -21,24 +21,6 @@ Database::execute($sql);
 }
  
  
-if($geteid)
-{
-    
-
-      //$sql1 = 'SELECT * FROM ``';
-//Database::execute($sql1);
-
-
-        private function getAllProducts() {
-		$sqlStatement = 'SELECT  * FROM PRODUCT';
-		$result = Database::execute($sqlStatement);
-		$result = $result->fetchAll();
-		 
-		$this->addViewVariable('products', $result);
-	}
-
- die;
-}
 
  
  
