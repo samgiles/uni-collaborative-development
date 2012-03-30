@@ -2,8 +2,8 @@
 /**
  * Provides the interface for viewing the list of Warehouse.
  * @author Vishal Patel
- * @package application-controller
- * @subpackage application-controller-backoffice
+ * @package application_controller
+ * @subpackage application_controller-backoffice
  * @version 0.2
  */
 class WarehouseController extends Controller {

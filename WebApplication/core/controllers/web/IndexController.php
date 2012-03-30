@@ -2,8 +2,8 @@
 /**
  * The main index page.
  * @author Samuel Giles
- * @package application-controller
- * @subpackage application-controller-web
+ * @package application_controller
+ * @subpackage application_controller-web
  * @version 0.4
  */
 class IndexController extends Controller {

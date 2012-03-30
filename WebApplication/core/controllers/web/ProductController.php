@@ -2,8 +2,8 @@
 /**
  * Used for the display of a product page.
  * @author Samuel Giles
- * @package application-controller
- * @subpackage application-controller-web
+ * @package application_controller
+ * @subpackage application_controller-web
  * @version 0.3
  */
 class ProductController extends Controller {

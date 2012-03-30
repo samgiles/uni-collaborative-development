@@ -2,8 +2,8 @@
 /**
  * Displays information of a product, providing an interface for the viewing of sales figures and and interface to edit product details.
  * @author Samuel Giles
- * @package application-controller
- * @subpackage application-controller-backoffice
+ * @package application_controller
+ * @subpackage application_controller-backoffice
  */
 class ProductStatsController extends Controller {
 

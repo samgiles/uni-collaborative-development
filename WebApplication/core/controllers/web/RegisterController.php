@@ -2,8 +2,8 @@
 /**
  * Used for registering new System Users.
  * @author Samuel Giles, Vishal Patel
- * @package application-controller
- * @subpackage application-controller-web
+ * @package application_controller
+ * @subpackage application_controller-web
  * @version 1.2
  */
 class RegisterController extends Controller {
