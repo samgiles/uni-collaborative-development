@@ -3,6 +3,7 @@
  * A mock controller, the name is irrelevant.
  * @author Samuel Giles
  * @package unit-tests
+ * @subpackage unit-tests-mockobjects
  */
 class AnObscureController extends Controller {
 }
@@ -11,6 +12,7 @@ class AnObscureController extends Controller {
  * A mock controller.
  * @author Samuel Giles
  * @package unit-tests
+ * @subpackage unit-tests-mockobjects
  */
 class IndexController extends Controller {
 }

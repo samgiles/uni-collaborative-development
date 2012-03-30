@@ -1,4 +1,10 @@
 <?php
+/**
+ * Bootstrap script that sets up PHPUnit
+ * @author Samuel Giles
+ * @package unit-tests
+ */
+
 $dn = dirname(__FILE__);
 
 $psdn = PATH_SEPARATOR . $dn; // Path separator and dn

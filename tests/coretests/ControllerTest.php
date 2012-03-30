@@ -3,6 +3,7 @@
  * A mock controller used for testing the controller.
  * @author Samuel Giles
  * @package unit-tests
+ * @subpackage unit-tests-mockobjects
  */
 class MockController extends Controller {
   

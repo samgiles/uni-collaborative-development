@@ -3,6 +3,7 @@
  * A mock authentication object.
  * @author Samuel Giles
  * @package unit-tests
+ * @subpackage unit-tests-mockobjects
  */
 class MockAuthenticator extends Authenticate {
 	
@@ -22,6 +23,7 @@ class MockAuthenticator extends Authenticate {
  * A mock observer object
  * @author Samuel Giles
  * @package unit-tests
+ * @subpackage unit-tests-mockobjects
  */
 class MockObserver extends LoginObserver {
 	

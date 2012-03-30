@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * A mock session writer object.
+ * @author Samuel Giles
+ * @package unit-tests
+ * @subpackage unit-tests-mockobjects
+ */
 class MockSessionWriter extends SessionWriter {
   public function read($hash) {}
   public function write($hash, $sessionObject)	{}
@@ -15,6 +20,12 @@ class MockSessionWriter extends SessionWriter {
   }
 }
 
+/**
+ * Tests the Session object.
+ * @author Samuel Giles
+ * @package unit-tests
+ * @subpackage unit-tests-mockobjects
+ */
 class SessionTest extends PHPUnit_Framework_TestCase {
   
   protected function setUp() {

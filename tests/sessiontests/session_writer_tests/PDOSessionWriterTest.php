@@ -2,7 +2,11 @@
 include_once ('SessionWriterTest.php');
 include_once('DummyObject.php');
 
-
+/**
+ * Tests the PDOSessionWriter against a database on the same network as the CI server.
+ * @author Samuel Giles
+ * @package unit-tests-mock
+ */
 class PDOSessionWriterTest extends SessionWriterTest {
   
   private $_runtests = true;	
