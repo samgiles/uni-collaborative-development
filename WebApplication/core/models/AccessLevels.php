@@ -3,7 +3,7 @@
  * Determines the AccessLevels as bit flags.
  * @author Samuel Giles
  * @package application-core
- * @package application-core-models
+ * @subpackage application-core-models
  * @version 0.8
  */
 abstract class AccessLevels {

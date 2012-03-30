@@ -3,7 +3,7 @@
  * A simple payment processing service
  * @author Samuel Giles
  * @package application-core
- * @package application-core-models
+ * @subpackage application-core-models
  * @version 1.0
  */
 class PaymentProcessor {

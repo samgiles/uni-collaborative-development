@@ -4,7 +4,7 @@
  * @author Samuel Giles
  * TODO:  Update this when Product Models are created.
  * @package application-core
- * @package application-core-models
+ * @subpackage application-core-models
  */
 class ShoppingCart {
 	

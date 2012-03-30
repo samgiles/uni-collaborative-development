@@ -4,7 +4,7 @@
  * @author Samuel Giles
  * @version 1.0
  * @package application-core
- * @package application-core-models
+ * @subpackage application-core-models
  */
 class Address {
     
