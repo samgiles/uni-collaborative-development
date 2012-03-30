@@ -2,46 +2,54 @@
 /**
  * Represents an Address
  * @author Samuel Giles
- * @package application-models
+ * @version 1.0
+ * @package application-core
+ * @package application-core-models
  */
- 
-         /**
-	 * Logging object.
-	 * @var Logger
-	 */
-     
 class Address {
     
-	    /**
+	/**
 	 * Logging object.
 	 * @var Logger
 	 */
 	private $_logger;
-	    /**
-        *This is where the code from
-        */
+
+	/**
+	 * The primary key code of the address object.
+	 * @var unknown_type
+	 */
 	private $_code; // PK
     
-        /**
-        *This is where
-        */
-    
+	/**
+	 * The Lineone value of the address.
+	 * @var unknown_type
+	 */
 	private $_lineone;
     
-            /**
-        *This is where the code from
-        */
-        
+	/**
+	 * The linetwo value of the address
+	 * @var unknown_type
+	 */
 	private $_linetwo;
     
+	/**
+	 * The postcode of the address,
+	 * @var unknown_type
+	 */
 	private $_postcode;
 	
-    
+	/**
+	 * Constructs a new Empty Address.
+	 */
 	public function __construct() {
 		$this->_logger = Logger::GetLogger();
 		$this->_code = null;
 	}
 	
+	/**
+	 * Saves the object, if the object's primary key is undefined, or null, then a row is inserted in the database, if it is defined the value is updated.
+	 * @throws Exception
+	 */
 	public function save() {
 		if ($this->_code == null) {
 			// INSERT.
@@ -66,34 +74,63 @@ class Address {
 		}
 	}
 	
+	/**
+	 * Set Lineone of the Address.
+	 * @param string $lineone
+	 */
 	public function setLineone($lineone) {
 		$this->_lineone = $lineone;
 	}
 	
+	/**
+	 * Set line two of the Address
+	 * @param string $linetwo
+	 */
 	public function setLinetwo($linetwo) {
 		$this->_linetwo = $linetwo;
 	}
 	
+	/**
+	 * Sets the postcode of the address.
+	 * @param string $postcode
+	 */
 	public function setPostcode($postcode) {
 		$this->_postcode = $postcode;
 	}
 	
+	/**
+	 * Gets the code of the address in the databse, the primary key.
+	 */
 	public function getCode() {
 		return $this->_code;
 	}
 	
+	/**
+	 * Gets lineone of the address
+	 */
 	public function getLineOne() {
 		return $this->_lineone;
 	}
-	
+
+	/**
+	 * Gets line two of the address
+	 */
 	public function getLineTwo() {
 		return $this->_linetwo;
 	}
 	
+	/**
+	 * Gets the postcode of the address.
+	 */
 	public function getPostcode() {
 		return $this->_postcode;
 	}
 	
+	/**
+	 * Gets an address or a list of addresses identified by the postcode.
+	 * @param string $postcode
+	 * @throws Exception
+	 */
 	public static function getAddressByPostcode($postcode) {
 		
 		$pdostatement = Database::execute('SELECT * FROM ADDRESS WHERE POST_CODE = ' . $postcode);
@@ -117,6 +154,11 @@ class Address {
 		return $address;
 	}
 	
+	/**
+	 * Gets an address object by it's primary key.
+	 * @param int $code
+	 * @throws Exception
+	 */
 	public static function getAddressByCode($code) {
 		
 		if ($code instanceof Address) {
@@ -136,6 +178,10 @@ class Address {
 		return Address::createFromArray($result);
 	}
 	
+	/**
+	 * Creates an address object from a database tuple or an equivalent array.
+	 * @param array $array
+	 */
 	public static function createFromArray(array $array) {
 		$address = new Address();
 		
