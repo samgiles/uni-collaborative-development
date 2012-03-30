@@ -8,6 +8,9 @@
  */
 class GamesController extends Controller {
     
+	/**
+	 * Constructs the controller.
+	 */
     public function __construct() {
 		$this->_skin = 'default';
 		$this->_layout = 'main';
@@ -20,6 +23,9 @@ class GamesController extends Controller {
         $this->addViewVariable('c', 'Games');
 	}
 	
+	/**
+	 * Loads the projects.
+	 */
 	private function loadProducts() {
 		
 		$sql = "SELECT CODE FROM PRODUCT WHERE CATEGORY = 0";
