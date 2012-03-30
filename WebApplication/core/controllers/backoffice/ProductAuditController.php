@@ -3,6 +3,7 @@
  * Used to generate a JSON representation of sales figures for a Particular product.
  * @author Samuel Giles
  * @package application-controller
+ * @subpackage application-controller-backoffice
  * @version 1.0
  */
 class ProductAuditController extends Controller {
