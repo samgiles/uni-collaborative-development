@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * A mock controller used for testing the controller.
+ * @author Samuel Giles
+ * @package unit-tests
+ */
 class MockController extends Controller {
   
   public function __construct() {
@@ -14,7 +18,11 @@ class MockController extends Controller {
   }
 }
 
-
+/**
+ * Unit testing the Controller class.
+ * @author Samuel Giles
+ * @package unit-tests
+ */
 class ControllerTest extends PHPUnit_Framework_TestCase {
   
   private $_mockController;	

@@ -1,4 +1,9 @@
 <?php
+/**
+ * A mock authentication object.
+ * @author Samuel Giles
+ * @package unit-tests
+ */
 class MockAuthenticator extends Authenticate {
 	
 	private $_pass;
@@ -13,6 +18,11 @@ class MockAuthenticator extends Authenticate {
 	
 }
 
+/**
+ * A mock observer object
+ * @author Samuel Giles
+ * @package unit-tests
+ */
 class MockObserver extends LoginObserver {
 	
 	public $handledUpdate = false;
@@ -22,6 +32,11 @@ class MockObserver extends LoginObserver {
 	}
 }
 
+/**
+ * Unit testing the login functionality.
+ * @author Samuel Giles
+ * @package unit-tests
+ */
 class LoginTest extends PHPUnit_Framework_TestCase {
     private $_failAuth;
 	private $_passAuth;

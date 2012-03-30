@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Tests the PageModel.
+ * @author Samuel Giles
+ * @package unit-tests
+ */
 class PageModelTests extends PHPUnit_Framework_TestCase {
   
   /**
