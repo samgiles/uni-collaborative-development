@@ -2,8 +2,8 @@
 /**
  * Order Confirmation Screen.
  * @author Hezekiah Lloyd Ball
- * @package application-controllers
- * @subpackage web-controllers
+ * @package application-controller
+ * @subpackage application-controller-web
  * @version 0.0.1 - Not included yet -> TODO Set up redirect in CheckoutController on successful payment and order update.
  */
 class ConfirmationController extends Controller {

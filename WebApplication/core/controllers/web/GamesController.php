@@ -1,9 +1,9 @@
 <?php
 /**
  * The games page.
- * @author Sameul Giles
- * @package application-controllers
- * @subpackage web-controllers
+ * @author Samuel Giles
+ * @package application-controller
+ * @subpackage application-controller-web
  * @version 0.4
  */
 class GamesController extends Controller {

@@ -2,8 +2,8 @@
 /**
  * The software page.
  * @author James Legros, Samuel Giles
- * @package application-controllers
- * @subpackage web-controllers
+ * @package application-controller
+ * @subpackage application-controller-web
  * @version 0.4
  */
 class SoftwareController extends Controller {

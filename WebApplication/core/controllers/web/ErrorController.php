@@ -2,8 +2,8 @@
 /**
  * A simple 404 error controller.
  * @author Samuel Giles
- * @package application-controllers
- * @subpackage web-controllers
+ * @package application-controller
+ * @subpackage application-controller-web
  * @todo Generalise for any error not just 404.
  */
 class ErrorController extends Controller {
