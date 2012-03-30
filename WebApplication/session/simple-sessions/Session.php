@@ -4,8 +4,8 @@ require_once('SessionWriter.php');
  * A Session object. A Session object must be started using the static method `start`.
  * @author Samuel Giles
  * @version 0.1
- * @package core
- * @subpackage core-sessions
+ * @package application-core
+ * @subpackage application-core-sessions
  */
 class Session {
 	

@@ -2,8 +2,8 @@
 /**
  * Provides an interface to a for reading and writing session data.
  * @author Samuel Giles
- * @package core
- * @subpackage core-sessions
+ * @package application-core
+ * @subpackage application-core-sessions
  * @version 1.0
  */
 abstract class SessionWriter {

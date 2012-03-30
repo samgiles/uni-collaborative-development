@@ -2,8 +2,8 @@
 /**
  * An implementation of the session writer that writes the session data to a PDO data source.
  * @author Samuel Giles
- * @package core
- * @subpackage core-sessions
+ * @package application-core
+ * @subpackage application-core-sessions
  */
 class PDOSessionWriter extends SessionWriter {
 	
