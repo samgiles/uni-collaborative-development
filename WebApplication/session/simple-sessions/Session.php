@@ -6,14 +6,43 @@ require_once('SessionWriter.php');
  * @version 0.1
  */
 class Session {
-  private static $HTTP_PERSIST_NAME = 'SESS';
-  private $_objects;
-  private $_idHash;
+	
+	/**
+	 * The name of the cookie that will store the session hash.
+	 * @var string
+	 */
+	private static $HTTP_PERSIST_NAME = 'SESS';
+	
+	/**
+	 * The array of objects stored in this session.
+	 * @var array
+	 */
+	private $_objects;
+	
+	/**
+	 * The hash that identifies this session.
+	 * @var string
+	 */
+	private $_idHash;
   
-  private $_sessionWriter;
-  private $_dontWrite = true;
+	/**
+	 * The session writer object that is used to read and write session data.
+	 * @var SessionWriter
+	 */
+	private $_sessionWriter;
+	
+	/**
+	 * On shutdown of the PHP engine the destructor of this Session is going to write the session data to using the writer, however for performance reasons, this flag will only be set when data
+	 * is changed therefore we only write to the data whe n we need to.
+	 * @var boolean
+	 */
+	private $_dontWrite = true;
   
-  private static $instance;
+	/**
+	 * The instance of this Session
+	 * @var Session
+	 */
+	private static $instance;
   
   /**
    * Starts a Session given a SessionWriter, this checks for a cookie that can identify a session with a client/request, if one hasn't been started yet then 
@@ -38,6 +67,12 @@ class Session {
   	}
   }
   
+  /**
+   * Constructs a new session writer with a given Writer and Hash.
+   * @param SessionWriter $sessionWriter The session writer
+   * @param string $hash The hash.
+   * @param boolean $new Whether this is a new session or an existing session.
+   */
   private function __construct(SessionWriter $sessionWriter, $hash, $new = false) {
   	$this->_sessionWriter = $sessionWriter;
   	$this->_idHash = $hash;
@@ -55,13 +90,19 @@ class Session {
   	}
   }
   
+  /**
+   * Destroys the Session and writes to the SessionWriter if needed.
+   */
   public function __destruct() {
   	if ($this->_dontWrite === false) {
       $this->_sessionWriter->write($this->_idHash, $this->_objects);
   	}
   }
 
-
+  /**
+   * Get a value from the session store associated with the key.  Returns NULL if no value exists.
+   * @param string $key
+   */
   public static function get($key) {
     if (self::sessionStarted()) {
       $key = (string)$key;
@@ -74,6 +115,11 @@ class Session {
     return NULL;
   }
 
+  /**
+   * Sets a value in the session store associated with a key.
+   * @param string $key
+   * @param mixed $value
+   */
   public static function set($key, $value) {
     if (self::sessionStarted()) {
       self::$instance->_objects[$key] = $value;
@@ -83,6 +129,9 @@ class Session {
     return false;
   }
   
+  /**
+   * Clears all of the session objects.
+   */
   private function clearAll() {
   	$this->_sessionWriter->clear($this->_idHash);
   	$this->_sessionWriter->httpClear(self::$HTTP_PERSIST_NAME);
@@ -90,6 +139,9 @@ class Session {
   	$this->_objects = array();
   }
   
+  /**
+   * Clears all of the session objects.
+   */
   public static function clear() {
     if (self::sessionStarted()) {
       $session = self::$instance->clearAll();
@@ -99,6 +151,9 @@ class Session {
     return false;
   }
   
+  /**
+   * Get's whether the session has started yet.
+   */
   public static function sessionStarted() {
     if (self::$instance === NULL || !isset(self::$instance)) {
       trigger_error('Session not started, start session with `Session::start($sessionWriter)`', E_USER_NOTICE);
