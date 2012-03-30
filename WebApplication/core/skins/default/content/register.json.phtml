@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Defines the result of a registration so the registration form can provide useful feedback on errors.
+ * @author Samuel Giles
+ * @version 1.0
+ * @package application-views
+ * @subpackage application-views-content 
+ */
+?>
 {
   "usernameTaken": <?php echo ($this->usernameTaken()) ? "true" : "false"; ?>,
   "success"		 : <?php echo ($this->success()) ? "true" : "false";?>
