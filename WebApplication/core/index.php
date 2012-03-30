@@ -61,7 +61,7 @@ if (isset($_POST['errreport'])) {
 	$logger->error("Received Error Report\nCode:\t{$errno}\n__________________\nError:\t{$errstr}\n__________________\nFile:\t{$errfile}\nLine:\t{$errline}\nAt:\t{$erruri}\nUser Message:\t$message\n__________________\n");
 }
 	
-Session::start(new PDOSessionWriter(new PDO("mysql:host=localhost;dbname=sessions", 'root', 'lifts1')));
+Session::start(new PDOSessionWriter(new PDO("@SESSIONDSN", '@SESSIONUNAME', '@SESSIONPWORD')));
 
 
 /*
