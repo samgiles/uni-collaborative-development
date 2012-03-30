@@ -1,4 +1,9 @@
 <?php
+/**
+ * 
+ * @author Samuel Giles
+ *
+ */
 class BackOfficeController extends Controller {
 	public function __construct() {
 		$this->_skin = 'default';

@@ -6,28 +6,24 @@
  * @subpackage application-controller-backoffice
  * @version 0.2
  */
- 
- 
-$getid = $_GET['id'];
-
-if($getid)
-{
-
-
-$sql = "DELETE FROM STAFF WHERE CODE='{$getid}' LIMIT 1";
-
-Database::execute($sql);
-
-}
-
-
- 
 class StaffController extends Controller {
     
     public function __construct() {
     	$this->_skin = 'default';
 		$this->_layout = 'main';
 		$this->_content = 'Staff';
+		
+		$getid = $_GET['id'];
+		
+		if($getid)
+		{
+		
+		
+			$sql = "DELETE FROM STAFF WHERE CODE='{$getid}' LIMIT 1";
+		
+			Database::execute($sql);
+		
+		}
 		
 		$this->requiredAccess(AccessLevels::GENERALSTAFF | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
         $this->getAllStaff();
