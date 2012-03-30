@@ -7,7 +7,6 @@
  */
 class User {
     
-    ////where your login is saved////////
 	
 	private $_logger;
 	
