@@ -3,6 +3,7 @@
  * Provides the interface for viewing the list of Supervisor.
  * @author Vishal Patel
  * @package application-controller
+ * @subpackage application-controller-backoffice
  * @version 0.2
  */
 class SupervisorController extends Controller {

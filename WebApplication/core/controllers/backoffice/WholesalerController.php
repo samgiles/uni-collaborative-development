@@ -3,6 +3,7 @@
  * Provides the interface for viewing the list of Wholesalers.
  * @author Samuel Giles
  * @package application-controller
+ * @subpackage application-controller-backoffice
  * @version 0.2
  */
 class WholesalerController extends Controller {

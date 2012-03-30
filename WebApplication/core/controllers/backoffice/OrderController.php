@@ -2,7 +2,8 @@
 /**
  * No Description TODO: Write Description
  * @author Nadeem Alam
- * @package application-controllers
+ * @package application-controller
+ * @subpackage application-controller-backoffice
  */
 class OrderController extends Controller {
     

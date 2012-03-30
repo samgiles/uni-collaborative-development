@@ -1,8 +1,9 @@
 <?php
 /**
  * Provides the interface for viewing the list of ListProducts
- * @author Samuel Giles
+ * @author James Legros
  * @package application-controller
+ * @subpackage application-controller-backoffice
  * @version 0.2
  */
 class ListProductsController extends Controller {

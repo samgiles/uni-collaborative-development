@@ -3,6 +3,7 @@
  * Provides the interface for viewing the list of Customer.
  * @author Vishal Patel
  * @package application-controller
+ * @subpackage application-controller-backoffice
  * @version 0.2
  */
 class CustomerController extends Controller {

@@ -5,7 +5,8 @@
  * TODO
  * 
  * @author Vishal Patel
- * @package application-controllers
+ * @package application-controller
+ * @subpackage application-controller-backoffice
  */
 class CheckController extends Controller {
     
