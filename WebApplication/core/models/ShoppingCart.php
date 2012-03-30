@@ -3,7 +3,8 @@
  * A Shopping Cart model that can persist across a single session and store basket information in the database.
  * @author Samuel Giles
  * TODO:  Update this when Product Models are created.
- * @package application-models
+ * @package application-core
+ * @package application-core-models
  */
 class ShoppingCart {
 	

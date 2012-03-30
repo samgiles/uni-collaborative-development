@@ -1,8 +1,9 @@
 <?php
 /**
  * 
- * @author sam
- * @package application-models
+ * @author Samuel Giles
+ * @package application-core
+ * @package application-core-models
  */
 class Product {
     

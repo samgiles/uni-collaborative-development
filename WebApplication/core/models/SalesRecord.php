@@ -2,7 +2,8 @@
 /**
  * Stores information about a Salesrecord.
  * @author Samuel Giles
- * @package application-models
+ * @package application-core
+ * @package application-core-models
  */
  
 class SalesRecord {

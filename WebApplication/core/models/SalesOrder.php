@@ -2,7 +2,8 @@
 /**
  * 
  * @author Samuel Giles
- * @package application-models
+ * @package application-core
+ * @package application-core-models
  */
 class SalesOrder {
   private $_basket;
