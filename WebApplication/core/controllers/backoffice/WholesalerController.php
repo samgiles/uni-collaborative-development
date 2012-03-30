@@ -13,17 +13,12 @@ class WholesalerController extends Controller {
 		$this->_content = 'wholesalers';
 		
 		$this->requiredAccess(AccessLevels::WAREHOUSE | AccessLevels::SUPERVISOR | AccessLevels::ADMIN);
-        
+        $this->getAllWholesalers();
         // Tell the view that we're an Index controller.
 		$this->addViewVariable("c", "Wholesaler");
         if(isset($_POST['name'])) {
             $this->addWholesaler();
         }
-<<<<<<< HEAD
-=======
-        
-        $this->getAllWholesalers();
->>>>>>> e5a45ba324393508f1a97d2dadf62e6a017d3736
 	}
 	
 	
@@ -37,11 +32,6 @@ class WholesalerController extends Controller {
 
 
     private function addWholesaler() {
-<<<<<<< HEAD
-    		$sqlStatement = "INSERT INTO `WHOLESALER`.`CODE`,`WHOLESALER`.`NAME`, `WHOLESALER`.`CONTACT_NAME`, `WHOLESALER`.`CONTACT_NUMBER`, `ADDRESS`.`LINE_ONE`, `ADDRESS`.`LINE_TWO`, `ADDRESS`.`POST_CODE` FROM WHOLESALER, ADDRESS WHERE `WHOLESALER`.`ADDRESS_CODE` = `ADDRESS`.`CODE values({$_POST['name']}, {$_POST['contact']}, {$_POST['contactnumber']}, {$_POST['addrlineone']},{$_POST['addrline2']}, {$_POST['postcode]})";
-	        Database::execute($sqlStatement);
-    }
-=======
     	    $address = array();
     	    
     	    
@@ -60,4 +50,3 @@ class WholesalerController extends Controller {
 	        Database::execute($sqlStatement);
     }
 }
->>>>>>> e5a45ba324393508f1a97d2dadf62e6a017d3736

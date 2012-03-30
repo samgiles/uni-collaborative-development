@@ -111,7 +111,7 @@ class Logger {
 	*/
 	private function checkFile($filename){
 		if(!file_exists($this->_path . $filename)){
-			$handle = fopen($this->_path . $filename, 'w') or die("Can't create log file: " . $filename);
+			$handle = fopen($this->_path . $filename, 'w');// or die("Can't create log file: " . $filename);
 			fclose($handle);
 			return;
 		}
@@ -123,7 +123,7 @@ class Logger {
 	* @param string $message The message to append to the $filename
 	*/
 	private function append($filename, $message){
-		$handle = fopen($this->_path . $filename, 'a') or die('Can not open file. ' . $filename);
+		$handle = fopen($this->_path . $filename, 'a'); //or die('Can not open file. ' . $filename);
 		fwrite($handle,"\n" . $message . "\n");
 		fclose($handle);
 		}

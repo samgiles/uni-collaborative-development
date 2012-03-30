@@ -29,4 +29,4 @@ class CustomerController extends Controller {
 }
 
 /**
-      $sqlStatement NEEDS ADDING TO FUNCTION!!! *\
+      $sqlStatement NEEDS ADDING TO FUNCTION!!! */

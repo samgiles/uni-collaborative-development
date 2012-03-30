@@ -1,5 +1,11 @@
 <?php
-// Small script to populate the database with some random Sales orders
+/**
+ * A small inefficient script that is used to generate loads of random sales data's
+ * This isn't designed to be robust or anything, simply to be run once or twice for testing purposes.
+ * @author Samuel Giles
+ * @package tests
+ * @version 0.4
+ */
 
 $dn = dirname(__FILE__);
 
@@ -30,9 +36,6 @@ $time = microtime(true);
 
 $timeNow = time();
 
-
-
-
 for ($i = 0; $i < 100; ++$i) {
 	$newTime = floor(rand(0, 640000));
 	
@@ -57,4 +60,4 @@ for ($i = 0; $i < 100; ++$i) {
 		Database::execute($sql);
 	}
 }
-echo "done in " . (microtime(true) - $time) . "ms";
+echo "done in " . (microtime(true) - $time) . "s";

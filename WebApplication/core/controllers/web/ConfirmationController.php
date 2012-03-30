@@ -17,4 +17,4 @@ class ConfirmationController extends Controller {
         // Tell the view that we're an Index controller.
 		$this->addViewVariable("c", "Index");
 	}
-} 
+}
