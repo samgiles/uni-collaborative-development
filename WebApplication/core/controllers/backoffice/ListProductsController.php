@@ -2,8 +2,8 @@
 /**
  * Provides the interface for viewing the list of ListProducts
  * @author James Legros
- * @package application_controller
- * @subpackage application_controller-backoffice
+ * @package application-controller
+ * @subpackage application-controller-backoffice
  * @version 0.2
  */
 class ListProductsController extends Controller {

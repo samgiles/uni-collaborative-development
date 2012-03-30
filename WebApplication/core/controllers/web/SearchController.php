@@ -2,8 +2,8 @@
 /**
  * Used for querying the products, can sort the products in ascending or descending price order.
  * @author Samuel Giles
- * @package application_controller
- * @subpackage application_controller-web
+ * @package application-controller
+ * @subpackage application-controller-web
  * @version 1.2
  */
 class SearchController extends Controller {

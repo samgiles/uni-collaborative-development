@@ -2,8 +2,8 @@
 /**
  * Handles the Shopping cart.
  * @author Samuel Giles
- * @package application_controller
- * @subpackage application_controller-web
+ * @package application-controller
+ * @subpackage application-controller-web
  * @version 0.8
  * @todo Update and refactor to use the Product model.
  */

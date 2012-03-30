@@ -2,8 +2,8 @@
 /**
  * Manages and Displays the checkout.
  * @author Samuel Giles
- * @package application_controller
- * @subpackage application_controller-web
+ * @package application-controller
+ * @subpackage application-controller-web
  * @version 0.4
  */
 class CheckoutController extends Controller {

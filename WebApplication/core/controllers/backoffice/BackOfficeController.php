@@ -2,8 +2,8 @@
 /**
  * A simple page that outputs some links to pages in the backoffice.
  * @author Samuel Giles
- * @package application_controller
- * @subpackage application_controller-backoffice
+ * @package application-controller
+ * @subpackage application-controller-backoffice
  */
 class BackOfficeController extends Controller {
 	public function __construct() {
